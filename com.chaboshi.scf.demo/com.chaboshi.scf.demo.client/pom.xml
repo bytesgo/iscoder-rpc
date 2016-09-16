@@ -1,0 +1,28 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.chaboshi.scf</groupId>
+		<artifactId>com.chaboshi.scf.demo</artifactId>
+		<version>2.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>com.chaboshi.scf.demo.client</artifactId>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.chaboshi.scf.demo.api</groupId>
+			<artifactId>com.chaboshi.scf.demo.api</artifactId>
+			<version>2.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.chaboshi.scf</groupId>
+			<version>2.0.1-SNAPSHOT</version>
+			<artifactId>com.chaboshi.scf.demo.service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.chaboshi.scf</groupId>
+			<artifactId>com.chaboshi.scf.client</artifactId>
+			<version>2.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+</project>
