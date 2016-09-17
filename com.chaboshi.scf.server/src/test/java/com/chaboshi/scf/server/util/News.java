@@ -8,8 +8,6 @@ import com.chaboshi.scf.serializer.component.annotation.SCFSerializable;
 @SCFSerializable
 public class News {
 
-  private static final long serialVersionUID = 1L;
-
   @SCFMember // 标记该字段为需要序列化字段
   private int newsID;
 

@@ -1,12 +1,11 @@
 package com.chaboshi.scf.server.performance.commandhelper;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.chaboshi.scf.server.performance.Command;
 import com.chaboshi.scf.server.performance.CommandType;
-import com.chaboshi.scf.server.performance.commandhelper.Count;
 
-import junit.framework.Assert;
 
 public class CountTest {
 

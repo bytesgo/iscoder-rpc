@@ -1,10 +1,8 @@
 package com.chaboshi.scf.server.secure;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-import com.chaboshi.scf.server.secure.DESHelper;
-
-import junit.framework.Assert;
 
 public class DESHelperTest {
 

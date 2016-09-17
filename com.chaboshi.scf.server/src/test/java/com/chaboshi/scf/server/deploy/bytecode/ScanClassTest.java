@@ -4,17 +4,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-import com.chaboshi.scf.server.deploy.bytecode.ClassInfo;
-import com.chaboshi.scf.server.deploy.bytecode.ContractInfo;
-import com.chaboshi.scf.server.deploy.bytecode.ScanClass;
 import com.chaboshi.scf.server.deploy.bytecode.ClassInfo.MethodInfo;
 import com.chaboshi.scf.server.deploy.bytecode.ClassInfo.ParamInfo;
 import com.chaboshi.scf.server.deploy.bytecode.ContractInfo.SessionBean;
 import com.chaboshi.scf.server.deploy.hotdeploy.DynamicClassLoader;
 
-import junit.framework.Assert;
 
 public class ScanClassTest {
 

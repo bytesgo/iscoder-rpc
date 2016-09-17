@@ -3,15 +3,15 @@ package com.chaboshi.scf.client.communication.socket;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.chaboshi.scf.client.utility.jsr.LinkedTransferQueue;
 import com.chaboshi.scf.client.utility.jsr.TransferQueue;
 import com.chaboshi.scf.protocol.exception.TimeoutException;
 
 public class NIOHandler {
-  private static final Log logger = LogFactory.getLog(NIOHandler.class);
+  private static final Logger logger = LoggerFactory.getLogger(NIOHandler.class);
   private final static TransferQueue<WindowData> writeQueue = new LinkedTransferQueue<WindowData>();
   private final static TransferQueue<TimeOut> timeOutQueue = new LinkedTransferQueue<TimeOut>();
   private static NIOHandler handler = new NIOHandler();

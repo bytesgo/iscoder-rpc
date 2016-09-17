@@ -6,6 +6,7 @@ import com.chaboshi.scf.server.filter.ProtocolParseFilter;
 
 public class ProtocolParseFilterTest {
 
+  @SuppressWarnings("unused")
   @Test
   public void testFilter() {
     byte[] buf = new byte[] { 1, -79, 0, 0, 0, 1, 0, 0, 0, 101, 2, 0, 4, 1, -5, 107, -6, 25, 0, -23, 3, 0, 0, 19, 0, 0, 0, 19, 0, 0, 0, 0,

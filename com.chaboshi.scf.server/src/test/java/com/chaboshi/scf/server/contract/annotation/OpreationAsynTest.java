@@ -11,12 +11,12 @@ import com.chaboshi.scf.server.contract.annotation.ServiceContract;
 public class OpreationAsynTest {
   public static void main(String[] args) {
     try {
-      Class cla = Class.forName("com.bj58.spat.scf.server.contract.annotation.OpreTest");
+      Class<?> cla = Class.forName("com.bj58.spat.scf.server.contract.annotation.OpreTest");
       Method[] method = cla.getDeclaredMethods();
       for (Method m : method) {
         OperationAsyn oa = m.getAnnotation(OperationAsyn.class);
         Type[] typeAry = m.getGenericParameterTypes();
-        Class[] clazz = m.getParameterTypes();
+        Class<?>[] clazz = m.getParameterTypes();
         String sn = "";
         StringBuffer strBuff = new StringBuffer();
         if (oa != null) {

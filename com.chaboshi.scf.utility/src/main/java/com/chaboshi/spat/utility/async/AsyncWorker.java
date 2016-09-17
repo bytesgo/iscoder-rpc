@@ -5,15 +5,15 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.chaboshi.spat.utility.jsr166.LinkedTransferQueue;
 import com.chaboshi.spat.utility.jsr166.TransferQueue;
 
 class AsyncWorker extends Thread {
 
-  private static final Log logger = LogFactory.getLog(AsyncWorker.class);
+  private static final Logger logger = LoggerFactory.getLogger(AsyncWorker.class);
   final String threadFactoryName;
 
   /**

@@ -7,7 +7,7 @@ import com.chaboshi.scf.server.util.SystemUtils;
 
 public class SystemUtilsTest {
 
-  private static final Map map = new ConcurrentHashMap();
+  private static final Map<Integer, Integer> map = new ConcurrentHashMap<Integer, Integer>();
 
   public static void main(String[] args) {
     Thread t[] = new Thread[10];

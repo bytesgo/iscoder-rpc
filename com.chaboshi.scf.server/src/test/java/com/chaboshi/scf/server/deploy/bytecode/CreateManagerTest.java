@@ -67,6 +67,7 @@ public class CreateManagerTest {
 
   @Test
   public void fun() throws IOException {
+    @SuppressWarnings("resource")
     JarFile jarFile = new JarFile("D:/serviceframe_v2_online/lib/serviceframe/serviceframe-2.0.1.beta.jar"); // ����jar�ļ�
     Enumeration<JarEntry> entry = jarFile.entries();
     JarEntry jarEntry = null;

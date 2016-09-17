@@ -7,6 +7,9 @@
  */
 package com.chaboshi.scf.client.utility.logger;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.client.SCFConst;
 
 /**
@@ -16,10 +19,10 @@ import com.chaboshi.scf.client.SCFConst;
  */
 public class FileLog implements ILog {
 
-  public static org.apache.commons.logging.Log logger = null;
+  private Logger logger = null;
 
   public FileLog(Class<?> cls) {
-    logger = org.apache.commons.logging.LogFactory.getLog(cls);
+    logger = LoggerFactory.getLogger(cls);
   }
 
   @Override
@@ -69,17 +72,7 @@ public class FileLog implements ILog {
 
   @Override
   public void error(Throwable e) {
-    logger.error(e);
-  }
-
-  @Override
-  public void fatal(String message) {
-    logger.fatal(SCFConst.VERSION_FLAG + message);
-  }
-
-  @Override
-  public void fatal(String message, Throwable t) {
-    logger.fatal(SCFConst.VERSION_FLAG + message, t);
+    logger.error("", e);
   }
 
   @Override

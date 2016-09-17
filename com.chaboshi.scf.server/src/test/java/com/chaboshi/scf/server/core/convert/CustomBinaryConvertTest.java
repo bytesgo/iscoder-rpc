@@ -1,11 +1,8 @@
 package com.chaboshi.scf.server.core.convert;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-import com.chaboshi.scf.server.core.convert.IConvert;
-import com.chaboshi.scf.server.core.convert.SCFBinaryConvert;
-
-import junit.framework.Assert;
 
 public class CustomBinaryConvertTest {
 

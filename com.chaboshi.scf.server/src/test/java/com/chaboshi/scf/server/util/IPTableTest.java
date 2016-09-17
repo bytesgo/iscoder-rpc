@@ -1,12 +1,10 @@
 package com.chaboshi.scf.server.util;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.context.ServiceConfig;
-import com.chaboshi.scf.server.util.IPTable;
-
-import junit.framework.Assert;
 
 public class IPTableTest {
 

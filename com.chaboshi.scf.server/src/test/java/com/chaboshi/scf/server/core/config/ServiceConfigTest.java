@@ -1,11 +1,11 @@
 package com.chaboshi.scf.server.core.config;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.chaboshi.scf.server.RootPath;
 import com.chaboshi.scf.server.contract.context.ServiceConfig;
 
-import junit.framework.Assert;
 
 public class ServiceConfigTest {
 

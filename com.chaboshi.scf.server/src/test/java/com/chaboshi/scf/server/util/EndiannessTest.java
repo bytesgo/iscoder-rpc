@@ -1,10 +1,8 @@
 package com.chaboshi.scf.server.util;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-import com.chaboshi.scf.server.util.EndiannessHelper;
-
-import junit.framework.Assert;
 
 public class EndiannessTest {
 

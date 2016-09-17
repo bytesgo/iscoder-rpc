@@ -1,7 +1,7 @@
 package com.chaboshi.scf.server.filter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.chaboshi.scf.protocol.sfp.v1.Protocol;
 import com.chaboshi.scf.server.contract.context.Global;
@@ -22,7 +22,7 @@ import com.chaboshi.scf.server.contract.filter.IFilter;
  */
 public class ProtocolCreateFilter implements IFilter {
 
-  private static final Log logger = LogFactory.getLog(ProtocolCreateFilter.class);
+  private static final Logger logger = LoggerFactory.getLogger(ProtocolCreateFilter.class);
 
   @Override
   public void filter(SCFContext context) throws Exception {

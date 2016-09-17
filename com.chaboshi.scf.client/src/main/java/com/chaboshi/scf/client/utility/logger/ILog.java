@@ -102,18 +102,4 @@ public interface ILog {
    */
   void error(Throwable e);
 
-  /**
-   * Logging a fatal message
-   * 
-   * @param message the message to log
-   */
-  void fatal(String message);
-
-  /**
-   * Logging a fatal message with the throwable message
-   * 
-   * @param message the message to log
-   * @param t the exception
-   */
-  void fatal(String message, Throwable t);
 }

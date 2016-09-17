@@ -10,59 +10,30 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<org.slf4j.version>1.6.1</org.slf4j.version>
-		<spring.version>3.0.5.RELEASE</spring.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.1.1</version>
-		</dependency>
-
-		<!-- 日志 -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${org.slf4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${org.slf4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
-		</dependency>
-
-		<dependency>
 			<groupId>antlr</groupId>
 			<artifactId>antlrall</artifactId>
-			<version>2.7.2</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.jboss.netty</groupId>
 			<artifactId>netty</artifactId>
-			<version>3.1.5.GA</version>
 		</dependency>
 		<dependency>
 			<groupId>com.chaboshi.scf.protocol</groupId>
 			<artifactId>com.chaboshi.scf.protocol</artifactId>
-			<version>2.0.1-SNAPSHOT</version>
+			<version>${parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.chaboshi.scf</groupId>
 			<artifactId>com.chaboshi.scf.utility</artifactId>
-			<version>2.0.1-SNAPSHOT</version>
+			<version>${parent.version}</version>
 		</dependency>
 	</dependencies>
 
