@@ -8,10 +8,10 @@ import java.util.Map.Entry;
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.log.ILog;
 import com.chaboshi.scf.server.contract.log.LogFactory;
-import com.chaboshi.scf.server.contract.server.IServer;
+import com.chaboshi.scf.server.contract.server.Server;
 import com.chaboshi.scf.server.performance.exception.SerializeException;
 
-public class MonitorWebCenter implements IServer {
+public class MonitorWebCenter implements Server {
   static ILog logger = LogFactory.getLogger(MonitorWebCenter.class);
 
   static MonitorUDPClient udp;

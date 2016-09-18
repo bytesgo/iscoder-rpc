@@ -162,4 +162,8 @@ public class ServiceConfig {
       }
     }
   }
+
+  public String getServiceName() {
+    return property.get("scf.service.name");
+  }
 }

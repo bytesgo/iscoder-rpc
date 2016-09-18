@@ -17,7 +17,7 @@ import com.chaboshi.scf.server.util.ExceptionHelper;
 import com.chaboshi.scf.server.util.ServiceFrameException;
 import com.chaboshi.scf.server.util.SystemUtils;
 
-public abstract class InvokerBase implements IInvokerHandle {
+public abstract class InvokerBase implements InvokerHandler {
 
   /**
    * log

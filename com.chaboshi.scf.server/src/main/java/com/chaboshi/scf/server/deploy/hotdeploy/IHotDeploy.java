@@ -6,7 +6,7 @@
 
 package com.chaboshi.scf.server.deploy.hotdeploy;
 
-import com.chaboshi.scf.server.core.proxy.IInvokerHandle;
+import com.chaboshi.scf.server.core.proxy.InvokerHandler;
 
 /**
  * a interface for description hot deploy class
@@ -19,8 +19,8 @@ import com.chaboshi.scf.server.core.proxy.IInvokerHandle;
  */
 public interface IHotDeploy {
 
-  public void setSyncInvokerHandle(IInvokerHandle handle);
+  public void setSyncInvokerHandle(InvokerHandler handle);
 
-  public void setAsyncInvokerHandle(IInvokerHandle handle);
+  public void setAsyncInvokerHandle(InvokerHandler handle);
 
 }

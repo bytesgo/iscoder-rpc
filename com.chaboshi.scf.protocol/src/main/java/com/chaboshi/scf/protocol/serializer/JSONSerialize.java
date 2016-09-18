@@ -19,7 +19,7 @@ class JSONSerialize extends SerializeBase {
   }
 
   @Override
-  public Object deserialize(byte[] data, Class<?> cls) throws Exception {
+  public <T> T deserialize(byte[] data, Class<T> cls) throws Exception {
     throw new UnsupportedOperationException("Not supported json serialize!");
   }
 }

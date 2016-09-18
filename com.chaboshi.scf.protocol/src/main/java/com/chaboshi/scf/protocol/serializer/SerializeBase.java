@@ -43,5 +43,5 @@ public abstract class SerializeBase {
 
   public abstract byte[] serialize(Object obj) throws Exception;
 
-  public abstract Object deserialize(byte[] data, Class<?> cls) throws Exception;
+  public abstract <T> T deserialize(byte[] data, Class<T> cls) throws Exception;
 }

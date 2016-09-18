@@ -12,6 +12,6 @@ import com.chaboshi.scf.server.bootstrap.Main;
 public class Server {
 
   public static void main(String[] args) throws Exception {
-    Main.main(new String[] { "demo" });
+    Main.main(new String[] { "-dscf.service.name=demo", "-Dscf.service.name=demo" });
   }
 }

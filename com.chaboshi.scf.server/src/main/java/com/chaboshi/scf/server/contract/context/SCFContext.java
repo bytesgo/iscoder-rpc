@@ -7,7 +7,7 @@ package com.chaboshi.scf.server.contract.context;
 
 import com.chaboshi.scf.protocol.sdp.RequestProtocol;
 import com.chaboshi.scf.server.contract.http.HttpContext;
-import com.chaboshi.scf.server.contract.server.IServerHandler;
+import com.chaboshi.scf.server.contract.server.ServerHandler;
 
 /**
  * SCF request/response context
@@ -34,7 +34,7 @@ public class SCFContext {
 
   private SCFChannel channel;
 
-  private IServerHandler serverHandler;
+  private ServerHandler serverHandler;
 
   private boolean isDoInvoke = true;
 
@@ -56,7 +56,7 @@ public class SCFContext {
     this.setChannel(channel);
   }
 
-  public SCFContext(byte[] requestBuffer, SCFChannel channel, ServerType serverType, IServerHandler handler) throws Exception {
+  public SCFContext(byte[] requestBuffer, SCFChannel channel, ServerType serverType, ServerHandler handler) throws Exception {
 
     this.scfRequest.setRequestBuffer(requestBuffer);
     this.setChannel(channel);
@@ -154,11 +154,11 @@ public class SCFContext {
     return serverType;
   }
 
-  public void setServerHandler(IServerHandler responseHandler) {
+  public void setServerHandler(ServerHandler responseHandler) {
     this.serverHandler = responseHandler;
   }
 
-  public IServerHandler getServerHandler() {
+  public ServerHandler getServerHandler() {
     return serverHandler;
   }
 

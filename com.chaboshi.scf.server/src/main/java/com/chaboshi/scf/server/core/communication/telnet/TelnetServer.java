@@ -13,7 +13,7 @@ import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.log.ILog;
 import com.chaboshi.scf.server.contract.log.LogFactory;
-import com.chaboshi.scf.server.contract.server.IServer;
+import com.chaboshi.scf.server.contract.server.Server;
 
 /**
  * start netty server
@@ -24,7 +24,7 @@ import com.chaboshi.scf.server.contract.server.IServer;
  *         <a href="http://www.58.com">website</a>
  * 
  */
-public class TelnetServer implements IServer {
+public class TelnetServer implements Server {
 
   public TelnetServer() {
 

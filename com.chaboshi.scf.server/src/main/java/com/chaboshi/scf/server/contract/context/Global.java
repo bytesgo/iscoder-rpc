@@ -16,7 +16,7 @@ import org.jboss.netty.channel.Channel;
 
 import com.chaboshi.scf.server.contract.filter.IFilter;
 import com.chaboshi.scf.server.contract.init.IInit;
-import com.chaboshi.scf.server.contract.server.IServer;
+import com.chaboshi.scf.server.contract.server.Server;
 
 /**
  * A class contains global variable
@@ -33,7 +33,7 @@ public class Global {
 
   private IProxyFactory proxyFactory = null;
 
-  private List<IServer> serverList = new ArrayList<IServer>();
+  private List<Server> serverList = new ArrayList<Server>();
 
   private List<IFilter> globalRequestFilterList = new ArrayList<IFilter>();
 
@@ -124,7 +124,7 @@ public class Global {
     return this.proxyFactory;
   }
 
-  public List<IServer> getServerList() {
+  public List<Server> getServerList() {
     return this.serverList;
   }
 
@@ -136,7 +136,7 @@ public class Global {
     return this.rootPath;
   }
 
-  public void addServer(IServer server) {
+  public void addServer(Server server) {
     synchronized (serverList) {
       serverList.add(server);
     }

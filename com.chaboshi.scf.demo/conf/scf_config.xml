@@ -6,7 +6,7 @@
 <!-- service name -->
 <property>
 <name>scf.service.name</name>
-<value>demo</value>
+<value></value>
 </property>
 
 <!-- service encoding -->

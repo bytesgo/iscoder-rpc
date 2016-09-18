@@ -19,7 +19,7 @@ class SCFSerialize extends SerializeBase {
   }
 
   @Override
-  public Object deserialize(byte[] data, Class<?> cls) throws Exception {
+  public <T> T deserialize(byte[] data, Class<T> cls) throws Exception {
     return SerializationUtil.deserialize(data, cls);
   }
 }
