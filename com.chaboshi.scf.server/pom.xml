@@ -26,7 +26,7 @@
 			<artifactId>netty</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.chaboshi.scf.protocol</groupId>
+			<groupId>com.chaboshi.scf</groupId>
 			<artifactId>com.chaboshi.scf.protocol</artifactId>
 			<version>${parent.version}</version>
 		</dependency>
