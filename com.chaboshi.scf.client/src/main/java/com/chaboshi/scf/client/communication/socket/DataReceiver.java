@@ -12,8 +12,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.chaboshi.scf.client.utility.logger.ILog;
-import com.chaboshi.scf.client.utility.logger.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * DataReceiver
@@ -58,7 +58,7 @@ class Worker implements Runnable {
 
   private final static int T_COUNT = Runtime.getRuntime().availableProcessors();// CPU核数
   private ExecutorService pool = Executors.newFixedThreadPool(T_COUNT, new ThreadRenameFactory("Async DataReceiver Thread"));
-  private static ILog logger = LogFactory.getLogger(Worker.class);
+  private static final Logger logger = LoggerFactory.getLogger(Worker.class);
   List<CSocket> sockets = null;
 
   public Worker(List<CSocket> sockets) {
@@ -73,12 +73,12 @@ class Worker implements Runnable {
           try {
             pool.execute(Handle.getInstance(socket));
           } catch (Throwable ex) {
-            logger.error(ex);
+            logger.error("", ex);
           }
         }
         Thread.sleep(1);
       } catch (Throwable ex) {
-        logger.error(ex);
+        logger.error("", ex);
       }
     }
   }
@@ -87,7 +87,7 @@ class Worker implements Runnable {
 class Handle implements Runnable {
 
   private static ConcurrentHashMap<CSocket, Handle> mapInstance = new ConcurrentHashMap<CSocket, Handle>();
-  private static ILog logger = LogFactory.getLogger(Handle.class);
+  private static final Logger logger = LoggerFactory.getLogger(Handle.class);
   private CSocket socket = null;
   private final static Object lockHelper = new Object();
 

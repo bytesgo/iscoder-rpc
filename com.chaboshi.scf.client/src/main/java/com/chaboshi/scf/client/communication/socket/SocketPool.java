@@ -12,12 +12,13 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.client.configuration.ServiceConfig;
 import com.chaboshi.scf.client.configuration.commmunication.SocketPoolProfile;
 import com.chaboshi.scf.client.loadbalance.Server;
 import com.chaboshi.scf.client.proxy.ServiceProxy;
-import com.chaboshi.scf.client.utility.logger.ILog;
-import com.chaboshi.scf.client.utility.logger.LogFactory;
 import com.chaboshi.scf.protocol.exception.RebootException;
 import com.chaboshi.scf.protocol.exception.ThrowErrorHelper;
 import com.chaboshi.scf.protocol.sdp.ExceptionProtocol;
@@ -31,7 +32,7 @@ import com.chaboshi.scf.secure.SecureKey;
  *
  * @author Service Platform Architecture Team (spat@58.com)
  */
-public class ScoketPool {
+public class SocketPool {
 
   @SuppressWarnings("unused")
   private InetSocketAddress endPoint;
@@ -40,10 +41,10 @@ public class ScoketPool {
   private Server server;
   // private AutoResetEvent event = new AutoResetEvent();
   // private AutoResetEventO event = new AutoResetEventO();
-  private static ILog logger = LogFactory.getLogger(ScoketPool.class);
+  private static final Logger logger = LoggerFactory.getLogger(SocketPool.class);
   private ServiceConfig serviceConfig;
 
-  public ScoketPool(Server server, SocketPoolProfile config) {
+  public SocketPool(Server server, SocketPoolProfile config) {
     this.server = server;
     this.endPoint = new InetSocketAddress(server.getAddress(), server.getPort());
     this.socketPoolConfig = config;
@@ -59,7 +60,7 @@ public class ScoketPool {
    * @author HaoXB
    * @date 2011-09-01
    */
-  public ScoketPool(Server server, ServiceConfig serviceconfig) {
+  public SocketPool(Server server, ServiceConfig serviceconfig) {
     this.server = server;
     // this.endPoint = new InetSocketAddress(server.getAddress(),
     // server.getPort());

@@ -9,9 +9,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.client.proxy.ServiceProxy;
-import com.chaboshi.scf.client.utility.logger.ILog;
-import com.chaboshi.scf.client.utility.logger.LogFactory;
 import com.chaboshi.scf.server.contract.annotation.AnnotationUtil;
 import com.chaboshi.scf.server.contract.annotation.OperationContract;
 import com.chaboshi.scf.server.contract.entity.Out;
@@ -25,7 +26,7 @@ public class MethodCaller {
 
   private String serviceName;
   private String lookup;
-  private static ILog logger = LogFactory.getLogger(MethodCaller.class);
+  private static final Logger logger = LoggerFactory.getLogger(MethodCaller.class);
 
   public MethodCaller(String serviceName, String lookup) {
     this.serviceName = serviceName;

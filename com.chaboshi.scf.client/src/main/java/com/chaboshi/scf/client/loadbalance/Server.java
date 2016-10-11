@@ -11,15 +11,16 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.client.communication.socket.CSocket;
-import com.chaboshi.scf.client.communication.socket.ScoketPool;
+import com.chaboshi.scf.client.communication.socket.SocketPool;
 import com.chaboshi.scf.client.communication.socket.ThreadRenameFactory;
 import com.chaboshi.scf.client.communication.socket.WindowData;
 import com.chaboshi.scf.client.configuration.loadbalance.ServerProfile;
 import com.chaboshi.scf.client.loadbalance.component.ServerState;
 import com.chaboshi.scf.client.proxy.builder.ReceiveHandler;
-import com.chaboshi.scf.client.utility.logger.ILog;
-import com.chaboshi.scf.client.utility.logger.LogFactory;
 import com.chaboshi.scf.protocol.sfp.v1.Protocol;
 
 /**
@@ -29,7 +30,7 @@ import com.chaboshi.scf.protocol.sfp.v1.Protocol;
  */
 public class Server {
 
-  private static ILog logger = LogFactory.getLogger(Server.class);
+  private static final Logger logger = LoggerFactory.getLogger(Server.class);
   private int port;
   private int weight;
   private String name;
@@ -39,7 +40,7 @@ public class Server {
   private float weightRage;
   private int currUserCount;
   private ServerState state;
-  private ScoketPool scoketpool;
+  private SocketPool scoketpool;
   private boolean testing = false;
   private final ScheduledExecutorService scheduler;
 
@@ -81,11 +82,11 @@ public class Server {
     return port;
   }
 
-  public ScoketPool getScoketpool() {
+  public SocketPool getScoketpool() {
     return scoketpool;
   }
 
-  protected void setScoketpool(ScoketPool scoketpool) {
+  protected void setScoketpool(SocketPool scoketpool) {
     this.scoketpool = scoketpool;
   }
 

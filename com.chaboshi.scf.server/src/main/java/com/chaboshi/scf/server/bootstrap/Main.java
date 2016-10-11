@@ -7,19 +7,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Appender;
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.context.IProxyFactory;
 import com.chaboshi.scf.server.contract.context.ServiceConfig;
 import com.chaboshi.scf.server.contract.filter.IFilter;
 import com.chaboshi.scf.server.contract.init.IInit;
-import com.chaboshi.scf.server.contract.log.ILog;
 import com.chaboshi.scf.server.contract.log.Log4jConfig;
-import com.chaboshi.scf.server.contract.log.LogFactory;
-import com.chaboshi.scf.server.contract.log.SystemPrintStream;
 import com.chaboshi.scf.server.contract.server.Server;
 import com.chaboshi.scf.server.deploy.filemonitor.FileMonitor;
 import com.chaboshi.scf.server.deploy.filemonitor.HotDeployListener;
@@ -38,7 +34,7 @@ import com.chaboshi.scf.server.deploy.hotdeploy.ProxyFactoryLoader;
  */
 public class Main {
 
-  private static ILog logger = null;
+  private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
   /**
    * start server
@@ -78,7 +74,6 @@ public class Main {
 
     // load log4j
     loadLog4jConfig(log4jConfigPath, log4jConfigDefaultPath, serviceName);
-    logger = LogFactory.getLogger(Main.class);
 
     logger.info("+++++++++++++++++++++ staring +++++++++++++++++++++\n");
 
@@ -204,33 +199,7 @@ public class Main {
     File fLog4jConfig = new File(configPath);
     if (fLog4jConfig.exists()) {
       Log4jConfig.configure(configPath);
-      SystemPrintStream.redirectToLog4j();
-    } else {
-      Log4jConfig.configure(defaultPath);
-      String logPath = null;
-      Appender appender = Logger.getRootLogger().getAppender("activexAppender");
-      if (appender instanceof FileAppender) {
-        FileAppender fappender = (FileAppender) appender;
-        if (!fappender.getFile().contains(serviceName)) {
-          logPath = fappender.getFile();
-          fappender.setFile(
-              fappender.getFile().substring(0, fappender.getFile().lastIndexOf("/")) + "/" + serviceName + "/" + serviceName + ".log");
-          fappender.activateOptions();
-        }
-      }
-      SystemPrintStream.redirectToLog4j();
-      try {
-        if (logPath != null) {
-          File file = new File(logPath);
-          file.delete();
-        }
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
     }
-
-    // redirect System.out & System.err into log file
-
   }
 
   /**

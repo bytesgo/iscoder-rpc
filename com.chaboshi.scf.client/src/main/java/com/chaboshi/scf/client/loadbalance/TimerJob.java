@@ -4,7 +4,7 @@
  */
 package com.chaboshi.scf.client.loadbalance;
 
-import com.chaboshi.scf.client.communication.socket.ScoketPool;
+import com.chaboshi.scf.client.communication.socket.SocketPool;
 
 /**
  * TimerJob
@@ -26,7 +26,7 @@ public class TimerJob implements Runnable {
      * 如果当前连接处于重启状态则注销当前服务所有socket
      */
     try {
-      ScoketPool sp = server.getScoketpool();
+      SocketPool sp = server.getScoketpool();
       try {
         sp.destroy();
       } catch (Throwable e) {

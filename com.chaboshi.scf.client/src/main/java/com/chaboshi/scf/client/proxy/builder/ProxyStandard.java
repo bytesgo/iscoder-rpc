@@ -8,8 +8,8 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
-import com.chaboshi.scf.client.utility.logger.ILog;
-import com.chaboshi.scf.client.utility.logger.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * ProxyStandard
@@ -22,7 +22,7 @@ public class ProxyStandard implements InvocationHandler, Serializable, IProxySta
   private Class<?> interfaceClass;
   private MethodCaller methodCaller;
   private String lookup;
-  private ILog logger = LogFactory.getLogger(ProxyStandard.class);
+  private static final Logger logger = LoggerFactory.getLogger(ProxyStandard.class);
 
   /**
    * @param interfaceClass 接口类

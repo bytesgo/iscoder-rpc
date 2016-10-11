@@ -14,11 +14,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.client.configuration.commmunication.SocketPoolProfile;
 import com.chaboshi.scf.client.utility.AutoResetEvent;
 import com.chaboshi.scf.client.utility.helper.SystemUtils;
-import com.chaboshi.scf.client.utility.logger.ILog;
-import com.chaboshi.scf.client.utility.logger.LogFactory;
 import com.chaboshi.scf.protocol.exception.DataOverFlowException;
 import com.chaboshi.scf.protocol.exception.ProtocolException;
 import com.chaboshi.scf.protocol.exception.TimeoutException;
@@ -33,13 +34,13 @@ import com.chaboshi.scf.protocol.utility.ProtocolConst;
  */
 public class CSocket {
 
-  private static final ILog logger = LogFactory.getLogger(CSocket.class);
+  private static final Logger logger = LoggerFactory.getLogger(CSocket.class);
   private Socket socket;
   private byte[] DESKey;
   /** DES密钥 */
   private boolean rights;
   /** 是否启用认证 */
-  private ScoketPool pool;
+  private SocketPool pool;
   private SocketChannel channel;
   private boolean _inPool = false;
   private boolean _connecting = false;
@@ -55,7 +56,7 @@ public class CSocket {
   private ExecutorService executorService = Executors.newFixedThreadPool(SystemUtils.getHalfCpuProcessorCount());
   private static NIOHandler handler = null;
 
-  protected CSocket(InetSocketAddress endpoint, ScoketPool _pool, SocketPoolProfile config) throws Exception {
+  protected CSocket(InetSocketAddress endpoint, SocketPool _pool, SocketPoolProfile config) throws Exception {
     this.socketConfig = config;
     this.pool = _pool;
 
@@ -80,7 +81,7 @@ public class CSocket {
         try {
           Thread.sleep(50);
         } catch (InterruptedException e) {
-          logger.error(e);
+          logger.error("", e);
         }
       }
     }
@@ -99,7 +100,7 @@ public class CSocket {
     logger.info("create a new connection :" + this.toString());
   }
 
-  protected CSocket(String addr, int port, ScoketPool _pool, SocketPoolProfile config) throws Exception {
+  protected CSocket(String addr, int port, SocketPool _pool, SocketPoolProfile config) throws Exception {
     this.socketConfig = config;
     this.pool = _pool;
 
@@ -124,7 +125,7 @@ public class CSocket {
         try {
           Thread.sleep(50);
         } catch (InterruptedException e) {
-          logger.error(e);
+          logger.error("", e);
         }
       }
     }
@@ -328,7 +329,7 @@ public class CSocket {
 
   public void dispose(boolean flag) {
     if (flag) {
-      logger.warning("destory a connection");
+      logger.warn("destory a connection");
       try {
         dataReceiver.UnRegSocketChannel(this);
       } finally {

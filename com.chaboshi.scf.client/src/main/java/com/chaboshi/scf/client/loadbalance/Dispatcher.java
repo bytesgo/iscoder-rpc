@@ -9,13 +9,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.chaboshi.scf.client.communication.socket.ScoketPool;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.chaboshi.scf.client.communication.socket.SocketPool;
 import com.chaboshi.scf.client.configuration.ServiceConfig;
 import com.chaboshi.scf.client.configuration.loadbalance.ServerProfile;
 import com.chaboshi.scf.client.loadbalance.component.ServerChoose;
 import com.chaboshi.scf.client.loadbalance.component.ServerState;
-import com.chaboshi.scf.client.utility.logger.ILog;
-import com.chaboshi.scf.client.utility.logger.LogFactory;
 
 /**
  * Dispatcher
@@ -24,7 +25,7 @@ import com.chaboshi.scf.client.utility.logger.LogFactory;
  */
 public class Dispatcher {
 
-  private static ILog logger = LogFactory.getLogger(Server.class);
+  private static final Logger logger = LoggerFactory.getLogger(Dispatcher.class);
   private List<Server> ServerPool = new ArrayList<Server>();
   private AtomicInteger requestCount = new AtomicInteger(0);
 
@@ -41,7 +42,7 @@ public class Dispatcher {
         Server s = new Server(ser);
         if (s.getState() != ServerState.Disable) {
           // ScoketPool sp = new ScoketPool(s, config.getSocketPool());
-          ScoketPool sp = new ScoketPool(s, config);
+          SocketPool sp = new SocketPool(s, config);
           s.setScoketpool(sp);
           ServerPool.add(s);
         }
@@ -82,7 +83,7 @@ public class Dispatcher {
             result = server;
             server.setState(ServerState.Testing);
             server.setDeadTime(0);
-            logger.warning("find server that need to test!host:" + server.getAddress());
+            logger.warn("find server that need to test!host:" + server.getAddress());
             break;
           }
         }
@@ -96,7 +97,7 @@ public class Dispatcher {
             server.setDeadTime(0);
             // --requestCount;
             requestCount.getAndDecrement();// requestCount--;
-            logger.warning("find server that need to test!host:" + server.getAddress());
+            logger.warn("find server that need to test!host:" + server.getAddress());
             break;
           }
         }
@@ -111,7 +112,7 @@ public class Dispatcher {
 
     if (result == null) {
       result = ServerPool.get(new Random().nextInt(count));
-      logger.warning("Not get server, This server is " + result.getState() + " DeadTime:" + result.getDeadTime() + " DeadTimeout"
+      logger.warn("Not get server, This server is " + result.getState() + " DeadTime:" + result.getDeadTime() + " DeadTimeout"
           + result.getDeadTimeout());
     }
     return result;
@@ -159,7 +160,7 @@ public class Dispatcher {
             server.setState(ServerState.Testing);
             server.setDeadTime(0);
             result = server;
-            logger.warning("find server that need to test!host:" + server.getAddress());
+            logger.warn("find server that need to test!host:" + server.getAddress());
             break;
           }
         }
@@ -172,7 +173,7 @@ public class Dispatcher {
             server.setDeadTime(0);
             result = server;
             requestCount.getAndDecrement();
-            logger.warning("find server that need to test!host:" + server.getAddress());
+            logger.warn("find server that need to test!host:" + server.getAddress());
             break;
           }
         }
@@ -193,7 +194,7 @@ public class Dispatcher {
         result = this.GetServer(getNoName(sc.getServerName())[counts]);
       }
 
-      logger.warning("Not get Specified server, This server is " + result.getState() + " DeadTime:" + result.getDeadTime() + " DeadTimeout"
+      logger.warn("Not get Specified server, This server is " + result.getState() + " DeadTime:" + result.getDeadTime() + " DeadTimeout"
           + result.getDeadTimeout());
     }
     return result;

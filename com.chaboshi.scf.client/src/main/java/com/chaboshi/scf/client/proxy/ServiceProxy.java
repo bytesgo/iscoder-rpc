@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.client.SCFConst;
 import com.chaboshi.scf.client.configuration.ServiceConfig;
 import com.chaboshi.scf.client.loadbalance.Dispatcher;
@@ -21,8 +24,6 @@ import com.chaboshi.scf.client.loadbalance.component.ServerState;
 import com.chaboshi.scf.client.proxy.builder.InvokeResult;
 import com.chaboshi.scf.client.proxy.builder.Parameter;
 import com.chaboshi.scf.client.proxy.builder.ReceiveHandler;
-import com.chaboshi.scf.client.utility.logger.ILog;
-import com.chaboshi.scf.client.utility.logger.LogFactory;
 import com.chaboshi.scf.protocol.exception.RebootException;
 import com.chaboshi.scf.protocol.exception.ThrowErrorHelper;
 import com.chaboshi.scf.protocol.exception.TimeoutException;
@@ -43,7 +44,7 @@ import com.chaboshi.scf.protocol.utility.KeyValuePair;
  */
 public class ServiceProxy {
 
-  private static final ILog logger = LogFactory.getLogger(ServiceProxy.class);
+  private static final Logger logger = LoggerFactory.getLogger(ServiceProxy.class);
   private int count = 0;
   private int sessionId = 1;
   private int requestTime = 0;
