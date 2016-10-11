@@ -7,10 +7,10 @@ import java.text.DecimalFormat;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.MessageEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.chaboshi.scf.server.contract.context.SCFContext;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.performance.Command;
 import com.chaboshi.scf.server.performance.CommandType;
 import com.chaboshi.scf.server.performance.JVMMonitor;
@@ -19,7 +19,7 @@ import com.chaboshi.scf.server.performance.MonitorMemory;
 
 public class JVM extends CommandHelperBase {
 
-  private static ILog logger = LogFactory.getLogger(JVM.class);
+  private static final Logger logger = LoggerFactory.getLogger(JVM.class);
 
   @Override
   public Command createCommand(String commandStr) {

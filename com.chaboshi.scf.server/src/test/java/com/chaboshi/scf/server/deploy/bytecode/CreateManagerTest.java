@@ -6,17 +6,17 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import org.apache.log4j.xml.DOMConfigurator;
 import org.junit.Test;
 
 import com.chaboshi.scf.server.RootPath;
 import com.chaboshi.scf.server.contract.context.IProxyFactory;
-import com.chaboshi.scf.server.contract.log.Log4jConfig;
 import com.chaboshi.scf.server.deploy.hotdeploy.DynamicURLClassLoader;
 
 public class CreateManagerTest {
 
   static {
-    Log4jConfig.configure(RootPath.projectRootPath + "config/scf_log4j.xml");
+    DOMConfigurator.configure(RootPath.projectRootPath + "config/scf_log4j.xml");
   }
 
   @Test

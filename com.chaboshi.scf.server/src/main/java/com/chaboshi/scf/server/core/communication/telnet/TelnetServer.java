@@ -9,10 +9,10 @@ import org.jboss.netty.channel.group.ChannelGroup;
 import org.jboss.netty.channel.group.ChannelGroupFuture;
 import org.jboss.netty.channel.group.DefaultChannelGroup;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.chaboshi.scf.server.contract.context.Global;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.contract.server.Server;
 
 /**
@@ -25,11 +25,10 @@ import com.chaboshi.scf.server.contract.server.Server;
  */
 public class TelnetServer implements Server {
 
+  private static Logger logger = LoggerFactory.getLogger(TelnetServer.class);
+
   public TelnetServer() {
-
   }
-
-  private static ILog logger = LogFactory.getLogger(TelnetServer.class);
 
   /**
    * netty ServerBootstrap

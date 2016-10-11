@@ -3,8 +3,9 @@ package com.chaboshi.scf.server.performance.monitorweb;
 import java.lang.management.MemoryUsage;
 import java.text.DecimalFormat;
 
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.server.performance.JVMMonitor;
 import com.chaboshi.scf.server.performance.MonitorGC;
 import com.chaboshi.scf.server.performance.MonitorMemory;
@@ -16,7 +17,7 @@ import com.chaboshi.scf.server.performance.MonitorMemory;
  */
 public class MonitorJVM {
 
-  private static ILog logger = LogFactory.getLogger(MonitorJVM.class);
+  private static final Logger logger = LoggerFactory.getLogger(MonitorJVM.class);
   private MonitorUDPClient udp;
   private String serviceName;
 

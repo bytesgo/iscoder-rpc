@@ -1,9 +1,10 @@
 package com.chaboshi.scf.server.filter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.server.contract.context.SCFContext;
 import com.chaboshi.scf.server.contract.filter.IFilter;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 
 /**
  * A filter for set SCFContext monitor true
@@ -15,7 +16,7 @@ import com.chaboshi.scf.server.contract.log.LogFactory;
  */
 public class MonitorRequestFilter implements IFilter {
 
-  private static ILog logger = LogFactory.getLogger(MonitorRequestFilter.class);
+  private static final Logger logger = LoggerFactory.getLogger(MonitorRequestFilter.class);
 
   @Override
   public void filter(SCFContext context) throws Exception {

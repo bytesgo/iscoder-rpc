@@ -14,11 +14,15 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class ServiceConfig {
+
+  private static final Logger logger = LoggerFactory.getLogger(ServiceConfig.class);
 
   private static Map<String, String> property = null;
 
@@ -37,7 +41,6 @@ public class ServiceConfig {
   public int getInt(String name) throws Exception {
     String value = property.get(name);
     if (value == null || value.equalsIgnoreCase("")) {
-      // throw new Exception("the property (" + name + ") is null");
       return 0;
     }
     return Integer.parseInt(value);
@@ -57,7 +60,7 @@ public class ServiceConfig {
       return null;
     }
 
-    List<String> list = new ArrayList<String>();
+    List<String> list = new ArrayList<String>(3);
     String[] values = value.split(split);
     for (String v : values) {
       list.add(v);
@@ -73,7 +76,7 @@ public class ServiceConfig {
    * @throws Exception
    */
   public static ServiceConfig getServiceConfig(String... paths) throws Exception {
-
+    logger.info("load service config...");
     ServiceConfig instance = new ServiceConfig();
 
     XPathFactory factory = XPathFactory.newInstance();
@@ -98,20 +101,21 @@ public class ServiceConfig {
         Node node = propertyNodes.item(i);
         Node nameNode = (Node) exprName.evaluate(node, XPathConstants.NODE);
         Node valueNode = (Node) exprValue.evaluate(node, XPathConstants.NODE);
-
         Node append = valueNode.getAttributes().getNamedItem("append");
+        String key, value;
         if (append != null && append.getNodeValue() != null && append.getNodeValue().equalsIgnoreCase("true")) {
-          String key = nameNode.getTextContent();
-          String value = property.get(nameNode.getTextContent());
+          key = nameNode.getTextContent();
+          value = property.get(nameNode.getTextContent());
           if (value != null) {
-            value += "," + valueNode.getTextContent();
+            value += "," + valueNode.getTextContent().replaceAll("\n", "").trim();
           } else {
-            value = valueNode.getTextContent();
+            value = valueNode.getTextContent().replaceAll("\n", "").trim();
           }
-          property.put(key, value);
         } else {
-          property.put(nameNode.getTextContent(), valueNode.getTextContent());
+          key = nameNode.getTextContent().trim();
+          value = valueNode.getTextContent().replaceAll("\n", "").trim();
         }
+        property.put(key, value);
       }
     }
 
@@ -165,5 +169,13 @@ public class ServiceConfig {
 
   public String getServiceName() {
     return property.get("scf.service.name");
+  }
+
+  public void setServiceName(String serviceName) {
+    set("scf.service.name", serviceName);
+  }
+
+  public boolean isHotDeploy() throws Exception {
+    return getBoolean("scf.hotdeploy");
   }
 }

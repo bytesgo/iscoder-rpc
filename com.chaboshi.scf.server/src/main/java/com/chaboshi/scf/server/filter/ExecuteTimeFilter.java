@@ -2,13 +2,14 @@ package com.chaboshi.scf.server.filter;
 
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.context.SCFContext;
 import com.chaboshi.scf.server.contract.context.StopWatch;
 import com.chaboshi.scf.server.contract.context.StopWatch.PerformanceCounter;
 import com.chaboshi.scf.server.contract.filter.IFilter;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.util.UDPClient;
 
 /**
@@ -27,8 +28,7 @@ public class ExecuteTimeFilter implements IFilter {
 
   private static UDPClient udpClient = null;
 
-  private static ILog logger = LogFactory.getLogger(ExecuteTimeFilter.class);
-
+  private static final Logger logger = LoggerFactory.getLogger(ExecuteTimeFilter.class);
   static {
     try {
       String ip = Global.getSingleton().getServiceConfig().getString("scf.log.udpserver.ip");

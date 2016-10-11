@@ -9,14 +9,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.server.contract.annotation.AnnotationUtil;
 import com.chaboshi.scf.server.contract.annotation.HttpPathParameter;
 import com.chaboshi.scf.server.contract.annotation.HttpRequestMapping;
 import com.chaboshi.scf.server.contract.annotation.OperationContract;
 import com.chaboshi.scf.server.contract.annotation.ServiceBehavior;
 import com.chaboshi.scf.server.contract.annotation.ServiceContract;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.deploy.bytecode.ContractInfo.SessionBean;
 import com.chaboshi.scf.server.deploy.hotdeploy.DynamicClassLoader;
 import com.chaboshi.scf.server.util.ClassHelper;
@@ -24,10 +25,7 @@ import com.chaboshi.scf.server.util.FileHelper;
 
 public class ScanClass {
 
-  /**
-   * logger
-   */
-  private static ILog logger = LogFactory.getLogger(ScanClass.class);
+  private static Logger logger = LoggerFactory.getLogger(ScanClass.class);
 
   /**
    * ContractInfo for create proxy

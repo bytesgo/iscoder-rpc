@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.client.communication.socket.CSocket;
+import com.chaboshi.scf.client.communication.socket.SCFSocket;
 import com.chaboshi.scf.client.communication.socket.SocketPool;
 import com.chaboshi.scf.client.communication.socket.ThreadRenameFactory;
 import com.chaboshi.scf.client.communication.socket.WindowData;
@@ -128,12 +128,12 @@ public class Server {
       throw new Exception("This proxy server is unavailable.state:" + state + "+host:" + address);
     }
     increaseCU();
-    CSocket socket = null;
+    SCFSocket socket = null;
     try {
       try {
         socket = this.scoketpool.getSocket();
         byte[] data = p.toBytes(socket.isRights(), socket.getDESKey());
-        socket.registerRec(p.getSessionID());
+        socket.registerRec(p.getSessionId());
         socket.send(data);
       } catch (Throwable ex) {
         logger.error("Server get socket Exception", ex);
@@ -143,7 +143,7 @@ public class Server {
           socket.dispose();
         }
       }
-      byte[] buffer = socket.receive(p.getSessionID(), currUserCount);
+      byte[] buffer = socket.receive(p.getSessionId(), currUserCount);
       Protocol result = Protocol.fromBytes(buffer, socket.isRights(), socket.getDESKey());
       if (this.state == ServerState.Testing) {
         relive();
@@ -165,7 +165,7 @@ public class Server {
         markAsDead();
       }
       if (socket != null) {
-        socket.unregisterRec(p.getSessionID());
+        socket.unregisterRec(p.getSessionId());
       }
       decreaseCU();
     }
@@ -185,13 +185,13 @@ public class Server {
       throw new Exception("This proxy server is unavailable.state:" + state + "+host:" + address);
     }
     increaseCU();
-    CSocket socket = null;
+    SCFSocket socket = null;
     try {
       try {
         socket = this.scoketpool.getSocket();
         byte[] data = p.toBytes(socket.isRights(), socket.getDESKey());
         WindowData wd = new WindowData(receiveHandler, socket, data);
-        socket.registerRec(p.getSessionID(), wd);
+        socket.registerRec(p.getSessionId(), wd);
         socket.offerAsyncWrite(wd);
       } catch (Throwable ex) {
         logger.error("Server get socket Exception", ex);

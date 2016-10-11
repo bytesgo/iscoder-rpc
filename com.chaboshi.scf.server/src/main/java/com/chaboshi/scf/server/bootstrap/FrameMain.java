@@ -11,11 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.server.bootstrap.serverframe.ButtonFrame;
 import com.chaboshi.scf.server.bootstrap.serverframe.MenuBar;
 import com.chaboshi.scf.server.bootstrap.serverframe.TreeFrame;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 
 /**
  * main window
@@ -24,7 +25,7 @@ import com.chaboshi.scf.server.contract.log.LogFactory;
  */
 public class FrameMain extends JFrame {
   private static final long serialVersionUID = 563726381249120291L;
-  private static ILog logger = null;
+  private static Logger logger = LoggerFactory.getLogger(FrameMain.class);
 
   public FrameMain(String title) {
     super(title);
@@ -34,8 +35,6 @@ public class FrameMain extends JFrame {
     FrameMain frameMain = new FrameMain("授权文件生成器");
     frameMain.setSize(450, 550);
     frameMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    /** load log4j */
-    logger = LogFactory.getLogger(FrameMain.class);
     /** 获得显示器大小对象 */
     Dimension displaySize = Toolkit.getDefaultToolkit().getScreenSize();
     /** 获得窗口大小对象 */

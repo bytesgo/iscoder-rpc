@@ -1,9 +1,10 @@
 package com.chaboshi.scf.server.core.convert;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.protocol.sfp.enumeration.SerializeType;
 import com.chaboshi.scf.protocol.sfp.v1.Protocol;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 
 /**
  * A convert facotry for create converter
@@ -14,7 +15,7 @@ import com.chaboshi.scf.server.contract.log.LogFactory;
  * 
  */
 public class ConvertFacotry {
-
+  private static Logger logger = LoggerFactory.getLogger(ConvertFacotry.class);
   /**
    * java
    */
@@ -24,8 +25,6 @@ public class ConvertFacotry {
    * SCFBinary
    */
   private static SCFBinaryConvert scfBinaryConvert = new SCFBinaryConvert();
-
-  private static ILog logger = LogFactory.getLogger(ConvertFacotry.class);
 
   public static IConvert getConvert(Protocol p) {
     if (p.getSerializeType() == SerializeType.SCFBinary) {

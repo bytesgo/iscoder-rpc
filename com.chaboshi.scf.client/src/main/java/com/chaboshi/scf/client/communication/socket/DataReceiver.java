@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 class DataReceiver {
 
   private static DataReceiver _DataReceiver = null;
-  List<CSocket> sockets = new ArrayList<CSocket>();
+  List<SCFSocket> sockets = new ArrayList<SCFSocket>();
   private final static Object LockHelper = new Object();
 
   private DataReceiver() {
@@ -44,11 +44,11 @@ class DataReceiver {
     return _DataReceiver;
   }
 
-  public synchronized void RegSocketChannel(final CSocket socket) throws ClosedChannelException, IOException {
+  public synchronized void RegSocketChannel(final SCFSocket socket) throws ClosedChannelException, IOException {
     sockets.add(socket);
   }
 
-  public synchronized void UnRegSocketChannel(CSocket socket) {
+  public synchronized void UnRegSocketChannel(SCFSocket socket) {
     sockets.remove(socket);
     Handle.RemoveInstance(socket);
   }
@@ -59,9 +59,9 @@ class Worker implements Runnable {
   private final static int T_COUNT = Runtime.getRuntime().availableProcessors();// CPU核数
   private ExecutorService pool = Executors.newFixedThreadPool(T_COUNT, new ThreadRenameFactory("Async DataReceiver Thread"));
   private static final Logger logger = LoggerFactory.getLogger(Worker.class);
-  List<CSocket> sockets = null;
+  List<SCFSocket> sockets = null;
 
-  public Worker(List<CSocket> sockets) {
+  public Worker(List<SCFSocket> sockets) {
     this.sockets = sockets;
   }
 
@@ -69,7 +69,7 @@ class Worker implements Runnable {
   public void run() {
     while (true) {
       try {
-        for (final CSocket socket : sockets) {
+        for (final SCFSocket socket : sockets) {
           try {
             pool.execute(Handle.getInstance(socket));
           } catch (Throwable ex) {
@@ -86,12 +86,12 @@ class Worker implements Runnable {
 
 class Handle implements Runnable {
 
-  private static ConcurrentHashMap<CSocket, Handle> mapInstance = new ConcurrentHashMap<CSocket, Handle>();
+  private static ConcurrentHashMap<SCFSocket, Handle> mapInstance = new ConcurrentHashMap<SCFSocket, Handle>();
   private static final Logger logger = LoggerFactory.getLogger(Handle.class);
-  private CSocket socket = null;
+  private SCFSocket socket = null;
   private final static Object lockHelper = new Object();
 
-  protected static Handle getInstance(CSocket socket) {
+  protected static Handle getInstance(SCFSocket socket) {
     Handle handle = mapInstance.get(socket);
     if (handle == null) {
       synchronized (lockHelper) {
@@ -105,11 +105,11 @@ class Handle implements Runnable {
 
   }
 
-  private Handle(CSocket socket) {
+  private Handle(SCFSocket socket) {
     this.socket = socket;
   }
 
-  protected static void RemoveInstance(CSocket socket) {
+  protected static void RemoveInstance(SCFSocket socket) {
     synchronized (lockHelper) {
       mapInstance.remove(socket);
     }

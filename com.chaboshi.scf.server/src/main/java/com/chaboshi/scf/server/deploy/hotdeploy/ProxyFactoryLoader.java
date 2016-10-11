@@ -14,6 +14,8 @@ import com.chaboshi.scf.server.deploy.bytecode.CreateManager;
  */
 public class ProxyFactoryLoader {
 
+  private static final CreateManager cm = new CreateManager();
+
   /**
    * 
    * @param serviceConfig
@@ -21,10 +23,7 @@ public class ProxyFactoryLoader {
    * @throws Exception
    */
   public static IProxyFactory loadProxyFactory(DynamicClassLoader classLoader) throws Exception {
-
-    CreateManager cm = new CreateManager();
     return cm.careteProxy(
-        Global.getSingleton().getRootPath() + "service/deploy/" + Global.getSingleton().getServiceConfig().getString("scf.service.name"),
-        classLoader);
+        Global.getSingleton().getRootPath() + "service/deploy/" + Global.getSingleton().getServiceConfig().getServiceName(), classLoader);
   }
 }

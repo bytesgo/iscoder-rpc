@@ -1,5 +1,8 @@
 package com.chaboshi.scf.server.core.proxy;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.protocol.sdp.RequestProtocol;
 import com.chaboshi.scf.protocol.sdp.ResponseProtocol;
 import com.chaboshi.scf.protocol.sfp.v1.Protocol;
@@ -9,8 +12,6 @@ import com.chaboshi.scf.server.contract.context.IProxyStub;
 import com.chaboshi.scf.server.contract.context.SCFContext;
 import com.chaboshi.scf.server.contract.context.SCFResponse;
 import com.chaboshi.scf.server.contract.context.StopWatch;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.performance.monitorweb.FrameExCount;
 import com.chaboshi.scf.server.util.ErrorState;
 import com.chaboshi.scf.server.util.ExceptionHelper;
@@ -19,10 +20,7 @@ import com.chaboshi.scf.server.util.SystemUtils;
 
 public abstract class InvokerBase implements InvokerHandler {
 
-  /**
-   * log
-   */
-  private final static ILog logger = LogFactory.getLogger(InvokerBase.class);
+  private static Logger logger = LoggerFactory.getLogger(InvokerBase.class);
 
   /**
    * 调用真实服务
@@ -77,7 +75,7 @@ public abstract class InvokerBase implements InvokerHandler {
       logger.debug("proxyFactory.getProxy finish");
       if (localProxy == null) {
         ServiceFrameException sfe = new ServiceFrameException(
-            "method:ProxyHandle.invoke--msg:" + request.getLookup() + "." + request.getMethodName() + " not fond",
+            "method:ProxyHandler.invoke--msg:" + request.getLookup() + "." + request.getMethodName() + " not fond",
             context.getChannel().getRemoteIP(), context.getChannel().getLocalIP(), request, ErrorState.NotFoundServiceException, null);
         response = ExceptionHelper.createError(sfe);
         logger.error("localProxy is null", sfe);

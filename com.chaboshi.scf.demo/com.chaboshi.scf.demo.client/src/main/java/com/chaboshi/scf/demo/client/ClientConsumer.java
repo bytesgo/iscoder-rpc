@@ -26,7 +26,7 @@ public class ClientConsumer {
     long start = System.currentTimeMillis();
     String result = helloService.say("李亚州");
     System.out.println("说话内容 : " + result);
-    benchRun(1000, 100000);
+    benchRun(1, 1);
 
     System.out.println(System.currentTimeMillis() - start);
   }
@@ -40,7 +40,7 @@ public class ClientConsumer {
         @Override
         public void run() {
           String result = helloService.say("李亚州--" + j);
-          System.out.println("说话内容 : " + result);
+          System.out.println("client get说话内容 : " + result);
         }
       });
     }

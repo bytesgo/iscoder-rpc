@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.xml.DOMConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +16,6 @@ import com.chaboshi.scf.server.contract.context.IProxyFactory;
 import com.chaboshi.scf.server.contract.context.ServiceConfig;
 import com.chaboshi.scf.server.contract.filter.IFilter;
 import com.chaboshi.scf.server.contract.init.IInit;
-import com.chaboshi.scf.server.contract.log.Log4jConfig;
 import com.chaboshi.scf.server.contract.server.Server;
 import com.chaboshi.scf.server.deploy.filemonitor.FileMonitor;
 import com.chaboshi.scf.server.deploy.filemonitor.HotDeployListener;
@@ -35,6 +35,7 @@ import com.chaboshi.scf.server.deploy.hotdeploy.ProxyFactoryLoader;
 public class Main {
 
   private static final Logger logger = LoggerFactory.getLogger(Main.class);
+  private static ServiceConfig serviceConfig;
 
   /**
    * start server
@@ -84,17 +85,16 @@ public class Main {
     logger.info("service scf_log4j.xml: " + log4jConfigPath);
     logger.info("default scf_log4j.xml: " + log4jConfigDefaultPath);
 
-    // load service config
-    logger.info("load service config...");
-    ServiceConfig serviceConfig = loadServiceConfig(scfConfigDefaultPath, scfConfigPath);
+    serviceConfig = ServiceConfig.getServiceConfig(scfConfigDefaultPath, scfConfigPath);
+
     Set<String> keySet = argsMap.keySet();
     for (String key : keySet) {
-      logger.info(key + ": " + argsMap.get(key));
+      logger.debug(key + ": " + argsMap.get(key));
       serviceConfig.set(key, argsMap.get(key));
     }
-    if (serviceConfig.getServiceName() == null || serviceConfig.getServiceName().equalsIgnoreCase("")) {
+    if (serviceConfig.getServiceName() == null || serviceConfig.getServiceName().length() == 0) {
       logger.info("scf.service.name:" + serviceName);
-      serviceConfig.set("scf.service.name", serviceName);
+      serviceConfig.setServiceName(serviceName);
     }
     Global.getSingleton().setServiceConfig(serviceConfig);
 
@@ -108,7 +108,6 @@ public class Main {
     classLoader.addFolder(jarPath);
     GlobalClassLoader.addSystemClassPathFolder(jarPath);
     jarPath = null;
-
     logger.info("-------------------------end-------------------------\n");
 
     if (new File(serviceFolderPath).isDirectory() || !serviceName.equalsIgnoreCase("error_service_name_is_null")) {
@@ -119,46 +118,12 @@ public class Main {
       logger.info("-------------------------end-------------------------\n");
 
       // load init beans
-      logger.info("-----------------loading init beans------------------");
       loadInitBeans(classLoader, serviceConfig);
-      logger.info("-------------------------end-------------------------\n");
     }
 
-    // load global request-filters
-    logger.info("-----------loading global request filters------------");
-    List<IFilter> requestFilters = loadFilters(classLoader, serviceConfig, "scf.filter.global.request");
-    for (IFilter filter : requestFilters) {
-      Global.getSingleton().addGlobalRequestFilter(filter);
-    }
-    logger.info("-------------------------end-------------------------\n");
-
-    // load global response-filters
-    logger.info("-----------loading global response filters-----------");
-    List<IFilter> responseFilters = loadFilters(classLoader, serviceConfig, "scf.filter.global.response");
-    for (IFilter filter : responseFilters) {
-      Global.getSingleton().addGlobalResponseFilter(filter);
-    }
-    logger.info("-------------------------end-------------------------\n");
-
-    // load connection filters
-    logger.info("-----------loading connection filters-----------");
-    List<IFilter> connFilters = loadFilters(classLoader, serviceConfig, "scf.filter.connection");
-    for (IFilter filter : connFilters) {
-      Global.getSingleton().addConnectionFilter(filter);
-    }
-    logger.info("-------------------------end-------------------------\n");
-
-    // load servers
-    logger.info("------------------ starting servers -----------------");
-    loadServers(classLoader, serviceConfig);
-    logger.info("-------------------------end-------------------------\n");
-
-    // add current service file to monitor
-    if (serviceConfig.getBoolean("scf.hotdeploy")) {
-      logger.info("------------------init file monitor-----------------");
-      addFileMonitor(rootPath, serviceConfig.getServiceName());
-      logger.info("-------------------------end-------------------------\n");
-    }
+    addFilter(classLoader);
+    loadServers(classLoader);
+    addFileMonitor(rootPath);
 
     try {
       registerExcetEven();
@@ -174,22 +139,6 @@ public class Main {
   }
 
   /**
-   * load service config
-   * 
-   * @param cps
-   * @return
-   * @throws Exception
-   */
-  private static ServiceConfig loadServiceConfig(String... cps) throws Exception {
-    ServiceConfig sc = ServiceConfig.getServiceConfig(cps);
-    if (sc == null) {
-      logger.error("ServiceConfig sc is null");
-    }
-
-    return sc;
-  }
-
-  /**
    * 
    * @param configPath
    * @param logFilePath
@@ -198,7 +147,9 @@ public class Main {
   private static void loadLog4jConfig(String configPath, String defaultPath, String serviceName) throws Exception {
     File fLog4jConfig = new File(configPath);
     if (fLog4jConfig.exists()) {
-      Log4jConfig.configure(configPath);
+      DOMConfigurator.configure(configPath);
+    } else {
+      DOMConfigurator.configure(defaultPath);
     }
   }
 
@@ -209,6 +160,7 @@ public class Main {
    * @throws Exception
    */
   private static void loadInitBeans(DynamicClassLoader classLoader, ServiceConfig sc) throws Exception {
+    logger.info("-----------------loading init beans------------------");
     List<String> initList = sc.getList("scf.init", ",");
     if (initList != null) {
       for (String initBeans : initList) {
@@ -222,6 +174,7 @@ public class Main {
         }
       }
     }
+    logger.info("-------------------------end-------------------------\n");
   }
 
   /**
@@ -258,7 +211,7 @@ public class Main {
     if (filterList != null) {
       for (String filterName : filterList) {
         try {
-          logger.info("load: " + filterName);
+          logger.debug("load: " + filterName);
           IFilter filter = (IFilter) classLoader.loadClass(filterName).newInstance();
           instanceList.add(filter);
         } catch (Exception e) {
@@ -266,8 +219,33 @@ public class Main {
         }
       }
     }
-
     return instanceList;
+  }
+
+  private static void addFilter(DynamicClassLoader classLoader) throws Exception {
+    // load global request-filters
+    logger.info("-----------loading global request filters------------");
+    List<IFilter> requestFilters = loadFilters(classLoader, serviceConfig, "scf.filter.global.request");
+    for (IFilter filter : requestFilters) {
+      Global.getSingleton().addGlobalRequestFilter(filter);
+    }
+    logger.info("-------------------------end-------------------------\n");
+
+    // load global response-filters
+    logger.info("-----------loading global response filters-----------");
+    List<IFilter> responseFilters = loadFilters(classLoader, serviceConfig, "scf.filter.global.response");
+    for (IFilter filter : responseFilters) {
+      Global.getSingleton().addGlobalResponseFilter(filter);
+    }
+    logger.info("-------------------------end-------------------------\n");
+
+    // load connection filters
+    logger.info("-----------loading connection filters-----------");
+    List<IFilter> connFilters = loadFilters(classLoader, serviceConfig, "scf.filter.connection");
+    for (IFilter filter : connFilters) {
+      Global.getSingleton().addConnectionFilter(filter);
+    }
+    logger.info("-------------------------end-------------------------\n");
   }
 
   /**
@@ -276,23 +254,23 @@ public class Main {
    * @param sc
    * @throws Exception
    */
-  private static void loadServers(DynamicClassLoader classLoader, ServiceConfig sc) throws Exception {
-    List<String> servers = sc.getList("scf.servers", ",");
-    if (servers != null) {
-      for (String server : servers) {
-        try {
-          if (sc.getBoolean(server + ".enable")) {
-            logger.info(server + " is starting...");
-            Server serverImpl = (Server) classLoader.loadClass(sc.getString(server + ".implement")).newInstance();
-            Global.getSingleton().addServer(serverImpl);
-            serverImpl.start();
-            logger.info(server + "started success!!!\n");
-          }
-        } catch (Exception ex) {
-
+  private static void loadServers(DynamicClassLoader classLoader) throws Exception {
+    logger.info("------------------ starting servers -----------------");
+    List<String> servers = serviceConfig.getList("scf.servers", ",");
+    for (String server : servers) {
+      try {
+        if (serviceConfig.getBoolean(server + ".enable")) {
+          logger.info(server + " is starting...");
+          Server serverImpl = (Server) classLoader.loadClass(serviceConfig.getString(server + ".implement")).newInstance();
+          Global.getSingleton().addServer(serverImpl);
+          serverImpl.start();
+          logger.info(server + "started success!!!\n");
         }
+      } catch (Exception err) {
+        logger.error(server + "error : ", err);
       }
     }
+    logger.info("-------------------------end-------------------------\n");
   }
 
   /**
@@ -301,13 +279,19 @@ public class Main {
    * @param config
    * @throws Exception
    */
-  private static void addFileMonitor(String rootPath, String serviceName) throws Exception {
-    FileMonitor.getInstance().addMonitorFile(rootPath + "service/deploy/" + serviceName + "/");
+  private static void addFileMonitor(String rootPath) throws Exception {
+    if (!serviceConfig.isHotDeploy()) {
+      return;
+    }
+    logger.info("------------------init file monitor-----------------");
 
+    FileMonitor.getInstance().addMonitorFile(rootPath + "service/deploy/" + serviceConfig.getServiceName() + "/");
     FileMonitor.getInstance().setInterval(5000);
     FileMonitor.getInstance().setNotifyCount(NotifyCount.Once);
     FileMonitor.getInstance().addListener(new HotDeployListener());
     FileMonitor.getInstance().start();
+
+    logger.info("-------------------------end-------------------------\n");
   }
 
   /**

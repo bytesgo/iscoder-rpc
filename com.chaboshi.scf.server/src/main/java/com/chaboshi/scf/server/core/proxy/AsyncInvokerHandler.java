@@ -2,6 +2,9 @@ package com.chaboshi.scf.server.core.proxy;
 
 import java.util.concurrent.TimeoutException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.protocol.sfp.v1.Protocol;
 import com.chaboshi.scf.server.contract.context.ExecFilterType;
 import com.chaboshi.scf.server.contract.context.Global;
@@ -11,8 +14,6 @@ import com.chaboshi.scf.server.contract.context.SecureContext;
 import com.chaboshi.scf.server.contract.context.ServerType;
 import com.chaboshi.scf.server.contract.filter.IFilter;
 import com.chaboshi.scf.server.contract.http.HttpThreadLocal;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.performance.monitorweb.AbandonCount;
 import com.chaboshi.scf.server.util.ExceptionHelper;
 import com.chaboshi.spat.utility.async.AsyncInvoker;
@@ -26,11 +27,8 @@ import com.chaboshi.spat.utility.async.IAsyncHandler;
  *         <a href="http://blog.58.com/spat/">blog</a> <a href="http://www.58.com">website</a>
  * 
  */
-public class AsyncInvokerHandle extends InvokerBase {
-  /**
-   * log
-   */
-  private final static ILog logger = LogFactory.getLogger(AsyncInvokerHandle.class);
+public class AsyncInvokerHandler extends InvokerBase {
+  private static Logger logger = LoggerFactory.getLogger(AsyncInvokerHandler.class);
   /**
    * 异步执行器
    */
@@ -38,7 +36,7 @@ public class AsyncInvokerHandle extends InvokerBase {
   private HttpThreadLocal httpThreadLocal;
   private int taskTimeOut = 1000;
 
-  public AsyncInvokerHandle() {
+  public AsyncInvokerHandler() {
     try {
       httpThreadLocal = HttpThreadLocal.getInstance();
       int workerCount = Global.getSingleton().getServiceConfig().getInt("scf.async.worker.count");

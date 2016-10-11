@@ -5,15 +5,15 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.server.contract.context.Global;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.contract.server.Server;
 import com.chaboshi.scf.server.performance.exception.SerializeException;
 
 public class MonitorWebCenter implements Server {
-  static ILog logger = LogFactory.getLogger(MonitorWebCenter.class);
-
+  private static final Logger logger = LoggerFactory.getLogger(MonitorWebCenter.class);
   static MonitorUDPClient udp;
 
   @Override

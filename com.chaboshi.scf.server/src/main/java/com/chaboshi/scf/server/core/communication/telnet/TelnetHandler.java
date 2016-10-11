@@ -7,9 +7,9 @@ import org.jboss.netty.channel.ChannelStateEvent;
 import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.performance.MonitorCenter;
 
 /**
@@ -23,7 +23,7 @@ import com.chaboshi.scf.server.performance.MonitorCenter;
 @ChannelPipelineCoverage("all")
 public class TelnetHandler extends SimpleChannelUpstreamHandler {
 
-  private static ILog logger = LogFactory.getLogger(TelnetHandler.class);
+  private static Logger logger = LoggerFactory.getLogger(TelnetHandler.class);
 
   @Override
   public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {

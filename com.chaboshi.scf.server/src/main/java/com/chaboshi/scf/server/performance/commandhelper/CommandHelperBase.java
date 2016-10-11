@@ -1,10 +1,9 @@
 package com.chaboshi.scf.server.performance.commandhelper;
 
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class CommandHelperBase implements ICommandHelper {
 
-  protected static ILog logger = LogFactory.getLogger(CommandHelperBase.class);
-
+  protected static Logger logger = LoggerFactory.getLogger(CommandHelperBase.class);
 }

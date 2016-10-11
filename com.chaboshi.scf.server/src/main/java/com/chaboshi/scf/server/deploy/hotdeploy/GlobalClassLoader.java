@@ -6,8 +6,9 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.List;
 
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.server.util.FileHelper;
 
 import sun.misc.Launcher;
@@ -23,8 +24,7 @@ import sun.misc.Launcher;
 @SuppressWarnings("restriction")
 public class GlobalClassLoader {
 
-  private static ILog logger = LogFactory.getLogger(GlobalClassLoader.class);
-
+  private static Logger logger = LoggerFactory.getLogger(GlobalClassLoader.class);
   private static Method addURL;
 
   static {

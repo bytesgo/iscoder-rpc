@@ -8,9 +8,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.server.contract.annotation.OperationAsyn;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.core.proxy.AsynBack;
 import com.chaboshi.scf.server.deploy.bytecode.ClassInfo.MethodInfo;
 import com.chaboshi.scf.server.deploy.hotdeploy.DynamicClassLoader;
@@ -30,7 +31,7 @@ import javassist.CtMethod;
  */
 public class ProxyClassCreater {
 
-  private static ILog logger = LogFactory.getLogger(ProxyClassCreater.class);
+  private static Logger logger = LoggerFactory.getLogger(ProxyClassCreater.class);
 
   @SuppressWarnings("rawtypes")
   public List<ClassFile> createProxy(DynamicClassLoader classLoader, ContractInfo serviceContract, long time) throws Exception {

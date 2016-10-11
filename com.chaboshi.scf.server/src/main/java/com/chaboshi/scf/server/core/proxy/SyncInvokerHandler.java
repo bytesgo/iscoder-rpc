@@ -1,11 +1,12 @@
 package com.chaboshi.scf.server.core.proxy;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.server.contract.context.ExecFilterType;
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.context.SCFContext;
 import com.chaboshi.scf.server.contract.filter.IFilter;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 
 /**
  * sync service invoke handle
@@ -17,7 +18,7 @@ import com.chaboshi.scf.server.contract.log.LogFactory;
  */
 public class SyncInvokerHandler extends InvokerBase {
 
-  private static ILog logger = LogFactory.getLogger(SyncInvokerHandler.class);
+  private static Logger logger = LoggerFactory.getLogger(SyncInvokerHandler.class);
 
   /**
    * create protocol and invoke service proxy

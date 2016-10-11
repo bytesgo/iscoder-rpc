@@ -3,6 +3,9 @@ package com.chaboshi.scf.server.core.proxy;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.protocol.exception.TimeoutException;
 import com.chaboshi.scf.protocol.sdp.ResponseProtocol;
 import com.chaboshi.scf.protocol.sfp.v1.Protocol;
@@ -14,8 +17,6 @@ import com.chaboshi.scf.server.contract.context.SecureContext;
 import com.chaboshi.scf.server.contract.context.ServerType;
 import com.chaboshi.scf.server.contract.filter.IFilter;
 import com.chaboshi.scf.server.contract.http.HttpThreadLocal;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.performance.monitorweb.AbandonCount;
 import com.chaboshi.scf.server.util.ExceptionHelper;
 import com.chaboshi.spat.utility.async.AsyncInvoker;
@@ -23,7 +24,7 @@ import com.chaboshi.spat.utility.async.IAsyncHandler;
 
 public class AsynBack {
 
-  private final static ILog logger = LogFactory.getLogger(AsynBack.class);
+  private static Logger logger = LoggerFactory.getLogger(AsynBack.class);
   private static AsynBack asyn = null;
   private static int taskTimeOut = 1000;
   private static HttpThreadLocal httpThreadLocal;

@@ -9,10 +9,10 @@ import org.jboss.netty.channel.group.ChannelGroup;
 import org.jboss.netty.channel.group.ChannelGroupFuture;
 import org.jboss.netty.channel.group.DefaultChannelGroup;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.chaboshi.scf.server.contract.context.Global;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.contract.server.Server;
 import com.chaboshi.scf.server.core.proxy.InvokerHandler;
 
@@ -30,8 +30,7 @@ public class NettyServer implements Server {
 
   }
 
-  static ILog logger = LogFactory.getLogger(NettyServer.class);
-
+  private static Logger logger = LoggerFactory.getLogger(NettyServer.class);
   /**
    * netty ServerBootstrap
    */
@@ -45,7 +44,7 @@ public class NettyServer implements Server {
   /**
    * invoker handle
    */
-  static InvokerHandler invokerHandle = null;
+  static InvokerHandler invokerHandler = null;
 
   /**
    * start netty server
@@ -54,7 +53,7 @@ public class NettyServer implements Server {
   public void start() throws Exception {
     logger.info("loading invoker...");
     String invoker = Global.getSingleton().getServiceConfig().getString("scf.proxy.invoker.implement");
-    invokerHandle = (InvokerHandler) Class.forName(invoker).newInstance();
+    invokerHandler = (InvokerHandler) Class.forName(invoker).newInstance();
     logger.info("initing server...");
     initSocketServer();
   }

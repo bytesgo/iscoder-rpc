@@ -15,8 +15,9 @@ import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.server.util.FileHelper;
 
 /**
@@ -29,8 +30,7 @@ import com.chaboshi.scf.server.util.FileHelper;
  */
 public class DynamicClassLoader extends SecureClassLoader {
 
-  private static ILog logger = LogFactory.getLogger(DynamicClassLoader.class);
-
+  private static Logger logger = LoggerFactory.getLogger(DynamicClassLoader.class);
   /**
    * jar list load class from this
    */
@@ -160,7 +160,7 @@ public class DynamicClassLoader extends SecureClassLoader {
         logger.debug("-----key:" + entry.getKey() + "  value:" + entry.getValue().getName());
       }
     } catch (Exception ex) {
-      logger.error(ex);
+      logger.error("", ex);
     }
     classCache.clear();
   }

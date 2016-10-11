@@ -5,10 +5,11 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.server.contract.context.IProxyFactory;
 import com.chaboshi.scf.server.contract.context.IProxyStub;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.deploy.hotdeploy.DynamicClassLoader;
 
 /**
@@ -20,7 +21,7 @@ import com.chaboshi.scf.server.deploy.hotdeploy.DynamicClassLoader;
  */
 public class CreateManager {
 
-  private static ILog logger = LogFactory.getLogger(CreateManager.class);
+  private static Logger logger = LoggerFactory.getLogger(CreateManager.class);
 
   public IProxyFactory careteProxy(String serviceRootPath, DynamicClassLoader classLoader) throws Exception {
 

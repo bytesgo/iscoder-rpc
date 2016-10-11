@@ -73,13 +73,13 @@ public class SocketPool {
     return queue.size();
   }
 
-  public synchronized CSocket getSocket() throws TimeoutException, IOException, InterruptedException, Throwable, Exception {
-    CSocket rSocket = null;
+  public synchronized SCFSocket getSocket() throws TimeoutException, IOException, InterruptedException, Throwable, Exception {
+    SCFSocket rSocket = null;
     if (queue.size() > 0) {
       rSocket = queue.dequeue();
     } else if (queue.getTotal() < socketPoolConfig.getMaxPoolSize()) {
       // CSocket socket = new CSocket(endPoint, this, socketPoolConfig);
-      CSocket socket = new CSocket(server.getAddress(), server.getPort(), this, socketPoolConfig);
+      SCFSocket socket = new SCFSocket(server.getAddress(), server.getPort(), this, socketPoolConfig);
       /**
        * 如果启动权限认证则注册之前进行授权文件认证
        * 
@@ -117,7 +117,7 @@ public class SocketPool {
     return rSocket;
   }
 
-  public void release(CSocket socket) {// 释放socket
+  public void release(SCFSocket socket) {// 释放socket
     if (socket == null) {
       logger.warn("socket is null when release(CSocket socket)");
     } else if (!socket.connecting()) {
@@ -135,7 +135,7 @@ public class SocketPool {
     }
   }
 
-  public void destroy(CSocket socket) {
+  public void destroy(SCFSocket socket) {
     try {
       logger.warn("socket destroyed!--" + socket.toString());
       socket.disconnect();
@@ -148,7 +148,7 @@ public class SocketPool {
 
   public void destroy() throws Exception {
     synchronized (this) {
-      List<CSocket> csList = queue.getAllSocket();
+      List<SCFSocket> csList = queue.getAllSocket();
       for (int i = 0; i < csList.size(); i++) {
         if (i < csList.size()) {
           csList.get(i).dispose(true);
@@ -170,7 +170,7 @@ public class SocketPool {
    *       5、服务器端通过服务器端私钥(SPrivateKey)解密、并校验授权文件是否正确，如果正确则返回通过客户端公钥(CPublicKey)加密的DES密钥，否则返回null/false
    *       6、客户端通过客户端私钥(CPrivateKey)解密服务器端返回数据获得RSA密钥 7、客户端、服务器端通过RSA加密数据进行交互
    */
-  private boolean checkRights(CSocket scoket) throws Throwable {
+  private boolean checkRights(SCFSocket scoket) throws Throwable {
 
     long startTime = System.currentTimeMillis();
     // 如果没有启用权限认证，则直接返回true,直接注册socket
@@ -185,7 +185,7 @@ public class SocketPool {
     Protocol publicKeyProtocol = proxy.createProtocol(handclaspProtocol);
 
     try {
-      scoket.registerRec(publicKeyProtocol.getSessionID());
+      scoket.registerRec(publicKeyProtocol.getSessionId());
       scoket.send(publicKeyProtocol.toBytes());// 过程2
       logger.info("send client publicKey sucess!");
     } finally {
@@ -196,7 +196,7 @@ public class SocketPool {
     /**
      * 过程3,接收服务器端生成公钥
      */
-    byte[] receivePublicBuffer = scoket.receive(publicKeyProtocol.getSessionID(), server.getCurrUserCount());
+    byte[] receivePublicBuffer = scoket.receive(publicKeyProtocol.getSessionId(), server.getCurrUserCount());
     if (null == receivePublicBuffer) {
       logger.warn("获取服务器公钥失败!");
       return false;
@@ -236,7 +236,7 @@ public class SocketPool {
     Protocol protocol_mw = proxy.createProtocol(handclaspProtocol_);
 
     try {
-      scoket.registerRec(protocol_mw.getSessionID());
+      scoket.registerRec(protocol_mw.getSessionId());
       scoket.send(protocol_mw.toBytes());// 过程4
       logger.info("send keyInfo sucess!");
     } finally {
@@ -247,7 +247,7 @@ public class SocketPool {
     /**
      * 过程5 获取由客户端公钥加密后的DES密钥
      */
-    byte[] receiveDESKey = scoket.receive(protocol_mw.getSessionID(), server.getCurrUserCount());
+    byte[] receiveDESKey = scoket.receive(protocol_mw.getSessionId(), server.getCurrUserCount());
     if (null == receiveDESKey) {
       logger.warn("获取DES密钥失败!");
       return false;
@@ -297,38 +297,38 @@ public class SocketPool {
   }
 }
 
-class CQueueL extends LinkedBlockingQueue<CSocket> {
+class CQueueL extends LinkedBlockingQueue<SCFSocket> {
   private static final long serialVersionUID = 8883610471211028756L;
   private int _duration;
   private int _minConn;
   private final Object shrinkLockHelper = new Object();
-  private CopyOnWriteArrayList<CSocket> _AllSocket = new CopyOnWriteArrayList<CSocket>();
+  private CopyOnWriteArrayList<SCFSocket> _AllSocket = new CopyOnWriteArrayList<SCFSocket>();
 
   public CQueueL(int _duration, int _minConn) {
     this._duration = _duration;
     this._minConn = _minConn;
   }
 
-  public CSocket enqueue(CSocket element) {
+  public SCFSocket enqueue(SCFSocket element) {
     offer(element);
     return element;
   }
 
-  public CSocket dequeue() {
-    CSocket csocket = (CSocket) poll();
+  public SCFSocket dequeue() {
+    SCFSocket csocket = (SCFSocket) poll();
     return csocket;
   }
 
-  public CSocket dequeue(long time) throws InterruptedException {
-    CSocket csocket = (CSocket) poll(time, TimeUnit.MILLISECONDS);
+  public SCFSocket dequeue(long time) throws InterruptedException {
+    SCFSocket csocket = (SCFSocket) poll(time, TimeUnit.MILLISECONDS);
     return csocket;
   }
 
-  public void register(CSocket socket) {
+  public void register(SCFSocket socket) {
     _AllSocket.add(socket);
   }
 
-  public synchronized boolean remove(CSocket socket) {
+  public synchronized boolean remove(SCFSocket socket) {
     _AllSocket.remove(socket);
     return super.remove(socket);
   }
@@ -337,7 +337,7 @@ class CQueueL extends LinkedBlockingQueue<CSocket> {
     return _AllSocket.size();
   }
 
-  public List<CSocket> getAllSocket() {
+  public List<SCFSocket> getAllSocket() {
     return _AllSocket;
   }
 

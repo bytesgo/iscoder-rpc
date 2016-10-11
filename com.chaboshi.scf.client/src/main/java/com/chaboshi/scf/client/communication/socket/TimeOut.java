@@ -4,9 +4,9 @@ public class TimeOut {
   private int sessionId;
   private long time;
   private WindowData wd;
-  private CSocket cSocket;
+  private SCFSocket cSocket;
 
-  public TimeOut(int sessionId, WindowData wd, CSocket cSocket) {
+  public TimeOut(int sessionId, WindowData wd, SCFSocket cSocket) {
     this.sessionId = sessionId;
     this.wd = wd;
     this.cSocket = cSocket;
@@ -37,11 +37,11 @@ public class TimeOut {
     this.wd = wd;
   }
 
-  public CSocket getcSocket() {
+  public SCFSocket getcSocket() {
     return cSocket;
   }
 
-  public void setcSocket(CSocket cSocket) {
+  public void setcSocket(SCFSocket cSocket) {
     this.cSocket = cSocket;
   }
 

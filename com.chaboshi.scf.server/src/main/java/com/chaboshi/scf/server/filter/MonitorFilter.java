@@ -1,15 +1,16 @@
 package com.chaboshi.scf.server.filter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.server.contract.context.SCFContext;
 import com.chaboshi.scf.server.contract.context.StopWatch;
 import com.chaboshi.scf.server.contract.filter.IFilter;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.performance.monitorweb.MonitorCount;
 
 public class MonitorFilter implements IFilter {
 
-  private static ILog logger = LogFactory.getLogger(MonitorFilter.class);
+  private static final Logger logger = LoggerFactory.getLogger(MonitorFilter.class);
 
   @Override
   public int getPriority() {

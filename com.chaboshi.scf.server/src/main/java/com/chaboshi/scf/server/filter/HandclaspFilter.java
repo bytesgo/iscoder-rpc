@@ -1,5 +1,8 @@
 package com.chaboshi.scf.server.filter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.protocol.sdp.ExceptionProtocol;
 import com.chaboshi.scf.protocol.sdp.HandclaspProtocol;
 import com.chaboshi.scf.protocol.sfp.enumeration.PlatformType;
@@ -11,15 +14,13 @@ import com.chaboshi.scf.server.contract.context.SCFResponse;
 import com.chaboshi.scf.server.contract.context.SecureContext;
 import com.chaboshi.scf.server.contract.context.ServerType;
 import com.chaboshi.scf.server.contract.filter.IFilter;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.secure.SecureKey;
 import com.chaboshi.scf.server.secure.StringUtils;
 import com.chaboshi.scf.server.util.ExceptionHelper;
 
 public class HandclaspFilter implements IFilter {
 
-  private static ILog logger = LogFactory.getLogger(HandclaspFilter.class);
+  private static final Logger logger = LoggerFactory.getLogger(HandclaspFilter.class);
 
   @Override
   public int getPriority() {

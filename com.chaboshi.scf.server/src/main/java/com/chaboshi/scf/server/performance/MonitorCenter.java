@@ -7,17 +7,17 @@ import java.util.concurrent.Executors;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.MessageEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.context.SCFContext;
 import com.chaboshi.scf.server.contract.filter.IFilter;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.filter.MonitorRequestFilter;
 import com.chaboshi.scf.server.filter.MonitorResponseFilter;
 
 public class MonitorCenter {
-
+  private static final Logger logger = LoggerFactory.getLogger(MonitorCenter.class);
   /**
    * thread pool
    */
@@ -32,11 +32,6 @@ public class MonitorCenter {
    * MonitorResponseFilter
    */
   private static IFilter monitorResponseFilter = new MonitorResponseFilter();
-
-  /**
-   * log
-   */
-  private static ILog logger = LogFactory.getLogger(MonitorCenter.class);
 
   private static Command command = null;
 

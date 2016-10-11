@@ -31,8 +31,8 @@ public class Protocol {
 
   public static final byte VERSION = 1;
   private int totalLen;
-  private int sessionID;
-  private byte serviceID;
+  private int sessionId;
+  private byte serviceId;
   private SDPType sdpType;
   private CompressType compressType = CompressType.UnCompress;
   private SerializeType serializeType = SerializeType.SCFBinary;
@@ -49,8 +49,8 @@ public class Protocol {
       PlatformType platformType, Object sdpEntity) {
 
     this.sdpEntity = sdpEntity;
-    this.sessionID = sessionId;
-    this.serviceID = serviceId;
+    this.sessionId = sessionId;
+    this.serviceId = serviceId;
     this.sdpType = sdpType;
     this.compressType = compressType;
     this.serializeType = serializeType;
@@ -61,8 +61,8 @@ public class Protocol {
       PlatformType platformType, byte[] userData) {
 
     this.userData = userData;
-    this.sessionID = sessionId;
-    this.serviceID = serviceId;
+    this.sessionId = sessionId;
+    this.serviceId = serviceId;
     this.sdpType = sdpType;
     this.compressType = compressType;
     this.serializeType = serializeType;
@@ -72,9 +72,9 @@ public class Protocol {
   public Protocol(int sessionId, byte serviceId, SDPType sdpType, Object sdpEntity) {
 
     this.sdpEntity = sdpEntity;
-    this.sessionID = sessionId;
+    this.sessionId = sessionId;
     this.sdpType = sdpType;
-    this.serviceID = serviceId;
+    this.serviceId = serviceId;
   }
 
   public Protocol() {
@@ -117,20 +117,20 @@ public class Protocol {
     this.serializeType = serializeType;
   }
 
-  public byte getServiceID() {
-    return serviceID;
+  public byte getServiceId() {
+    return serviceId;
   }
 
-  public void setServiceID(byte serviceID) {
-    this.serviceID = serviceID;
+  public void setServiceId(byte serviceId) {
+    this.serviceId = serviceId;
   }
 
-  public int getSessionID() {
-    return sessionID;
+  public int getSessionId() {
+    return sessionId;
   }
 
-  public void setSessionID(int sessionID) {
-    this.sessionID = sessionID;
+  public void setSessionId(int sessionId) {
+    this.sessionId = sessionId;
   }
 
   public byte[] getUserData() {
@@ -176,10 +176,10 @@ public class Protocol {
     System.arraycopy(ByteConverter.intToBytesLittleEndian(this.getTotalLen()), 0, data, startIndex, SFPStruct.TotalLen);
 
     startIndex += SFPStruct.TotalLen;
-    System.arraycopy(ByteConverter.intToBytesLittleEndian(this.getSessionID()), 0, data, startIndex, SFPStruct.SessionId);
+    System.arraycopy(ByteConverter.intToBytesLittleEndian(this.getSessionId()), 0, data, startIndex, SFPStruct.SessionId);
 
     startIndex += SFPStruct.SessionId;
-    data[startIndex] = this.getServiceID();
+    data[startIndex] = this.getServiceId();
 
     startIndex += SFPStruct.ServerId;
     data[startIndex] = (byte) this.getSDPType().getNum();
@@ -218,10 +218,10 @@ public class Protocol {
     for (int i = 0; i < SFPStruct.SessionId; i++) {
       sessionIDByte[i] = data[startIndex + i];
     }
-    p.setSessionID(ByteConverter.bytesToIntLittleEndian(sessionIDByte));
+    p.setSessionId(ByteConverter.bytesToIntLittleEndian(sessionIDByte));
 
     startIndex += SFPStruct.SessionId;// 9
-    p.setServiceID(data[startIndex]);
+    p.setServiceId(data[startIndex]);
 
     startIndex += SFPStruct.ServerId;// 10
     p.setSDPType(SDPType.getSDPType(data[startIndex]));
@@ -276,10 +276,10 @@ public class Protocol {
     for (int i = 0; i < SFPStruct.SessionId; i++) {
       sessionIDByte[i] = data[startIndex + i];
     }
-    p.setSessionID(ByteConverter.bytesToIntLittleEndian(sessionIDByte));
+    p.setSessionId(ByteConverter.bytesToIntLittleEndian(sessionIDByte));
 
     startIndex += SFPStruct.SessionId;// 9
-    p.setServiceID(data[startIndex]);
+    p.setServiceId(data[startIndex]);
 
     startIndex += SFPStruct.ServerId;// 10
     p.setSDPType(SDPType.getSDPType(data[startIndex]));
@@ -344,10 +344,10 @@ public class Protocol {
     System.arraycopy(ByteConverter.intToBytesLittleEndian(this.getTotalLen()), 0, data, startIndex, SFPStruct.TotalLen);
 
     startIndex += SFPStruct.TotalLen;
-    System.arraycopy(ByteConverter.intToBytesLittleEndian(this.getSessionID()), 0, data, startIndex, SFPStruct.SessionId);
+    System.arraycopy(ByteConverter.intToBytesLittleEndian(this.getSessionId()), 0, data, startIndex, SFPStruct.SessionId);
 
     startIndex += SFPStruct.SessionId;
-    data[startIndex] = this.getServiceID();
+    data[startIndex] = this.getServiceId();
 
     startIndex += SFPStruct.ServerId;
     data[startIndex] = (byte) this.getSDPType().getNum();

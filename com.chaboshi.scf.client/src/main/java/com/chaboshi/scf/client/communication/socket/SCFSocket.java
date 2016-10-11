@@ -32,9 +32,9 @@ import com.chaboshi.scf.protocol.utility.ProtocolConst;
  *
  * @author Service Platform Architecture Team (spat@58.com)
  */
-public class CSocket {
+public class SCFSocket {
 
-  private static final Logger logger = LoggerFactory.getLogger(CSocket.class);
+  private static final Logger logger = LoggerFactory.getLogger(SCFSocket.class);
   private Socket socket;
   private byte[] DESKey;
   /** DES密钥 */
@@ -56,7 +56,7 @@ public class CSocket {
   private ExecutorService executorService = Executors.newFixedThreadPool(SystemUtils.getHalfCpuProcessorCount());
   private static NIOHandler handler = null;
 
-  protected CSocket(InetSocketAddress endpoint, SocketPool _pool, SocketPoolProfile config) throws Exception {
+  protected SCFSocket(InetSocketAddress endpoint, SocketPool _pool, SocketPoolProfile config) throws Exception {
     this.socketConfig = config;
     this.pool = _pool;
 
@@ -100,7 +100,7 @@ public class CSocket {
     logger.info("create a new connection :" + this.toString());
   }
 
-  protected CSocket(String addr, int port, SocketPool _pool, SocketPoolProfile config) throws Exception {
+  protected SCFSocket(String addr, int port, SocketPool _pool, SocketPoolProfile config) throws Exception {
     this.socketConfig = config;
     this.pool = _pool;
 

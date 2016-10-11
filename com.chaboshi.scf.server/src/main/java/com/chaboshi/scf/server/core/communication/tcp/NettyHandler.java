@@ -11,6 +11,8 @@ import org.jboss.netty.channel.ChannelStateEvent;
 import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // import com.bj58.spat.scf.server.performance.monitorweb.MonitorErrorLog;
 import com.chaboshi.scf.protocol.utility.ProtocolConst;
@@ -21,8 +23,6 @@ import com.chaboshi.scf.server.contract.context.SCFContext;
 import com.chaboshi.scf.server.contract.context.SecureContext;
 import com.chaboshi.scf.server.contract.context.ServerType;
 import com.chaboshi.scf.server.contract.filter.IFilter;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.contract.server.ServerHandler;
 import com.chaboshi.scf.server.util.ExceptionHelper;
 
@@ -37,7 +37,7 @@ import com.chaboshi.scf.server.util.ExceptionHelper;
 @ChannelPipelineCoverage("all")
 public class NettyHandler extends SimpleChannelUpstreamHandler implements ServerHandler {
 
-  private static ILog logger = LogFactory.getLogger(NettyHandler.class);
+  private static Logger logger = LoggerFactory.getLogger(NettyHandler.class);
 
   @Override
   public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
@@ -57,7 +57,7 @@ public class NettyHandler extends SimpleChannelUpstreamHandler implements Server
 
         SCFContext scfContext = new SCFContext(requestBuffer, new SCFChannel(e.getChannel()), ServerType.TCP, this);
 
-        NettyServer.invokerHandle.invoke(scfContext);
+        NettyServer.invokerHandler.invoke(scfContext);
       } else {
         byte[] response = ExceptionHelper.createErrorProtocol();
         e.getChannel().write(ChannelBuffers.copiedBuffer(response));

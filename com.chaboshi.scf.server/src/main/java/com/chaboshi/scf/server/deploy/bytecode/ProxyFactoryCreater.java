@@ -4,9 +4,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.server.contract.context.Global;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.deploy.hotdeploy.DynamicClassLoader;
 
 import javassist.ClassPool;
@@ -24,7 +25,7 @@ import javassist.CtMethod;
  */
 public class ProxyFactoryCreater {
 
-  private static ILog logger = LogFactory.getLogger(ProxyFactoryCreater.class);
+  private static Logger logger = LoggerFactory.getLogger(ProxyFactoryCreater.class);
 
   @SuppressWarnings("rawtypes")
   public ClassFile createProxy(DynamicClassLoader classLoader, ContractInfo serviceContract, long time) throws Exception {

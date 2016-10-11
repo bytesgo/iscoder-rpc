@@ -5,12 +5,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.chaboshi.scf.server.contract.context.StopWatch;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 
 public class MonitorCount {
 
-  static ILog logger = LogFactory.getLogger(MonitorCount.class);
   private static AtomicInteger count = new AtomicInteger(0);
   private static Map<String, Integer> fromIP = new ConcurrentHashMap<String, Integer>();
 

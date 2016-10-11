@@ -1,9 +1,10 @@
 package com.chaboshi.scf.server.deploy.filemonitor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.context.IProxyFactory;
-import com.chaboshi.scf.server.contract.log.ILog;
-import com.chaboshi.scf.server.contract.log.LogFactory;
 import com.chaboshi.scf.server.deploy.hotdeploy.DynamicClassLoader;
 import com.chaboshi.scf.server.deploy.hotdeploy.ProxyFactoryLoader;
 
@@ -16,10 +17,7 @@ import com.chaboshi.scf.server.deploy.hotdeploy.ProxyFactoryLoader;
  */
 public class HotDeployListener implements IListener {
 
-  /**
-   * log
-   */
-  private static ILog logger = LogFactory.getLogger(HotDeployListener.class);
+  private static Logger logger = LoggerFactory.getLogger(HotDeployListener.class);
 
   public void fileChanged(FileInfo fInfo) {
     logger.info("service file is change!!! ");

@@ -21,20 +21,20 @@ public class WindowData {
   private Exception exception;
   private long timestamp;
   private ReceiveHandler receiveHandler;
-  private CSocket csocket;
+  private SCFSocket csocket;
   private byte[] sendData;
 
   public WindowData(AutoResetEvent event) {
     _event = event;
   }
 
-  public WindowData(ReceiveHandler receiveHandler, CSocket csocket) {
+  public WindowData(ReceiveHandler receiveHandler, SCFSocket csocket) {
     this.flag = 1;
     this.receiveHandler = receiveHandler;
     this.csocket = csocket;
   }
 
-  public WindowData(ReceiveHandler receiveHandler, CSocket csocket, byte[] sendData) {
+  public WindowData(ReceiveHandler receiveHandler, SCFSocket csocket, byte[] sendData) {
     this.flag = 1;
     this.receiveHandler = receiveHandler;
     this.csocket = csocket;
@@ -98,11 +98,11 @@ public class WindowData {
     this.receiveHandler = receiveHandler;
   }
 
-  public CSocket getCsocket() {
+  public SCFSocket getCsocket() {
     return csocket;
   }
 
-  public void setCsocket(CSocket csocket) {
+  public void setCsocket(SCFSocket csocket) {
     this.csocket = csocket;
   }
 
