@@ -95,7 +95,7 @@ public class NettyServer implements Server {
     logger.info("-- worker thread count: " + Global.getSingleton().getServiceConfig().getInt("scf.server.tcp.workerCount"));
     logger.info("--------------------------");
 
-    logger.info(Global.getSingleton().getServiceConfig().getString("scf.service.name") + " SocketServer starting...");
+    logger.info(Global.getSingleton().getServiceConfig().getServiceName() + " SocketServer starting...");
 
     bootstrap.setFactory(new NioServerSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool(),
         Global.getSingleton().getServiceConfig().getInt("scf.server.tcp.workerCount")));
