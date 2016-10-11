@@ -1,6 +1,5 @@
 package com.chaboshi.scf.server.deploy.bytecode;
 
-import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,17 +24,8 @@ public class CreateManager {
 
   public IProxyFactory careteProxy(String serviceRootPath, DynamicClassLoader classLoader) throws Exception {
 
-    String configPath = serviceRootPath + "/" + Constant.SERVICE_CONTRACT;
-    File file = new File(configPath);
-    ContractInfo serviceContract = null;
+    ContractInfo serviceContract = ScanClass.getContractInfo(serviceRootPath + "/", classLoader);
 
-    // if config file exists load contract info from config
-
-    if (file != null && file.exists()) {
-      serviceContract = ContractConfig.loadContractInfo(configPath, classLoader);
-    } else {
-      serviceContract = ScanClass.getContractInfo(serviceRootPath + "/", classLoader);
-    }
     long time = System.currentTimeMillis();
     List<ClassFile> localProxyList = new ProxyClassCreater().createProxy(classLoader, serviceContract, time);
     logger.info("proxy class buffer creater finish!!!");

@@ -12,13 +12,6 @@
 		<dependencySet>
 			<scope>runtime</scope>
 			<outputDirectory>lib</outputDirectory>
-			<excludes>
-				<exclude>org.slf4j:slf4j-api</exclude>
-				<exclude>org.slf4j:slf4j-log4j12</exclude>
-				<exclude>org.jyaml:jyaml</exclude>
-				<exclude>com.chaboshi.scf:protocol</exclude>
-				<exclude>mysql:mysql-connector-java</exclude>
-			</excludes>
 		</dependencySet>
 	</dependencySets>
 
