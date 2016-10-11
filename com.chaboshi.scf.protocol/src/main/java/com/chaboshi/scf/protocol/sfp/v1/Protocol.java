@@ -1,8 +1,5 @@
 /*
- * Copyright 2010 58.com, Inc.
- *
- * SPAT team blog: http://blog.58.com/spat/
- * website: http://www.58.com
+ * Copyright 2010 58.com, Inc. SPAT team blog: http://blog.58.com/spat/ website: http://www.58.com
  */
 package com.chaboshi.scf.protocol.sfp.v1;
 
@@ -19,9 +16,8 @@ import com.chaboshi.scf.secure.DESCoderHelper;
  * 
  * 版本一协义定义
  * 
- * 1byte(版本号) | 4byte(协义总长度) | 4byte(序列号) | 1byte(服务编号) | 1byte(消息体类型) | 1byte
- * 所采用的压缩算法 | 1byte 序列化规则 | 1byte 平台(.net java ...) | n byte消息体 | 5byte(分界符) 0
- * 1~4 5~8 9 10 11 12 13 消息头总长度:14byte
+ * 1byte(版本号) | 4byte(协义总长度) | 4byte(序列号) | 1byte(服务编号) | 1byte(消息体类型) | 1byte 所采用的压缩算法 | 1byte 序列化规则 | 1byte 平台(.net
+ * java ...) | n byte消息体 | 5byte(分界符) 0 1~4 5~8 9 10 11 12 13 消息头总长度:14byte
  * 
  * 协义总长度 = 消息头总长度 + 消息体总长度 (不包括分界符)
  * 

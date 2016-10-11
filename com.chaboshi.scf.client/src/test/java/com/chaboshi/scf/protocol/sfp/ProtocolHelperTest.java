@@ -8,7 +8,6 @@ import com.chaboshi.scf.protocol.sfp.enumeration.SDPType;
 import com.chaboshi.scf.protocol.sfp.v1.Protocol;
 import com.chaboshi.scf.protocol.utility.ProtocolHelper;
 
-
 public class ProtocolHelperTest {
 
   @Test

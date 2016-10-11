@@ -5,9 +5,6 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
-import com.chaboshi.scf.server.contract.annotation.OperationAsyn;
-import com.chaboshi.scf.server.contract.annotation.ServiceContract;
-
 public class OpreationAsynTest {
   public static void main(String[] args) {
     try {

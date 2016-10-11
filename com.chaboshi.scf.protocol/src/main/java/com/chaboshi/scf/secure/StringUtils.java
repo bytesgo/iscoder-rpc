@@ -2,8 +2,6 @@ package com.chaboshi.scf.secure;
 
 import java.io.UnsupportedEncodingException;
 
-import com.chaboshi.scf.secure.CharEncoding;
-
 /**
  * string byte
  * 

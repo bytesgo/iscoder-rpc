@@ -1,7 +1,6 @@
 /*
- * Written by Doug Lea with assistance from members of JCP JSR-166
- * Expert Group and released to the public domain, as explained at
- * http://creativecommons.org/licenses/publicdomain
+ * Written by Doug Lea with assistance from members of JCP JSR-166 Expert Group and released to the public domain, as
+ * explained at http://creativecommons.org/licenses/publicdomain
  */
 
 package com.chaboshi.scf.client.utility.jsr;
@@ -10,26 +9,20 @@ import java.util.Random;
 import java.util.concurrent.ForkJoinTask;
 
 /**
- * A random number generator isolated to the current thread. Like the global
- * {@link java.util.Random} generator used by the {@link java.lang.Math} class,
- * a {@code ThreadLocalRandom} is initialized with an internally generated seed
- * that may not otherwise be modified. When applicable, use of
- * {@code ThreadLocalRandom} rather than shared {@code Random} objects in
- * concurrent programs will typically encounter much less overhead and
- * contention. Use of {@code ThreadLocalRandom} is particularly appropriate when
- * multiple tasks (for example, each a {@link ForkJoinTask}) use random numbers
- * in parallel in thread pools.
+ * A random number generator isolated to the current thread. Like the global {@link java.util.Random} generator used by
+ * the {@link java.lang.Math} class, a {@code ThreadLocalRandom} is initialized with an internally generated seed that
+ * may not otherwise be modified. When applicable, use of {@code ThreadLocalRandom} rather than shared {@code Random}
+ * objects in concurrent programs will typically encounter much less overhead and contention. Use of
+ * {@code ThreadLocalRandom} is particularly appropriate when multiple tasks (for example, each a {@link ForkJoinTask})
+ * use random numbers in parallel in thread pools.
  *
  * <p>
- * Usages of this class should typically be of the form:
- * {@code ThreadLocalRandom.current().nextX(...)} (where {@code X} is
- * {@code Int}, {@code Long}, etc). When all usages are of this form, it is
- * never possible to accidently share a {@code ThreadLocalRandom} across
- * multiple threads.
+ * Usages of this class should typically be of the form: {@code ThreadLocalRandom.current().nextX(...)} (where {@code X}
+ * is {@code Int}, {@code Long}, etc). When all usages are of this form, it is never possible to accidently share a
+ * {@code ThreadLocalRandom} across multiple threads.
  *
  * <p>
- * This class also provides additional commonly used bounded random generation
- * methods.
+ * This class also provides additional commonly used bounded random generation methods.
  *
  * @since 1.7
  * @author Doug Lea
@@ -47,10 +40,9 @@ public class ThreadLocalRandom extends Random {
   private long rnd;
 
   /**
-   * Initialization flag to permit the first and only allowed call to setSeed
-   * (inside Random constructor) to succeed. We can't allow others since it
-   * would cause setting seed in one part of a program to unintentionally impact
-   * other usages by the thread.
+   * Initialization flag to permit the first and only allowed call to setSeed (inside Random constructor) to succeed. We
+   * can't allow others since it would cause setting seed in one part of a program to unintentionally impact other
+   * usages by the thread.
    */
   boolean initialized;
 
@@ -69,9 +61,8 @@ public class ThreadLocalRandom extends Random {
   };
 
   /**
-   * Constructor called only by localRandom.initialValue. We rely on the fact
-   * that the superclass no-arg constructor invokes setSeed exactly once to
-   * initialize.
+   * Constructor called only by localRandom.initialValue. We rely on the fact that the superclass no-arg constructor
+   * invokes setSeed exactly once to initialize.
    */
   ThreadLocalRandom() {
     super();
@@ -87,8 +78,7 @@ public class ThreadLocalRandom extends Random {
   }
 
   /**
-   * Throws {@code UnsupportedOperationException}. Setting seeds in this
-   * generator is not supported.
+   * Throws {@code UnsupportedOperationException}. Setting seeds in this generator is not supported.
    *
    * @throws UnsupportedOperationException always
    */
@@ -105,8 +95,8 @@ public class ThreadLocalRandom extends Random {
   }
 
   /**
-   * Returns a pseudorandom, uniformly distributed value between the given least
-   * value (inclusive) and bound (exclusive).
+   * Returns a pseudorandom, uniformly distributed value between the given least value (inclusive) and bound
+   * (exclusive).
    *
    * @param least the least value returned
    * @param bound the upper bound (exclusive)
@@ -120,8 +110,7 @@ public class ThreadLocalRandom extends Random {
   }
 
   /**
-   * Returns a pseudorandom, uniformly distributed value between 0 (inclusive)
-   * and the specified value (exclusive).
+   * Returns a pseudorandom, uniformly distributed value between 0 (inclusive) and the specified value (exclusive).
    *
    * @param n the bound on the random number to be returned. Must be positive.
    * @return the next value
@@ -148,8 +137,8 @@ public class ThreadLocalRandom extends Random {
   }
 
   /**
-   * Returns a pseudorandom, uniformly distributed value between the given least
-   * value (inclusive) and bound (exclusive).
+   * Returns a pseudorandom, uniformly distributed value between the given least value (inclusive) and bound
+   * (exclusive).
    *
    * @param least the least value returned
    * @param bound the upper bound (exclusive)
@@ -163,8 +152,8 @@ public class ThreadLocalRandom extends Random {
   }
 
   /**
-   * Returns a pseudorandom, uniformly distributed {@code double} value between
-   * 0 (inclusive) and the specified value (exclusive).
+   * Returns a pseudorandom, uniformly distributed {@code double} value between 0 (inclusive) and the specified value
+   * (exclusive).
    *
    * @param n the bound on the random number to be returned. Must be positive.
    * @return the next value
@@ -177,8 +166,8 @@ public class ThreadLocalRandom extends Random {
   }
 
   /**
-   * Returns a pseudorandom, uniformly distributed value between the given least
-   * value (inclusive) and bound (exclusive).
+   * Returns a pseudorandom, uniformly distributed value between the given least value (inclusive) and bound
+   * (exclusive).
    *
    * @param least the least value returned
    * @param bound the upper bound (exclusive)

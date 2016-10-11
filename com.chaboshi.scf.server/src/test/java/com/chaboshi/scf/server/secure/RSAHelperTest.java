@@ -3,7 +3,6 @@ package com.chaboshi.scf.server.secure;
 import org.junit.Assert;
 import org.junit.Test;
 
-
 public class RSAHelperTest {
 
   private static String src = "afh425yqdsf*$#^Q@#%HFGKSHFKG@#$%SFDGSFGK@$TDSF";

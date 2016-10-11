@@ -2,8 +2,6 @@ package com.chaboshi.scf.server.util;
 
 import org.junit.Test;
 
-import com.chaboshi.scf.server.util.Util;
-
 public class UtilTest {
 
   @Test

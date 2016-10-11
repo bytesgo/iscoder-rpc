@@ -4,10 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.chaboshi.scf.server.performance.Command;
-import com.chaboshi.scf.server.performance.CommandType;
-import com.chaboshi.scf.server.performance.ShowColumn;
-
 public class CommandTest {
 
   @Test

@@ -2,8 +2,6 @@ package com.chaboshi.scf.server.filter;
 
 import org.junit.Test;
 
-import com.chaboshi.scf.server.filter.ProtocolParseFilter;
-
 public class ProtocolParseFilterTest {
 
   @SuppressWarnings("unused")

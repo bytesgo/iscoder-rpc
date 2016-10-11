@@ -3,7 +3,6 @@ package com.chaboshi.scf.server.core.convert;
 import org.junit.Assert;
 import org.junit.Test;
 
-
 public class CustomBinaryConvertTest {
 
   @Test

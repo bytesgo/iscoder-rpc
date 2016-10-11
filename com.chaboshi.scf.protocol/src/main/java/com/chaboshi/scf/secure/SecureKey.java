@@ -3,10 +3,6 @@ package com.chaboshi.scf.secure;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.chaboshi.scf.secure.DESCoderHelper;
-import com.chaboshi.scf.secure.RSACoderHelper;
-
-
 public class SecureKey {
   RSACoderHelper rsaHelper = RSACoderHelper.getInstance();
   Map<String, Object> map = new HashMap<String, Object>();

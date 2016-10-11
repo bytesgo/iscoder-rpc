@@ -1,9 +1,6 @@
 /*
  * Copyright 2010 www.58.com, Inc.
- * 
- * @author Service Platform Architecture Team
- * mail: spat@58.com
- * web: http://www.58.com
+ * @author Service Platform Architecture Team mail: spat@58.com web: http://www.58.com
  */
 package com.chaboshi.scf.client.proxy.builder;
 
@@ -47,8 +44,7 @@ public class Parameter {
   /**
    * @param value null
    * @param clazz 方法返回类型(ex:interface java.util.Map)
-   * @param type 方法 底层方法的正式返回类型的 Type 对象 (ex:java.util.Map<java.lang.String,
-   *          java.lang.String>)
+   * @param type 方法 底层方法的正式返回类型的 Type 对象 (ex:java.util.Map<java.lang.String, java.lang.String>)
    * @throws ClassNotFoundException
    */
   private void init(Object value, Class<?> clazz, Type type) throws ClassNotFoundException {

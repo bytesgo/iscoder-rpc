@@ -16,12 +16,10 @@ public class MonitorProtocol {
   private byte body[];
 
   /**
-   * totalLen : 协议头的总长度 type： 发送消息的类别 0 count某段时间内的并发数, 1 jvm java虚拟机信息, 2
-   * abandon 被server抛弃数
+   * totalLen : 协议头的总长度 type： 发送消息的类别 0 count某段时间内的并发数, 1 jvm java虚拟机信息, 2 abandon 被server抛弃数
    * 
-   * exType： type下的小类别,目前只有jvm下有小的分类； 0 默认无分类, 1 jvmGc 获取内存使用情况 , 2 jvmGcutil
-   * 获取堆内存gc数据， 3 thread 线程数据， 4 class 加载类的数据， 5 memory获取JVM内存使用情况 6 heap
-   * 获取虚拟机的heap内存使用情况， 7 noheap 获取虚拟机的noheap内存使用情况，8 load负载情况。
+   * exType： type下的小类别,目前只有jvm下有小的分类； 0 默认无分类, 1 jvmGc 获取内存使用情况 , 2 jvmGcutil 获取堆内存gc数据， 3 thread 线程数据， 4 class 加载类的数据，
+   * 5 memory获取JVM内存使用情况 6 heap 获取虚拟机的heap内存使用情况， 7 noheap 获取虚拟机的noheap内存使用情况，8 load负载情况。
    */
 
   public MonitorProtocol() {

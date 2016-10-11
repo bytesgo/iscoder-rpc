@@ -10,8 +10,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.chaboshi.scf.server.deploy.bytecode.ProxyClassCreater;
-
 public class ProxyClassCreaterTest {
 
   @Test

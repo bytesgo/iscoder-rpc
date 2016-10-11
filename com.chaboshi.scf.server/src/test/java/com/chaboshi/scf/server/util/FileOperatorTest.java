@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.chaboshi.scf.server.util.FileHelper;
-
 public class FileOperatorTest {
 
   @Test

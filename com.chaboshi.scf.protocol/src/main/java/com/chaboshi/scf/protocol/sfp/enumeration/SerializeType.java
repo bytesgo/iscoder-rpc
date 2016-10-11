@@ -1,8 +1,5 @@
 /*
- * Copyright 2010 58.com, Inc.
- *
- * SPAT team blog: http://blog.58.com/spat/
- * website: http://www.58.com
+ * Copyright 2010 58.com, Inc. SPAT team blog: http://blog.58.com/spat/ website: http://www.58.com
  */
 package com.chaboshi.scf.protocol.sfp.enumeration;
 
@@ -13,7 +10,17 @@ package com.chaboshi.scf.protocol.sfp.enumeration;
  */
 public enum SerializeType {
 
-  JSON(1), JAVABinary(2), XML(3), SCFBinary(4);
+  JSON(1),
+
+  JAVABinary(2),
+
+  XML(3),
+
+  SCFBinary(4),
+
+  PB(5),
+
+  KRYO(6);
 
   private final int num;
 

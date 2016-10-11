@@ -1,8 +1,5 @@
 /*
- * Copyright 2010 58.com, Inc.
- * 
- * SPAT team blog: http://blog.58.com/spat/
- * website: http://www.58.com
+ * Copyright 2010 58.com, Inc. SPAT team blog: http://blog.58.com/spat/ website: http://www.58.com
  */
 package com.chaboshi.scf.protocol.serializer;
 
@@ -15,11 +12,11 @@ class SCFSerialize extends SerializeBase {
 
   @Override
   public byte[] serialize(Object obj) throws Exception {
-    return SerializationUtil.serialize(obj);
+    return PBUtils.serialize(obj);
   }
 
   @Override
   public <T> T deserialize(byte[] data, Class<T> cls) throws Exception {
-    return SerializationUtil.deserialize(data, cls);
+    return PBUtils.deserialize(data, cls);
   }
 }

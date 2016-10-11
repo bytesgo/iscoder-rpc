@@ -1,9 +1,6 @@
 /*
  * Copyright 2010 www.58.com, Inc.
- * 
- * @author Service Platform Architecture Team
- * mail: spat@58.com
- * web: http://www.58.com
+ * @author Service Platform Architecture Team mail: spat@58.com web: http://www.58.com
  */
 package com.chaboshi.scf.client.communication.socket;
 
@@ -166,8 +163,7 @@ public class ScoketPool {
    * @return 是否校验成功
    * @author HaoXB
    * @throws Throwable
-   * @date 2010-09-01 处理过程: 1、建立连接
-   *       2、客户端生成RSA公(CPublicKey)/私(CPrivateKey)钥,并将公钥(CPublicKey)传送给服务器端
+   * @date 2010-09-01 处理过程: 1、建立连接 2、客户端生成RSA公(CPublicKey)/私(CPrivateKey)钥,并将公钥(CPublicKey)传送给服务器端
    *       3、服务器端接收客户端提供的公钥(CPublicKey),并生成新的RSA公(SPublicKey)/私(SPrivateKey)钥,将公钥(SPublicKey)传送给客户端
    *       4、客户端用服务器端提供的公钥(SPublicKey)加密授权文件，并传送给服务器端
    *       5、服务器端通过服务器端私钥(SPrivateKey)解密、并校验授权文件是否正确，如果正确则返回通过客户端公钥(CPublicKey)加密的DES密钥，否则返回null/false

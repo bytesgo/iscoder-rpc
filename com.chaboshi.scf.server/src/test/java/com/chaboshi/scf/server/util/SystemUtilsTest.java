@@ -3,8 +3,6 @@ package com.chaboshi.scf.server.util;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.chaboshi.scf.server.util.SystemUtils;
-
 public class SystemUtilsTest {
 
   private static final Map<Integer, Integer> map = new ConcurrentHashMap<Integer, Integer>();

@@ -6,7 +6,6 @@ import org.junit.Test;
 import com.chaboshi.scf.server.RootPath;
 import com.chaboshi.scf.server.contract.context.ServiceConfig;
 
-
 public class ServiceConfigTest {
 
   @Test

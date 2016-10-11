@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import com.chaboshi.scf.server.performance.Command;
 import com.chaboshi.scf.server.performance.CommandType;
-import com.chaboshi.scf.server.performance.commandhelper.Exec;
 
 public class ExecTest {
 

@@ -3,7 +3,6 @@ package com.chaboshi.scf.server.util;
 import org.junit.Assert;
 import org.junit.Test;
 
-
 public class EndiannessTest {
 
   @Test

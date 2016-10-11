@@ -7,7 +7,7 @@
 		<version>2.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>com.chaboshi.scf.protocol</artifactId>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.objenesis</groupId>
@@ -24,6 +24,10 @@
 		<dependency>
 			<groupId>io.protostuff</groupId>
 			<artifactId>protostuff-runtime</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.esotericsoftware</groupId>
+			<artifactId>kryo</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

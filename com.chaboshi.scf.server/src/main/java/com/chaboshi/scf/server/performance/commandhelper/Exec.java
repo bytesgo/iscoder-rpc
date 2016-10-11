@@ -74,8 +74,7 @@ public class Exec extends CommandHelperBase {
       }
 
       /*
-       * logger.info("exec commad"); String msg = "not allow"; byte[]
-       * responseByte = msg.getBytes("utf-8");
+       * logger.info("exec commad"); String msg = "not allow"; byte[] responseByte = msg.getBytes("utf-8");
        * event.getChannel().write(ChannelBuffers .copiedBuffer(responseByte));
        */
     }

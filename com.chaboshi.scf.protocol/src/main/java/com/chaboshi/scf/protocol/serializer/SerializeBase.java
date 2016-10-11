@@ -1,8 +1,5 @@
 /*
- * Copyright 2010 58.com, Inc.
- *
- * SPAT team blog: http://blog.58.com/spat/
- * website: http://www.58.com
+ * Copyright 2010 58.com, Inc. SPAT team blog: http://blog.58.com/spat/ website: http://www.58.com
  */
 package com.chaboshi.scf.protocol.serializer;
 
@@ -20,6 +17,7 @@ public abstract class SerializeBase {
   private static SCFSerialize scfSerialize = new SCFSerialize();
 
   private static JSONSerialize jsonSerialize = new JSONSerialize();
+  private static KryoSerialize kryoSerialize = new KryoSerialize();
 
   private Charset encoder;
 
@@ -36,6 +34,8 @@ public abstract class SerializeBase {
       return scfSerialize;
     } else if (serializeType == SerializeType.JSON) {
       return jsonSerialize;
+    } else if (serializeType == SerializeType.KRYO) {
+      return kryoSerialize;
     }
 
     throw new Exception("末知的序列化算法");

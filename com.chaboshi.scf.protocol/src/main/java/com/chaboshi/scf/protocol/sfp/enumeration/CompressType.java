@@ -1,8 +1,5 @@
 /*
- * Copyright 2010 58.com, Inc.
- *
- * SPAT team blog: http://blog.58.com/spat/
- * website: http://www.58.com
+ * Copyright 2010 58.com, Inc. SPAT team blog: http://blog.58.com/spat/ website: http://www.58.com
  */
 package com.chaboshi.scf.protocol.sfp.enumeration;
 

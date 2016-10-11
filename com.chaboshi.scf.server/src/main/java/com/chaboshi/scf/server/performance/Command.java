@@ -21,24 +21,19 @@ import com.chaboshi.scf.server.performance.commandhelper.Time;
 
 /**
  * 
- * count[|second num|method methodName] * show method call times in num seconds
- * * second : in num seconds statistics once (num default 1) * method : for
- * statistics method * example : count * example : count|second 3 * example :
+ * count[|second num|method methodName] * show method call times in num seconds * second : in num seconds statistics
+ * once (num default 1) * method : for statistics method * example : count * example : count|second 3 * example :
  * count|second 3|method getInfo
  * 
- * time|grep abc[|group num|column -tkda] * show method execute time * grep :
- * condition * group : method called num times show statistics once * column :
- * show column a->all t->time k->key d->description * example: time|grep getInfo
- * * example: time|grep getInfo|group 10|column -tk
+ * time|grep abc[|group num|column -tkda] * show method execute time * grep : condition * group : method called num
+ * times show statistics once * column : show column a->all t->time k->key d->description * example: time|grep getInfo *
+ * example: time|grep getInfo|group 10|column -tk
  * 
- * exec|top |netstat -na * exec command (at present only allow:top or netstat) *
- * example: exec|top
+ * exec|top |netstat -na * exec command (at present only allow:top or netstat) * example: exec|top
  * 
- * jvm [-gcutil time count|-class time count] *-gcutil :detection heap memory
- * usage *-class :load class *time :time milliseconds apart test again *count
- * :detection count times *example :jvm -gcutil *example :jvm -gcutil 1000
- * *example :jvm -gcutil 1000 5 *example :jvm -class *example :jvm -class 1000
- * *example :jvm -class 1000 5
+ * jvm [-gcutil time count|-class time count] *-gcutil :detection heap memory usage *-class :load class *time :time
+ * milliseconds apart test again *count :detection count times *example :jvm -gcutil *example :jvm -gcutil 1000 *example
+ * :jvm -gcutil 1000 5 *example :jvm -class *example :jvm -class 1000 *example :jvm -class 1000 5
  * 
  * control * use for control scf-server
  * 

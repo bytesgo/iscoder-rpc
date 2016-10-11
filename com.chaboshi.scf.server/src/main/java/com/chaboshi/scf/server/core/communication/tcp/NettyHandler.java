@@ -12,7 +12,7 @@ import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
 
-//import com.bj58.spat.scf.server.performance.monitorweb.MonitorErrorLog;
+// import com.bj58.spat.scf.server.performance.monitorweb.MonitorErrorLog;
 import com.chaboshi.scf.protocol.utility.ProtocolConst;
 import com.chaboshi.scf.protocol.utility.ProtocolHelper;
 import com.chaboshi.scf.server.contract.context.Global;
@@ -31,8 +31,7 @@ import com.chaboshi.scf.server.util.ExceptionHelper;
  * 
  * @author Service Platform Architecture Team (spat@58.com)
  * 
- *         <a href="http://blog.58.com/spat/">blog</a>
- *         <a href="http://www.58.com">website</a>
+ *         <a href="http://blog.58.com/spat/">blog</a> <a href="http://www.58.com">website</a>
  * 
  */
 @ChannelPipelineCoverage("all")

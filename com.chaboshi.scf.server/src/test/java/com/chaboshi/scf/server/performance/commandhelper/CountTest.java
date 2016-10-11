@@ -6,7 +6,6 @@ import org.junit.Test;
 import com.chaboshi.scf.server.performance.Command;
 import com.chaboshi.scf.server.performance.CommandType;
 
-
 public class CountTest {
 
   @Test

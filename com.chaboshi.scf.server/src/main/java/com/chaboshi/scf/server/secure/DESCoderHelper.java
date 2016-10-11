@@ -13,8 +13,8 @@ import javax.crypto.spec.IvParameterSpec;
 /**
  * java 中默认密钥长度为56位,自动生成密钥经Base64加密后长度为12位
  * 通过java中自动生成的key进行DES加、解密无法与c#中DES解、加密互通,由于c#中byte按照8位有符号数(0~255)进行表示，而java中按照有符号数(-128~127)进行表示
- * 在java、c#进行DES加、解密进行互通时请使用方法中带Net的方法，注意方法中key length must be 8 bytes long
- * java方法实现DES使用工作模式默认为ECB java与c#互通实现DES使用工作模式为CBC
+ * 在java、c#进行DES加、解密进行互通时请使用方法中带Net的方法，注意方法中key length must be 8 bytes long java方法实现DES使用工作模式默认为ECB
+ * java与c#互通实现DES使用工作模式为CBC
  * 
  * @author HaoXB date:2011-08-08
  */
@@ -205,8 +205,8 @@ public class DESCoderHelper {
   }
 
   /**
-   * 解密 该方法与c#互通 如果密文为base64加密后的字符串,则需要base64解密为byte进行解码, 否则会抛出
-   * BadPaddingException: Given final block not properly padded 异常
+   * 解密 该方法与c#互通 如果密文为base64加密后的字符串,则需要base64解密为byte进行解码, 否则会抛出 BadPaddingException: Given final block not properly
+   * padded 异常
    * 
    * @param data 密文byte类型
    * @param key 密钥byte类型(IV length must be 8 bytes long)
@@ -237,10 +237,8 @@ public class DESCoderHelper {
   }
 
   /**
-   * 解密 该方法与c#互通
-   * data密文类型为原文加密后的byte类型,如果密文通过base64加密为字符串形式，解码请用方法decryptNetString(String
-   * data,String key) 如通过通过base64加密后字符串getByte方式调用该方法会抛出BadPaddingException:
-   * Given final block not properly padded 异常
+   * 解密 该方法与c#互通 data密文类型为原文加密后的byte类型,如果密文通过base64加密为字符串形式，解码请用方法decryptNetString(String data,String key)
+   * 如通过通过base64加密后字符串getByte方式调用该方法会抛出BadPaddingException: Given final block not properly padded 异常
    * key为密钥byte类型,为防止乱码问题建议使用时通过getByte("UTF-8")获取byte类型
    * 
    * @param data 密文byte类型

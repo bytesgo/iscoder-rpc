@@ -12,7 +12,6 @@ import com.chaboshi.scf.server.deploy.bytecode.ClassInfo.ParamInfo;
 import com.chaboshi.scf.server.deploy.bytecode.ContractInfo.SessionBean;
 import com.chaboshi.scf.server.deploy.hotdeploy.DynamicClassLoader;
 
-
 public class ScanClassTest {
 
   private static String jarPath = "E:\\javaproject\\bj58.scf.server\\lib";

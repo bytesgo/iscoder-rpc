@@ -2,24 +2,24 @@ package com.chaboshi.scf.server.components.proxy;
 
 import junit.framework.TestCase;
 
-//import java.util.ArrayList;
-//import java.util.List;
+// import java.util.ArrayList;
+// import java.util.List;
 //
-//import com.bj58.sfft.servicedemo.entity.Comment;
-//import com.bj58.sfft.servicedemo.entity.Info;
-//import com.bj58.sfft.serviceframe.contract.proxy.IProxyHandle;
-//import com.bj58.sfft.serviceframe.core.proxy.ProxyHandle;
-//import com.bj58.sfft.serviceframe.protocol.CreateHelper;
-//import com.bj58.sfft.serviceframe.protocol.KeyValuePair;
-//import com.bj58.sfft.serviceframe.protocol.ParseHelper;
-//import com.bj58.sfft.serviceframe.protocol.enumeration.Compress;
-//import com.bj58.sfft.serviceframe.protocol.enumeration.Platform;
-//import com.bj58.sfft.serviceframe.protocol.enumeration.Serializ;
-//import com.bj58.sfft.serviceframe.protocol.messagebody.datatype.Request;
-//import com.bj58.sfft.serviceframe.protocol.messagebody.datatype.Response;
-//import com.bj58.sfft.serviceframe.protocol.protocolentity.ProtocolEntityBase;
+// import com.bj58.sfft.servicedemo.entity.Comment;
+// import com.bj58.sfft.servicedemo.entity.Info;
+// import com.bj58.sfft.serviceframe.contract.proxy.IProxyHandle;
+// import com.bj58.sfft.serviceframe.core.proxy.ProxyHandle;
+// import com.bj58.sfft.serviceframe.protocol.CreateHelper;
+// import com.bj58.sfft.serviceframe.protocol.KeyValuePair;
+// import com.bj58.sfft.serviceframe.protocol.ParseHelper;
+// import com.bj58.sfft.serviceframe.protocol.enumeration.Compress;
+// import com.bj58.sfft.serviceframe.protocol.enumeration.Platform;
+// import com.bj58.sfft.serviceframe.protocol.enumeration.Serializ;
+// import com.bj58.sfft.serviceframe.protocol.messagebody.datatype.Request;
+// import com.bj58.sfft.serviceframe.protocol.messagebody.datatype.Response;
+// import com.bj58.sfft.serviceframe.protocol.protocolentity.ProtocolEntityBase;
 
-//@SuppressWarnings("unchecked")
+// @SuppressWarnings("unchecked")
 public class ProxyHandleTest extends TestCase {
   //
   // private static IProxyHandle proxyHandle = null;
