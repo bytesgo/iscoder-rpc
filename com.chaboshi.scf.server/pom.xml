@@ -28,12 +28,12 @@
 		<dependency>
 			<groupId>com.chaboshi.scf</groupId>
 			<artifactId>com.chaboshi.scf.protocol</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.chaboshi.scf</groupId>
 			<artifactId>com.chaboshi.scf.utility</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 	</dependencies>
 

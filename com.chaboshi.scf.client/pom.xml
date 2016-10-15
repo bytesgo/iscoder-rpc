@@ -8,7 +8,6 @@
 	</parent>
 	<artifactId>com.chaboshi.scf.client</artifactId>
 	<properties>
-		<lib.dir>${project.build.directory}/lib</lib.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 

@@ -8,6 +8,10 @@
 	</parent>
 	<artifactId>com.chaboshi.scf.protocol</artifactId>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.objenesis</groupId>
