@@ -11,12 +11,7 @@
 			<scope>runtime</scope>
 			<outputDirectory>lib</outputDirectory>
 		</dependencySet>
-		<dependencySet>
-			<scope>provided</scope>
-			<outputDirectory>lib</outputDirectory>
-		</dependencySet>
 	</dependencySets>
-
 
 	<fileSets>
 		<fileSet>
