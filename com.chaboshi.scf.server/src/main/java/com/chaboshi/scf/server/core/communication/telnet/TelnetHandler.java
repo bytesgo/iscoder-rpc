@@ -1,8 +1,8 @@
 package com.chaboshi.scf.server.core.communication.telnet;
 
 import org.jboss.netty.channel.ChannelEvent;
+import org.jboss.netty.channel.ChannelHandler.Sharable;
 import org.jboss.netty.channel.ChannelHandlerContext;
-import org.jboss.netty.channel.ChannelPipelineCoverage;
 import org.jboss.netty.channel.ChannelStateEvent;
 import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.MessageEvent;
@@ -20,7 +20,7 @@ import com.chaboshi.scf.server.performance.MonitorCenter;
  *         <a href="http://blog.58.com/spat/">blog</a> <a href="http://www.58.com">website</a>
  * 
  */
-@ChannelPipelineCoverage("all")
+@Sharable
 public class TelnetHandler extends SimpleChannelUpstreamHandler {
 
   private static Logger logger = LoggerFactory.getLogger(TelnetHandler.class);

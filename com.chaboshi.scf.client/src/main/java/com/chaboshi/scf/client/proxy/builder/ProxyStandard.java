@@ -44,11 +44,10 @@ public class ProxyStandard implements InvocationHandler, Serializable, IProxySta
     Object obj = null;
     try {
       obj = methodCaller.doMethodCall(args, method);
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (Exception err) {
+      logger.error("", err);
     }
-    long end = System.currentTimeMillis();
-    long total = end - start;
+    long total = System.currentTimeMillis() - start;
     if (total > 200) {
       logger.warn("interface:" + interfaceClass.getName() + ";class:" + lookup + ";method:" + method.getName() + ";invoke time :" + total);
     }
