@@ -28,7 +28,7 @@ public class HotDeployListener implements IListener {
       classLoader
           .addFolder(
               Global.getSingleton().getRootPath() + "service/deploy/"
-                  + Global.getSingleton().getServiceConfig().getString("scf.service.name") + "/",
+                  + Global.getSingleton().getServiceConfig().getServiceName() + "/",
               Global.getSingleton().getRootPath() + "service/lib/", Global.getSingleton().getRootPath() + "lib");
 
       IProxyFactory proxyFactory = ProxyFactoryLoader.loadProxyFactory(classLoader);

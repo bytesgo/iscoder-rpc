@@ -26,7 +26,8 @@ import javassist.CtMethod;
  * 
  * @author Service Platform Architecture Team (spat@58.com)
  * 
- *         <a href="http://blog.58.com/spat/">blog</a> <a href="http://www.58.com">website</a>
+ *         <a href="http://blog.58.com/spat/">blog</a>
+ *         <a href="http://www.58.com">website</a>
  * 
  */
 public class ProxyClassCreater {
@@ -39,6 +40,11 @@ public class ProxyClassCreater {
     logger.info("loading dynamic proxy v1...");
     List<ClassFile> clsList = new ArrayList<ClassFile>();
 
+    ClassPool pool = ClassPool.getDefault();
+    List<String> jarList = classLoader.getJarList();
+    for (String jar : jarList) {
+      pool.appendClassPath(jar);
+    }
     for (ContractInfo.SessionBean sessionBean : serviceContract.getSessionBeanList()) {
       if (sessionBean.getInterfaceClass() != null) {
         Iterator it = sessionBean.getInstanceMap().entrySet().iterator();
@@ -50,13 +56,6 @@ public class ProxyClassCreater {
           String proxyClassName = lookup + "ProxyStub" + time;
           logger.info("loading => " + proxyClassName);
           logger.info("class name:" + implClassName);
-
-          ClassPool pool = ClassPool.getDefault();
-
-          List<String> jarList = classLoader.getJarList();
-          for (String jar : jarList) {
-            pool.appendClassPath(jar);
-          }
 
           CtClass ctProxyClass = pool.makeClass(proxyClassName, null);
 

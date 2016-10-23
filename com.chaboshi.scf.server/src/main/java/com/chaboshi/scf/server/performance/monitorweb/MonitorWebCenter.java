@@ -51,7 +51,7 @@ public class MonitorWebCenter implements Server {
     MonitorProtocol countP = new MonitorProtocol(MonitorType.count, (short) 0);
     MonitorProtocol abandonP = new MonitorProtocol(MonitorType.abandon, (short) 0);
     MonitorProtocol frameExP = new MonitorProtocol(MonitorType.frameEx, (short) 0);
-    String serviceName = Global.getSingleton().getServiceConfig().getString("scf.service.name");
+    String serviceName = Global.getSingleton().getServiceConfig().getServiceName();
     MonitorJVM mjvm = new MonitorJVM(udp, serviceName);
     int sendtime = Global.getSingleton().getServiceConfig().getInt("scf.server.monitor.timeLag");
     String sendStr;

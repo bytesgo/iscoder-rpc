@@ -57,12 +57,12 @@ public class ProxyFactoryCreater {
         sbBody.append("if(lookup.equalsIgnoreCase(\"" + lookup + "\")){");
         sbBody.append("return proxy");
         sbBody.append(lookup);
-        sbBody.append(Global.getSingleton().getServiceConfig().getString("scf.service.name"));
+        sbBody.append(Global.getSingleton().getServiceConfig().getServiceName());
         sbBody.append(";}");
 
         sbConstructor.append("proxy");
         sbConstructor.append(lookup);
-        sbConstructor.append(Global.getSingleton().getServiceConfig().getString("scf.service.name"));
+        sbConstructor.append(Global.getSingleton().getServiceConfig().getServiceName());
         sbConstructor.append("=(");
         sbConstructor.append(Constant.IPROXYSTUB_CLASS_NAME);
         sbConstructor.append(")$1.get(");
@@ -70,7 +70,7 @@ public class ProxyFactoryCreater {
         sbConstructor.append(");");
 
         CtField proxyField = CtField.make("private " + Constant.IPROXYSTUB_CLASS_NAME + " proxy" + lookup
-            + Global.getSingleton().getServiceConfig().getString("scf.service.name") + " = null;", ctProxyClass);
+            + Global.getSingleton().getServiceConfig().getServiceName() + " = null;", ctProxyClass);
 
         ctProxyClass.addField(proxyField);
 

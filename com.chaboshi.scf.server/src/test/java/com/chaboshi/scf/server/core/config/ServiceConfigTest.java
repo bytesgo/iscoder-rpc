@@ -13,7 +13,7 @@ public class ServiceConfigTest {
 
     ServiceConfig sc = ServiceConfig.getServiceConfig(RootPath.projectRootPath + "config/scf_config.xml");
 
-    Assert.assertEquals("", sc.getString("scf.service.name"));
+    Assert.assertEquals("", sc.getServiceName());
     Assert.assertEquals("utf-8", sc.getString("scf.encoding"));
     Assert.assertEquals("com.bj58.spat.scf.server.core.init.SerializerInit", sc.getString("scf.init"));
 
@@ -65,7 +65,7 @@ public class ServiceConfigTest {
         RootPath.projectRootPath + "config/demo_config.xml");
 
     Assert.assertEquals(null, sc.getString("scf.service.name.abc"));
-    Assert.assertEquals("demo", sc.getString("scf.service.name"));
+    Assert.assertEquals("demo", sc.getServiceName());
     Assert.assertEquals("utf-8", sc.getString("scf.encoding"));
     Assert.assertEquals("com.bj58.spat.scf.server.core.init.SerializerInit,com.bj58.zhaopin.scf.pusher.zpt.components.Global",
         sc.getString("scf.init"));

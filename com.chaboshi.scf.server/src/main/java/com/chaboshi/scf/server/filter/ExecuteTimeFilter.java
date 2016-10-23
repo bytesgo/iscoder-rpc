@@ -34,7 +34,7 @@ public class ExecuteTimeFilter implements IFilter {
       String ip = Global.getSingleton().getServiceConfig().getString("scf.log.udpserver.ip");
       int port = Global.getSingleton().getServiceConfig().getInt("scf.log.udpserver.port");
       minRecordTime = Global.getSingleton().getServiceConfig().getInt("scf.log.exectime.limit");
-      serviceName = Global.getSingleton().getServiceConfig().getString("scf.service.name");
+      serviceName = Global.getSingleton().getServiceConfig().getServiceName();
 
       if (ip == null || port <= 0) {
         logger.error("upd ip is null or port is null");
