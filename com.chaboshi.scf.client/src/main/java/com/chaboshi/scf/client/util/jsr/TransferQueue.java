@@ -3,7 +3,7 @@
  * explained at http://creativecommons.org/licenses/publicdomain
  */
 
-package com.chaboshi.scf.client.utility.jsr;
+package com.chaboshi.scf.client.util.jsr;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.SynchronousQueue;

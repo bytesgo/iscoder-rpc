@@ -3,20 +3,22 @@
  */
 package com.chaboshi.scf.protocol.serializer;
 
+import com.chaboshi.scf.protocol.serializer.util.ProtobufUtils;
+
 /**
- * JsonSerialize
+ * ByteCodeSerialize
  *
  * @author Service Platform Architecture Team (spat@58.com)
  */
-class JSONSerialize extends SerializeBase {
+class SCFSerializer extends AbstractSerializer {
 
   @Override
   public byte[] serialize(Object obj) throws Exception {
-    throw new UnsupportedOperationException("Not supported json serialize!");
+    return ProtobufUtils.serialize(obj);
   }
 
   @Override
   public <T> T deserialize(byte[] data, Class<T> cls) throws Exception {
-    throw new UnsupportedOperationException("Not supported json serialize!");
+    return ProtobufUtils.deserialize(data, cls);
   }
 }

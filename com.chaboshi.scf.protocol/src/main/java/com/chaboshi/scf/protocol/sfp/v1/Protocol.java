@@ -4,7 +4,7 @@
 package com.chaboshi.scf.protocol.sfp.v1;
 
 import com.chaboshi.scf.protocol.compress.CompressBase;
-import com.chaboshi.scf.protocol.serializer.SerializeBase;
+import com.chaboshi.scf.protocol.serializer.AbstractSerializer;
 import com.chaboshi.scf.protocol.sfp.enumeration.CompressType;
 import com.chaboshi.scf.protocol.sfp.enumeration.PlatformType;
 import com.chaboshi.scf.protocol.sfp.enumeration.SDPType;
@@ -159,7 +159,7 @@ public class Protocol {
 
   public byte[] toBytes() throws Exception {
     int startIndex = 0;
-    SerializeBase serialize = SerializeBase.getInstance(this.getSerializeType());
+    AbstractSerializer serialize = AbstractSerializer.getInstance(this.getSerializeType());
     CompressBase compress = CompressBase.getInstance(this.getCompressType());
 
     this.sdpType = SDPType.getSDPType(this.sdpEntity);
@@ -244,7 +244,7 @@ public class Protocol {
     sdpData = CompressBase.getInstance(ct).unzip(sdpData);
     p.setUserData(sdpData);
 
-    SerializeBase serialize = SerializeBase.getInstance(st);
+    AbstractSerializer serialize = AbstractSerializer.getInstance(st);
     p.setSdpEntity(serialize.deserialize(sdpData, SDPType.getSDPClass(p.getSDPType())));
     return p;
   }
@@ -307,7 +307,7 @@ public class Protocol {
     }
 
     p.setUserData(sdpData);
-    SerializeBase serialize = SerializeBase.getInstance(st);
+    AbstractSerializer serialize = AbstractSerializer.getInstance(st);
     p.setSdpEntity(serialize.deserialize(sdpData, SDPType.getSDPClass(p.getSDPType())));
     return p;
   }
@@ -322,7 +322,7 @@ public class Protocol {
    */
   public byte[] toBytes(boolean rights, byte[] desKey) throws Exception {
     int startIndex = 0;
-    SerializeBase serialize = SerializeBase.getInstance(this.getSerializeType());
+    AbstractSerializer serialize = AbstractSerializer.getInstance(this.getSerializeType());
     CompressBase compress = CompressBase.getInstance(this.getCompressType());
 
     this.sdpType = SDPType.getSDPType(this.sdpEntity);

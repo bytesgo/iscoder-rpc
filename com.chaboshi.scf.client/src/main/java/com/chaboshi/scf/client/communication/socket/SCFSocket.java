@@ -18,8 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.chaboshi.scf.client.configuration.commmunication.SocketPoolProfile;
-import com.chaboshi.scf.client.utility.AutoResetEvent;
-import com.chaboshi.scf.client.utility.helper.SystemUtils;
+import com.chaboshi.scf.client.util.AutoResetEvent;
+import com.chaboshi.scf.client.util.helper.SystemUtils;
 import com.chaboshi.scf.protocol.exception.DataOverFlowException;
 import com.chaboshi.scf.protocol.exception.ProtocolException;
 import com.chaboshi.scf.protocol.exception.TimeoutException;

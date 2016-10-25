@@ -18,10 +18,10 @@ public class KryoSerializationUtilsTest {
     user.setId(201);
     user.setAge(23);
     user.setUsername("李亚州");
-    SerializeBase serializeBase = new KryoSerialize();
-    byte[] userByte = serializeBase.serialize(user);
+    AbstractSerializer abstractSerializer = new KryoSerializer();
+    byte[] userByte = abstractSerializer.serialize(user);
     System.out.println(userByte.length);
-    User user2 = serializeBase.deserialize(userByte, User.class);
+    User user2 = abstractSerializer.deserialize(userByte, User.class);
     System.out.println(user2);
 
   }

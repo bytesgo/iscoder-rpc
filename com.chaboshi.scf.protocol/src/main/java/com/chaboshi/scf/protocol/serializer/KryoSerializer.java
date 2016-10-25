@@ -3,6 +3,7 @@
  */
 package com.chaboshi.scf.protocol.serializer;
 
+import com.chaboshi.scf.protocol.serializer.util.KryoUtils;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 
@@ -11,7 +12,7 @@ import com.esotericsoftware.kryo.io.Output;
  *
  * @author Service Platform Architecture Team (spat@58.com)
  */
-class KryoSerialize extends SerializeBase {
+class KryoSerializer extends AbstractSerializer {
 
   @Override
   public byte[] serialize(Object obj) throws Exception {

@@ -3,7 +3,7 @@
  * explained at http://creativecommons.org/licenses/publicdomain
  */
 
-package com.chaboshi.scf.client.utility.jsr;
+package com.chaboshi.scf.client.util.jsr;
 
 import java.util.Random;
 import java.util.concurrent.ForkJoinTask;

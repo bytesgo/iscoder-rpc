@@ -9,7 +9,7 @@ package com.chaboshi.scf.client;
  * 
  * @author Service Platform Architecture Team (spat@58.com)
  */
-public class SCFConst {
+public final class SCFConst {
 
   public static String CONFIG_PATH = SCFInit.DEFAULT_CONFIG_PATH;
   /** 配置文件路径 */

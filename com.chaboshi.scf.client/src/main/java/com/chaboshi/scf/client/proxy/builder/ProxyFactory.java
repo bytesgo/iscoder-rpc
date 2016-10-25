@@ -4,7 +4,6 @@
  */
 package com.chaboshi.scf.client.proxy.builder;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 import java.net.MalformedURLException;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,45 +17,42 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ProxyFactory {
 
-  private static ConcurrentHashMap<String, Object> cache = new ConcurrentHashMap<String, Object>(); // 同步map
+  private static ConcurrentHashMap<String, Object> proxyCache = new ConcurrentHashMap<String, Object>(); // 同步map
 
   /**
-   * Factory for Proxy - creation.
+   * Factory for Proxy - creation.<br/>
+   * 
+   * example : <br/>
+   * ProxyFactory.create(INewsService.class, "tcp://demo/NewsService");
    * 
    * @param type the class of type
    * @param strUrl request URL
    * @return
    * @throws MalformedURLException
    */
-  // ProxyFactory.create(INewsService.class, url); url =
-  // "tcp://demo/NewsService";
   @SuppressWarnings("unchecked")
-  public static <T> T create(Class<T> type, String strUrl) {// <T> T返回任意类型的数据？
+  public static <T> T create(Class<T> type, String strUrl) {
     // 返回代理的实例 泛型
     String key = strUrl.toLowerCase();
     Object proxy = null;
-    if (cache.containsKey(key)) {
-      proxy = cache.get(key);
+    if (proxyCache.containsKey(key)) {
+      proxy = proxyCache.get(key);
     }
     if (proxy == null) {
       proxy = createStandardProxy(strUrl, type);
       if (proxy != null) {
-        cache.put(key, proxy);
+        proxyCache.put(key, proxy);
       }
     }
-
     return (T) proxy;
   }
 
-  /**
-   * 
-   * @param strUrl tcp://
-   ***/
   /***
+   * url = "tcp://demo/NewService";
+   * 
    * @param type 接口类
    * @return
    */
-  // url = "tcp://demo/NewService";
   private static Object createStandardProxy(String strUrl, Class<?> type) {
     String serviceName = "";
     String lookup = "";// 接口实现类
@@ -66,7 +62,7 @@ public class ProxyFactory {
       serviceName = splits[0]; // =demo
       lookup = splits[1]; // =NewService
     }
-    InvocationHandler handler = new ProxyStandard(type, serviceName, lookup);
+    ProxyStandard handler = new ProxyStandard(type, serviceName, lookup);
     return Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), new Class[] { type }, handler);
   }
 }

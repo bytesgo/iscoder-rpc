@@ -6,8 +6,8 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.client.utility.jsr.LinkedTransferQueue;
-import com.chaboshi.scf.client.utility.jsr.TransferQueue;
+import com.chaboshi.scf.client.util.jsr.LinkedTransferQueue;
+import com.chaboshi.scf.client.util.jsr.TransferQueue;
 import com.chaboshi.scf.protocol.exception.TimeoutException;
 
 public class NIOHandler {

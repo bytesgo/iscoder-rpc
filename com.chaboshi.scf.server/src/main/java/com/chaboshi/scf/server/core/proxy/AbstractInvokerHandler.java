@@ -27,7 +27,7 @@ public abstract class AbstractInvokerHandler implements InvokerHandler {
    * 
    * @param context
    */
-  void doInvoke(SCFContext context) {
+  protected void doInvoke(SCFContext context) {
     logger.debug("------------------------------ begin request-----------------------------");
 
     StringBuffer sbInvokerMsg = new StringBuffer();
@@ -135,7 +135,7 @@ public abstract class AbstractInvokerHandler implements InvokerHandler {
    * @param scfResponse
    * @return
    */
-  ResponseProtocol createResponse(SCFResponse scfResponse) {
+  private ResponseProtocol createResponse(SCFResponse scfResponse) {
     if (scfResponse.getOutParaList() != null && scfResponse.getOutParaList().size() > 0) {
       int outParaSize = scfResponse.getOutParaList().size();
       Object[] objArray = new Object[outParaSize];

@@ -12,12 +12,12 @@ import com.chaboshi.scf.protocol.sfp.enumeration.SerializeType;
  *
  * @author Service Platform Architecture Team (spat@58.com)
  */
-public abstract class SerializeBase {
+public abstract class AbstractSerializer {
 
-  private static SCFSerialize scfSerialize = new SCFSerialize();
+  private static SCFSerializer scfSerialize = new SCFSerializer();
 
-  private static JSONSerialize jsonSerialize = new JSONSerialize();
-  private static KryoSerialize kryoSerialize = new KryoSerialize();
+  private static JSONSerializer jsonSerialize = new JSONSerializer();
+  private static KryoSerializer kryoSerializer = new KryoSerializer();
 
   private Charset encoder;
 
@@ -29,13 +29,13 @@ public abstract class SerializeBase {
     this.encoder = encoder;
   }
 
-  public static SerializeBase getInstance(SerializeType serializeType) throws Exception {
+  public static AbstractSerializer getInstance(SerializeType serializeType) throws Exception {
     if (serializeType == SerializeType.SCFBinary) {
       return scfSerialize;
     } else if (serializeType == SerializeType.JSON) {
       return jsonSerialize;
     } else if (serializeType == SerializeType.KRYO) {
-      return kryoSerialize;
+      return kryoSerializer;
     }
 
     throw new Exception("末知的序列化算法");

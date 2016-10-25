@@ -21,7 +21,7 @@ import com.chaboshi.scf.client.configuration.commmunication.ProtocolProfile;
 import com.chaboshi.scf.client.configuration.commmunication.SocketPoolProfile;
 import com.chaboshi.scf.client.configuration.loadbalance.ServerProfile;
 import com.chaboshi.scf.client.configuration.secure.KeyProfile;
-import com.chaboshi.scf.client.utility.helper.XMLHelper;
+import com.chaboshi.scf.client.util.helper.XMLHelper;
 
 /**
  * ServiceConfig

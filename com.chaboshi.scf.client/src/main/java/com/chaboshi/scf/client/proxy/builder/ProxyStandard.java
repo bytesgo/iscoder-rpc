@@ -18,11 +18,11 @@ import org.slf4j.LoggerFactory;
  */
 public class ProxyStandard implements InvocationHandler, Serializable, IProxyStandard {
 
+  private static final Logger logger = LoggerFactory.getLogger(ProxyStandard.class);
   private static final long serialVersionUID = -8742928000690128026L;
   private Class<?> interfaceClass;
   private MethodCaller methodCaller;
   private String lookup;
-  private static final Logger logger = LoggerFactory.getLogger(ProxyStandard.class);
 
   /**
    * @param interfaceClass 接口类

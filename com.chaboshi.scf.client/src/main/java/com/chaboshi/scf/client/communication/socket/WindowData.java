@@ -5,7 +5,7 @@
 package com.chaboshi.scf.client.communication.socket;
 
 import com.chaboshi.scf.client.proxy.builder.ReceiveHandler;
-import com.chaboshi.scf.client.utility.AutoResetEvent;
+import com.chaboshi.scf.client.util.AutoResetEvent;
 
 /**
  * WindowData

@@ -57,7 +57,7 @@ public class ServiceProxy {
   private AtomicInteger requestCount = new AtomicInteger(0);
   private static final Object locker = new Object();
   private static final Object lockerSessionID = new Object();
-  private static final HashMap<String, ServiceProxy> Proxys = new HashMap<String, ServiceProxy>();
+  private static final HashMap<String, ServiceProxy> serviceProxys = new HashMap<String, ServiceProxy>();
   private static HashMap<String, ServerChoose> methodServer = new HashMap<String, ServerChoose>();
 
   private ServiceProxy(String serviceName) throws Exception {
@@ -91,17 +91,17 @@ public class ServiceProxy {
   }
 
   public static ServiceProxy getProxy(String serviceName) throws Exception {
-    ServiceProxy p = Proxys.get(serviceName.toLowerCase());
-    if (p == null) {
+    ServiceProxy serviceProxy = serviceProxys.get(serviceName.toLowerCase());
+    if (serviceProxy == null) {
       synchronized (locker) {
-        p = Proxys.get(serviceName.toLowerCase());
-        if (p == null) {
-          p = new ServiceProxy(serviceName);
-          Proxys.put(serviceName.toLowerCase(), p);
+        serviceProxy = serviceProxys.get(serviceName.toLowerCase());
+        if (serviceProxy == null) {
+          serviceProxy = new ServiceProxy(serviceName);
+          serviceProxys.put(serviceName.toLowerCase(), serviceProxy);
         }
       }
     }
-    return p;
+    return serviceProxy;
   }
 
   @SuppressWarnings("rawtypes")
@@ -112,10 +112,10 @@ public class ServiceProxy {
       listPara.add(new KeyValuePair(p.getSimpleName(), p.getValue()));
     }
     RequestProtocol requestProtocol = new RequestProtocol(typeName, methodName, listPara);
-    Protocol sendP = new Protocol(createSessionId(), (byte) config.getServiceid(), SDPType.Request, CompressType.UnCompress,
+    Protocol sendProtocol = new Protocol(createSessionId(), (byte) config.getServiceid(), SDPType.Request, CompressType.UnCompress,
         config.getProtocol().getSerializerType(), PlatformType.Java, requestProtocol);
 
-    Protocol receiveP = null;
+    Protocol receiveProtocol = null;
     Server server = null;
     String methodPara[] = this.getMethodPara(typeName, methodName, paras);
     for (int i = 0; i <= count; i++) {
@@ -126,7 +126,7 @@ public class ServiceProxy {
         throw new Exception("cannot get server");
       }
       try {
-        receiveP = server.request(sendP);
+        receiveProtocol = server.request(sendProtocol);
         break;
       } catch (IOException io) {
         if (count == 0 || i == ioreconnect) {
@@ -165,20 +165,21 @@ public class ServiceProxy {
 
     }
 
-    if (receiveP == null) {
+    if (receiveProtocol == null) {
       throw new Exception("userdatatype error!");
     }
 
-    if (receiveP.getSDPType() == SDPType.Response) {
-      ResponseProtocol rp = (ResponseProtocol) receiveP.getSdpEntity();
+    if (receiveProtocol.getSDPType() == SDPType.Response) {
+      ResponseProtocol response = (ResponseProtocol) receiveProtocol.getSdpEntity();
       logger.debug("invoke time:" + (System.currentTimeMillis() - watcher) + "ms");
-      return new InvokeResult(rp.getResult(), rp.getOutpara());
-    } else if (receiveP.getSDPType() == SDPType.Reset) { /** 服务重启 */
-      logger.info(server.getName() + " server is reboot,system will change normal server!");
+      return new InvokeResult(response.getResult(), response.getOutpara());
+    } else if (receiveProtocol.getSDPType() == SDPType.Reset) {
+      /** 服务重启 */
+      logger.warn(server.getName() + " server is reboot, system will change normal server!");
       this.createReboot(server);
       return invoke(returnType, typeName, methodName, paras);
-    } else if (receiveP.getSDPType() == SDPType.Exception) {
-      ExceptionProtocol ep = (ExceptionProtocol) receiveP.getSdpEntity();
+    } else if (receiveProtocol.getSDPType() == SDPType.Exception) {
+      ExceptionProtocol ep = (ExceptionProtocol) receiveProtocol.getSdpEntity();
       throw ThrowErrorHelper.throwServiceError(ep.getErrorCode(), ep.getErrorMsg());
     } else {
       throw new Exception("userdatatype error!");
@@ -293,7 +294,7 @@ public class ServiceProxy {
   }
 
   public static void destroyAll() {
-    Collection<ServiceProxy> spList = Proxys.values();
+    Collection<ServiceProxy> spList = serviceProxys.values();
     if (spList != null) {
       for (ServiceProxy sp : spList) {
         sp.destroy();

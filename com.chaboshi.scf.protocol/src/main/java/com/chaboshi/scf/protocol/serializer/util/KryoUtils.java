@@ -2,7 +2,7 @@
  * 
  */
 
-package com.chaboshi.scf.protocol.serializer;
+package com.chaboshi.scf.protocol.serializer.util;
 
 import com.esotericsoftware.kryo.Kryo;
 

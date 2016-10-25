@@ -1,4 +1,4 @@
-package com.chaboshi.scf.protocol.serializer;
+package com.chaboshi.scf.protocol.serializer.util;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,13 +11,13 @@ import io.protostuff.ProtostuffIOUtil;
 import io.protostuff.Schema;
 import io.protostuff.runtime.RuntimeSchema;
 
-public class PBUtils {
+public class ProtobufUtils {
 
   private static Map<Class<?>, Schema<?>> cachedSchema = new ConcurrentHashMap<Class<?>, Schema<?>>();
 
   private static Objenesis objenesis = new ObjenesisStd(true);
 
-  private PBUtils() {
+  private ProtobufUtils() {
   }
 
   private static <T> Schema<T> getSchema(Class<T> cls) {

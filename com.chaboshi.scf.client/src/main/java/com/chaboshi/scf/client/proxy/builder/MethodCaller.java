@@ -35,13 +35,13 @@ public class MethodCaller {
 
   @SuppressWarnings("unchecked")
   public Object doMethodCall(Object[] args, Method methodInfo) throws Exception, Throwable {
-    Type[] typeAry = methodInfo.getGenericParameterTypes();// ex:java.util.Map<java.lang.String,
+    Type[] argsTypes = methodInfo.getGenericParameterTypes();// ex:java.util.Map<java.lang.String,
                                                            // java.lang.String>
     Class<?>[] clsAry = methodInfo.getParameterTypes();// ex:java.util.Map
     if (args == null) {
       args = new Object[0];
     }
-    if (args.length != typeAry.length) {
+    if (args.length != argsTypes.length) {
       logger.error("argument count error!");
       throw new Exception("argument count error!");
     }
@@ -54,22 +54,21 @@ public class MethodCaller {
     ReceiveHandler receiveHandler = null;
     int parasLength = 0;
 
-    if (typeAry != null) {
-      if ((typeAry.length >= 1) && (args[typeAry.length - 1] instanceof ReceiveHandler)) {
+    if (argsTypes != null) {
+      if ((argsTypes.length >= 1) && (args[argsTypes.length - 1] instanceof ReceiveHandler)) {
         syn = false;
-        receiveHandler = (ReceiveHandler) args[typeAry.length - 1];
-        parasLength = typeAry.length - 1;
-
+        receiveHandler = (ReceiveHandler) args[argsTypes.length - 1];
+        parasLength = argsTypes.length - 1;
       } else {
-        parasLength = typeAry.length;
+        parasLength = argsTypes.length;
       }
       paras = new Parameter[parasLength];
       for (int i = 0; i < parasLength; i++) {
         if (args[i] instanceof Out) {
-          paras[i] = new Parameter(args[i], clsAry[i], typeAry[i], ParaType.Out);
+          paras[i] = new Parameter(args[i], clsAry[i], argsTypes[i], ParaType.Out);
           outParas.add(i);
         } else {
-          paras[i] = new Parameter(args[i], clsAry[i], typeAry[i], ParaType.In);
+          paras[i] = new Parameter(args[i], clsAry[i], argsTypes[i], ParaType.In);
         }
       }
     }

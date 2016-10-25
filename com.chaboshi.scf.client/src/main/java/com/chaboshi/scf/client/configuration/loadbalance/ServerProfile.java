@@ -8,7 +8,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import com.chaboshi.scf.client.SCFConst;
-import com.chaboshi.scf.client.utility.helper.TimeSpanHelper;
+import com.chaboshi.scf.client.util.helper.TimeSpanHelper;
 
 /**
  * ServerProfile

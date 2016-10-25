@@ -10,7 +10,7 @@ import javax.naming.directory.NoSuchAttributeException;
 
 import org.w3c.dom.Node;
 
-import com.chaboshi.scf.protocol.serializer.SerializeBase;
+import com.chaboshi.scf.protocol.serializer.AbstractSerializer;
 import com.chaboshi.scf.protocol.sfp.enumeration.CompressType;
 import com.chaboshi.scf.protocol.sfp.enumeration.SerializeType;
 
@@ -22,7 +22,7 @@ import com.chaboshi.scf.protocol.sfp.enumeration.SerializeType;
 public class ProtocolProfile {
 
   private SerializeType serializerType;
-  private SerializeBase serialize;
+  private AbstractSerializer serialize;
   public Charset Encoder;
   public byte serviceID;
   public CompressType compress;
@@ -44,7 +44,7 @@ public class ProtocolProfile {
     } else {
       throw new NoSuchAttributeException("Protocol not supported " + value + "!");
     }
-    this.serialize = SerializeBase.getInstance(serializerType);
+    this.serialize = AbstractSerializer.getInstance(serializerType);
     attrSer = node.getAttributes().getNamedItem("encoder");
     if (attrSer == null) {
       this.Encoder = Charset.forName("UTF-8");
@@ -65,7 +65,7 @@ public class ProtocolProfile {
     return compress;
   }
 
-  public SerializeBase getSerializer() {
+  public AbstractSerializer getSerializer() {
     return serialize;
   }
 
