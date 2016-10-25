@@ -32,7 +32,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.chaboshi.scf</groupId>
-			<artifactId>com.chaboshi.scf.utility</artifactId>
+			<artifactId>com.chaboshi.scf.util</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
 	</dependencies>
