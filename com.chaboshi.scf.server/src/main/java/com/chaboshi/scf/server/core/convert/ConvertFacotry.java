@@ -16,21 +16,15 @@ import com.chaboshi.scf.protocol.sfp.v1.Protocol;
  */
 public class ConvertFacotry {
   private static Logger logger = LoggerFactory.getLogger(ConvertFacotry.class);
-  /**
-   * java
-   */
-  private static JavaConvert javaConvert = new JavaConvert();
 
   /**
    * SCFBinary
    */
-  private static SCFBinaryConvert scfBinaryConvert = new SCFBinaryConvert();
+  private static SCFConvert scfBinaryConvert = new SCFConvert();
 
   public static IConvert getConvert(Protocol p) {
     if (p.getSerializeType() == SerializeType.SCFBinary) {
       return scfBinaryConvert;
-    } else if (p.getSerializeType() == SerializeType.JAVABinary) {
-      return javaConvert;
     }
 
     logger.error("can't get IConvert not : json ,java, customBinary ");

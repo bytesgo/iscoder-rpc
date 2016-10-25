@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.chaboshi.scf.server.contract.annotation.OperationAsyn;
-import com.chaboshi.scf.server.core.proxy.AsynBack;
+import com.chaboshi.scf.server.core.proxy.AsyncBack;
 import com.chaboshi.scf.server.deploy.bytecode.ClassInfo.MethodInfo;
 import com.chaboshi.scf.server.deploy.hotdeploy.DynamicClassLoader;
 import com.chaboshi.scf.server.util.Util;
@@ -26,8 +26,7 @@ import javassist.CtMethod;
  * 
  * @author Service Platform Architecture Team (spat@58.com)
  * 
- *         <a href="http://blog.58.com/spat/">blog</a>
- *         <a href="http://www.58.com">website</a>
+ *         <a href="http://blog.58.com/spat/">blog</a> <a href="http://www.58.com">website</a>
  * 
  */
 public class ProxyClassCreater {
@@ -86,7 +85,7 @@ public class ProxyClassCreater {
                 sb.append(lookup);
                 sb.append(m.getName());
                 sb.append(getParas(m));
-                AsynBack.asynMap.put(sb.toString(), 1);
+                AsyncBack.asynMap.put(sb.toString(), 1);
                 logger.info("asynBack asynMap's key :" + sb.toString());
               }
               if (!uniqueNameList.contains(m.getName())) {

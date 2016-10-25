@@ -22,10 +22,10 @@ import com.chaboshi.scf.server.util.ExceptionHelper;
 import com.chaboshi.spat.utility.async.AsyncInvoker;
 import com.chaboshi.spat.utility.async.IAsyncHandler;
 
-public class AsynBack {
+public class AsyncBack {
 
-  private static Logger logger = LoggerFactory.getLogger(AsynBack.class);
-  private static AsynBack asyn = null;
+  private static Logger logger = LoggerFactory.getLogger(AsyncBack.class);
+  private static AsyncBack asyn = null;
   private static int taskTimeOut = 1000;
   private static HttpThreadLocal httpThreadLocal;
   public static Map<String, Integer> asynMap = new ConcurrentHashMap<String, Integer>();
@@ -47,12 +47,12 @@ public class AsynBack {
     }
   }
 
-  private AsynBack() {
+  private AsyncBack() {
 
   }
 
-  public static AsynBack getAsynBack() {
-    return asyn != null ? asyn : new AsynBack();
+  public static AsyncBack getAsynBack() {
+    return asyn != null ? asyn : new AsyncBack();
   }
 
   public static void send(final int key, final Object obj) {

@@ -8,7 +8,7 @@ public class CustomBinaryConvertTest {
   @Test
   public void testConvertToTObjectClassOfQ() throws Exception {
     Object l = new long[] { 1L, 2L, 3L };
-    IConvert convert = new SCFBinaryConvert();
+    IConvert convert = new SCFConvert();
     long[] ary = (long[]) convert.convertToT(l, long[].class);
     Assert.assertEquals(1, ary[0]);
     Assert.assertEquals(2, ary[1]);

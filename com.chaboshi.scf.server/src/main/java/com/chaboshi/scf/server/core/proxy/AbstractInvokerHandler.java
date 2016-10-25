@@ -18,9 +18,9 @@ import com.chaboshi.scf.server.util.ExceptionHelper;
 import com.chaboshi.scf.server.util.ServiceFrameException;
 import com.chaboshi.scf.server.util.SystemUtils;
 
-public abstract class InvokerBase implements InvokerHandler {
+public abstract class AbstractInvokerHandler implements InvokerHandler {
 
-  private static Logger logger = LoggerFactory.getLogger(InvokerBase.class);
+  private static Logger logger = LoggerFactory.getLogger(AbstractInvokerHandler.class);
 
   /**
    * 调用真实服务
@@ -86,14 +86,14 @@ public abstract class InvokerBase implements InvokerHandler {
         sw.setFromIP(context.getChannel().getRemoteIP());
         sw.setLocalIP(context.getChannel().getLocalIP());
 
-        if (AsynBack.asynMap.containsKey(sbIsAsynMsg.toString())) {
+        if (AsyncBack.asynMap.containsKey(sbIsAsynMsg.toString())) {
           int sessionid = SystemUtils.createSessionId();
           // int sessionid =
           // context.getScfRequest().getProtocol().getSessionID();
           SCFContext.setThreadLocal(context);
           context.setAsyn(true);
-          AsynBack.contextMap.put(sessionid, context);
-          AsynBack.callBackUtil.offer(new WData(sessionid, System.currentTimeMillis()));
+          AsyncBack.contextMap.put(sessionid, context);
+          AsyncBack.callBackUtil.offer(new WData(sessionid, System.currentTimeMillis()));
         }
 
         // invoker real service

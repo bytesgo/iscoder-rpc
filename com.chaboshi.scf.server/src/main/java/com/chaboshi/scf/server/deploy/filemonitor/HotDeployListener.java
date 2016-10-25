@@ -25,11 +25,9 @@ public class HotDeployListener implements IListener {
       logger.info("begin hot deploy scf...");
 
       DynamicClassLoader classLoader = new DynamicClassLoader();
-      classLoader
-          .addFolder(
-              Global.getSingleton().getRootPath() + "service/deploy/"
-                  + Global.getSingleton().getServiceConfig().getServiceName() + "/",
-              Global.getSingleton().getRootPath() + "service/lib/", Global.getSingleton().getRootPath() + "lib");
+      classLoader.addFolder(
+          Global.getSingleton().getRootPath() + "service/deploy/" + Global.getSingleton().getServiceConfig().getServiceName() + "/",
+          Global.getSingleton().getRootPath() + "service/lib/", Global.getSingleton().getRootPath() + "lib");
 
       IProxyFactory proxyFactory = ProxyFactoryLoader.loadProxyFactory(classLoader);
       if (proxyFactory != null) {

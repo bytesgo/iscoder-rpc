@@ -45,24 +45,17 @@ public class CallBackUtil {
         try {
           WData wd = checkQueue.poll(1500, TimeUnit.MILLISECONDS);
           if (wd != null) {
-            if (AsynBack.contextMap.get(wd.getSessionID()).isDel()) {
-              AsynBack.contextMap.remove(wd.getSessionID());// 使用完删除context
+            if (AsyncBack.contextMap.get(wd.getSessionID()).isDel()) {
+              AsyncBack.contextMap.remove(wd.getSessionID());// 使用完删除context
               continue;
             }
             if ((System.currentTimeMillis() - wd.getTime()) > taskTimeOut) {
-              AsynBack.send(wd.getSessionID(), new Exception("wait other server recive timeout.wait time is " + taskTimeOut));
+              AsyncBack.send(wd.getSessionID(), new Exception("wait other server recive timeout.wait time is " + taskTimeOut));
             } else {
               offer(wd);
               Thread.sleep(1);
             }
           }
-
-          // if(System.currentTimeMillis() - time > 30000){
-          // logger.error("map count is "+AsynBack.contextMap.size() +"
-          // taskTimeOut is "+taskTimeOut+" checkQueue size is
-          // "+checkQueue.size());
-          // time = System.currentTimeMillis();
-          // }
 
         } catch (InterruptedException e) {
           try {

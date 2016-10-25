@@ -7,7 +7,7 @@ package com.chaboshi.scf.server.core.convert;
  *         <a href="http://blog.58.com/spat/">blog</a> <a href="http://www.58.com">website</a>
  * 
  */
-public class SCFBinaryConvert implements IConvert {
+public class SCFConvert implements IConvert {
 
   @Override
   public String convertToString(Object obj) {

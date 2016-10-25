@@ -16,7 +16,7 @@ import com.chaboshi.scf.server.contract.filter.IFilter;
  *         <a href="http://blog.58.com/spat/">blog</a> <a href="http://www.58.com">website</a>
  * 
  */
-public class SyncInvokerHandler extends InvokerBase {
+public class SyncInvokerHandler extends AbstractInvokerHandler {
 
   private static Logger logger = LoggerFactory.getLogger(SyncInvokerHandler.class);
 

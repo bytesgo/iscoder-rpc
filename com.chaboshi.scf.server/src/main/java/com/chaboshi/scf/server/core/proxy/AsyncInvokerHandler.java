@@ -27,7 +27,7 @@ import com.chaboshi.spat.utility.async.IAsyncHandler;
  *         <a href="http://blog.58.com/spat/">blog</a> <a href="http://www.58.com">website</a>
  * 
  */
-public class AsyncInvokerHandler extends InvokerBase {
+public class AsyncInvokerHandler extends AbstractInvokerHandler {
   private static Logger logger = LoggerFactory.getLogger(AsyncInvokerHandler.class);
   /**
    * 异步执行器
@@ -163,7 +163,7 @@ public class AsyncInvokerHandler extends InvokerBase {
         } finally {
           SCFContext.removeThreadLocal();
           logger.error("AsynBack.contextMap.remove " + context.getSessionID());
-          AsynBack.contextMap.remove(context.getSessionID());
+          AsyncBack.contextMap.remove(context.getSessionID());
         }
 
         context.getServerHandler().writeResponse(context);
