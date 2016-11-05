@@ -6,7 +6,6 @@
 package com.chaboshi.spat.utility.jsr166;
 
 import java.util.Random;
-import java.util.concurrent.ForkJoinTask;
 
 /**
  * A random number generator isolated to the current thread. Like the global {@link java.util.Random} generator used by

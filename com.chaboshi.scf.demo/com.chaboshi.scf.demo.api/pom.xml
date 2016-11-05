@@ -5,7 +5,6 @@
 		<groupId>com.chaboshi.scf.demo</groupId>
 		<artifactId>com.chaboshi.scf.demo</artifactId>
 		<version>2.0.1-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<properties>

@@ -30,7 +30,6 @@ public class ClassHelper {
    * @throws ClassNotFoundException
    */
   public static Set<Class<?>> getClassFromJar(String jarPath, DynamicClassLoader classLoader) throws IOException, ClassNotFoundException {
-    @SuppressWarnings("resource")
     JarFile jarFile = new JarFile(jarPath);
     Enumeration<JarEntry> entries = jarFile.entries();
     Set<Class<?>> classes = new LinkedHashSet<Class<?>>();

@@ -14,7 +14,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.chaboshi.scf.demo.api</groupId>
+			<groupId>com.chaboshi.scf.demo</groupId>
 			<artifactId>com.chaboshi.scf.demo.api</artifactId>
 			<version>2.0.1-SNAPSHOT</version>
 		</dependency>
@@ -37,24 +37,22 @@
 						<exclude>config/**</exclude>
 					</excludes>
 				</configuration>
-
 			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.6</version>
 				<configuration>
-					<finalName>demo</finalName>
 					<outputDirectory>${project.build.directory}/build</outputDirectory>
 					<descriptor>assembly.xml</descriptor>
 				</configuration>
-				<executions>
+				<!-- <executions>
 					<execution>
 						<phase>package</phase>
 						<goals>
-							<goal>assembly</goal>
+							<goal>single</goal>
 						</goals>
 					</execution>
-				</executions>
+				</executions> -->
 			</plugin>
 			<!-- 让maven插件跳过单元测试 -->
 			<plugin>
