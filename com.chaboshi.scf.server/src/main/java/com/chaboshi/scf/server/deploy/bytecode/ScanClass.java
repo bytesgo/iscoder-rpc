@@ -5,6 +5,7 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,6 +21,7 @@ import com.chaboshi.scf.server.contract.annotation.ServiceBehavior;
 import com.chaboshi.scf.server.contract.annotation.ServiceContract;
 import com.chaboshi.scf.server.deploy.bytecode.ContractInfo.SessionBean;
 import com.chaboshi.scf.server.deploy.hotdeploy.DynamicClassLoader;
+import com.chaboshi.scf.server.deploy.scanner.DefaultClassScanner;
 import com.chaboshi.scf.server.util.ClassHelper;
 import com.chaboshi.scf.server.util.FileHelper;
 
@@ -110,57 +112,61 @@ public class ScanClass {
    * @throws Exception
    */
   private static void scan(String path, DynamicClassLoader classLoader) throws Exception {
-    logger.info("begin scan jar from path:" + path);
+    logger.info("begin scan jar from path : " + path);
 
     List<String> jarPathList = FileHelper.getUniqueLibPath(path);
 
-    if (jarPathList == null) {
-      throw new Exception("no jar fonded from path: " + path);
+    Set<Class<?>> clsSet = new LinkedHashSet<Class<?>>();
+    if (jarPathList == null || jarPathList.isEmpty()) {
+      clsSet.addAll(scanFromClassPath("", classLoader));
     }
 
     contractClassInfos = new ArrayList<ClassInfo>();
     behaviorClassInfos = new ArrayList<ClassInfo>();
 
     for (String jpath : jarPathList) {
-      Set<Class<?>> clsSet = null;
       try {
-        clsSet = ClassHelper.getClassFromJar(jpath, classLoader);
+        clsSet.addAll(ClassHelper.getClassFromJar(jpath, classLoader));
       } catch (Exception ex) {
         throw ex;
       }
+    }
 
-      if (clsSet == null) {
-        continue;
-      }
-
-      for (Class<?> cls : clsSet) {
-        try {
-          ServiceBehavior behavior = cls.getAnnotation(ServiceBehavior.class);
-          ServiceContract contract = cls.getAnnotation(ServiceContract.class);
-          if (behavior == null && contract == null) {
-            continue;
-          }
-
-          if (contract != null) {
-            ClassInfo ci = contract(cls);
-            if (ci != null) {
-              contractClassInfos.add(ci);
-            }
-          } else if (behavior != null) {
-            ClassInfo ci = behavior(cls);
-            if (ci != null) {
-              behaviorClassInfos.add(ci);
-            }
-          }
-        } catch (Exception ex) {
-          throw ex;
+    for (Class<?> cls : clsSet) {
+      try {
+        ServiceBehavior behavior = cls.getAnnotation(ServiceBehavior.class);
+        ServiceContract contract = cls.getAnnotation(ServiceContract.class);
+        if (behavior == null && contract == null) {
+          continue;
         }
+
+        if (contract != null) {
+          ClassInfo ci = contract(cls);
+          if (ci != null) {
+            contractClassInfos.add(ci);
+          }
+        } else if (behavior != null) {
+          ClassInfo ci = behavior(cls);
+          if (ci != null) {
+            behaviorClassInfos.add(ci);
+          }
+        }
+      } catch (Exception ex) {
+        throw ex;
       }
     }
 
     contractInfo = createContractInfo(contractClassInfos, behaviorClassInfos);
 
     logger.info("finish scan jar");
+  }
+
+  /**
+   * @param classLoader
+   * @return
+   */
+  private static Set<Class<?>> scanFromClassPath(String packageName, DynamicClassLoader classLoader) {
+    return DefaultClassScanner.getInstance().getClassList(packageName, null);
   }
 
   /**

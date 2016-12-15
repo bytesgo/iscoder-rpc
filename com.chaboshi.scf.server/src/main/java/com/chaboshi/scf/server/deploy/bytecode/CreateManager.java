@@ -41,8 +41,8 @@ public class CreateManager {
 
     Class<?> proxyFactoryCls = classLoader.findClass(cfProxyFactory.getClsName(), cfProxyFactory.getClsByte(), null);
     Constructor<?> constructor = proxyFactoryCls.getConstructor(List.class);
-    IProxyFactory pfInstance = (IProxyFactory) constructor.newInstance(localProxyAry);
-    logger.info("crate ProxyFactory instance!!!");
-    return pfInstance;
+    IProxyFactory iProxyFactory = (IProxyFactory) constructor.newInstance(localProxyAry);
+    logger.info("crate ProxyFactory instance : " + iProxyFactory);
+    return iProxyFactory;
   }
 }

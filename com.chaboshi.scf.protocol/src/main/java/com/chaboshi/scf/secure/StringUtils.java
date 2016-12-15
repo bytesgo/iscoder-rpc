@@ -108,4 +108,8 @@ public class StringUtils {
     return StringUtils.newString(bytes, CharEncoding.UTF_8);
   }
 
+  public static boolean isNotEmpty(String str) {
+    return str != null && str.length() != 0;
+  }
+
 }

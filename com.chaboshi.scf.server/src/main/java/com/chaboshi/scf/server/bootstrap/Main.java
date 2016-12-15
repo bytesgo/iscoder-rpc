@@ -49,8 +49,8 @@ public class Main {
       throw new IllegalArgumentException("usage: -Dscf.service.name=<service-name> [<other-scf-config>]");
     }
 
-    String userDir = System.getProperty("user.dir");
-    String rootPath = userDir + "/../";
+    String userDir = System.getProperty("user.dir", null);
+    String rootPath = userDir + "/";
     String serviceName = "no service name please set it";
     Map<String, String> argsMap = new HashMap<String, String>();
     Global.getSingleton().setRootPath(rootPath);
