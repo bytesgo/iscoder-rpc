@@ -12,9 +12,9 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.jboss.netty.channel.Channel;
 
-import com.chaboshi.scf.server.contract.filter.IFilter;
+import com.chaboshi.scf.server.IFilter;
 import com.chaboshi.scf.server.contract.init.IInit;
-import com.chaboshi.scf.server.contract.server.Server;
+import com.chaboshi.scf.server.core.Server;
 
 /**
  * A class contains global variable

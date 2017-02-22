@@ -1,12 +1,12 @@
-package com.chaboshi.scf.server.core.proxy;
+package com.chaboshi.scf.server.core.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.chaboshi.scf.server.IFilter;
 import com.chaboshi.scf.server.contract.context.ExecFilterType;
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.context.SCFContext;
-import com.chaboshi.scf.server.contract.filter.IFilter;
 
 /**
  * sync service invoke handle

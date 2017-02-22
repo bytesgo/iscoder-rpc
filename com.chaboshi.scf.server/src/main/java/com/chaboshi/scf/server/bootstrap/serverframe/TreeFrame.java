@@ -16,9 +16,9 @@ import javax.swing.tree.TreeSelectionModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.server.contract.annotation.OperationContract;
-import com.chaboshi.scf.server.contract.annotation.ServiceBehavior;
-import com.chaboshi.scf.server.contract.annotation.ServiceContract;
+import com.chaboshi.scf.server.annotation.OperationContract;
+import com.chaboshi.scf.server.annotation.ServiceBehavior;
+import com.chaboshi.scf.server.annotation.ServiceContract;
 import com.chaboshi.scf.server.deploy.hotdeploy.DynamicClassLoader;
 import com.chaboshi.scf.server.util.ClassHelper;
 

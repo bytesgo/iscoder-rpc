@@ -2,7 +2,7 @@
  * Copyright 2010 58.com, Inc.
  */
 
-package com.chaboshi.scf.server.core.convert;
+package com.chaboshi.scf.server.core;
 
 /**
  * a interface for description convert object to target type

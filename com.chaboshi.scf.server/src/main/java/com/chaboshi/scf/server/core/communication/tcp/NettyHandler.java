@@ -17,13 +17,13 @@ import org.slf4j.LoggerFactory;
 // import com.bj58.spat.scf.server.performance.monitorweb.MonitorErrorLog;
 import com.chaboshi.scf.protocol.utility.ProtocolConst;
 import com.chaboshi.scf.protocol.utility.ProtocolHelper;
+import com.chaboshi.scf.server.IFilter;
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.context.SCFChannel;
 import com.chaboshi.scf.server.contract.context.SCFContext;
 import com.chaboshi.scf.server.contract.context.SecureContext;
 import com.chaboshi.scf.server.contract.context.ServerType;
-import com.chaboshi.scf.server.contract.filter.IFilter;
-import com.chaboshi.scf.server.contract.server.ServerHandler;
+import com.chaboshi.scf.server.core.ServerHandler;
 import com.chaboshi.scf.server.util.ExceptionHelper;
 
 /**

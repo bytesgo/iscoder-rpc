@@ -1,4 +1,4 @@
-package com.chaboshi.scf.server.core.proxy;
+package com.chaboshi.scf.server.core.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

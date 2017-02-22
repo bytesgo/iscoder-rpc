@@ -1,5 +1,7 @@
 package com.chaboshi.scf.server.core.convert;
 
+import com.chaboshi.scf.server.core.IConvert;
+
 /**
  * 
  * @author Service Platform Architecture Team (spat@58.com)

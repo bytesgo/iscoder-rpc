@@ -1,4 +1,4 @@
-package com.chaboshi.scf.server.contract.annotation;
+package com.chaboshi.scf.server.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -6,11 +6,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.PARAMETER)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface HttpPathParameter {
-  public String mapping();
-
-  public HttpParameterType paramType() default HttpParameterType.PathParameter;
+public @interface OperationAsyn {
+  public boolean isAsyn() default false;
 }

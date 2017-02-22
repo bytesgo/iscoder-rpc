@@ -11,12 +11,12 @@ import org.apache.log4j.xml.DOMConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.chaboshi.scf.server.IFilter;
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.context.IProxyFactory;
 import com.chaboshi.scf.server.contract.context.ServiceConfig;
-import com.chaboshi.scf.server.contract.filter.IFilter;
 import com.chaboshi.scf.server.contract.init.IInit;
-import com.chaboshi.scf.server.contract.server.Server;
+import com.chaboshi.scf.server.core.Server;
 import com.chaboshi.scf.server.deploy.filemonitor.FileMonitor;
 import com.chaboshi.scf.server.deploy.filemonitor.HotDeployListener;
 import com.chaboshi.scf.server.deploy.filemonitor.NotifyCount;

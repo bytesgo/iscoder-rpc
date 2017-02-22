@@ -1,85 +1,87 @@
-package com.chaboshi.scf.server.core.proxy;
+package com.chaboshi.scf.server.core.handler;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeoutException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.protocol.exception.TimeoutException;
-import com.chaboshi.scf.protocol.sdp.ResponseProtocol;
 import com.chaboshi.scf.protocol.sfp.v1.Protocol;
+import com.chaboshi.scf.server.IFilter;
 import com.chaboshi.scf.server.contract.context.ExecFilterType;
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.context.SCFContext;
 import com.chaboshi.scf.server.contract.context.SCFResponse;
 import com.chaboshi.scf.server.contract.context.SecureContext;
 import com.chaboshi.scf.server.contract.context.ServerType;
-import com.chaboshi.scf.server.contract.filter.IFilter;
 import com.chaboshi.scf.server.contract.http.HttpThreadLocal;
 import com.chaboshi.scf.server.performance.monitorweb.AbandonCount;
 import com.chaboshi.scf.server.util.ExceptionHelper;
 import com.chaboshi.spat.utility.async.AsyncInvoker;
 import com.chaboshi.spat.utility.async.IAsyncHandler;
 
-public class AsyncBack {
+/**
+ * async service invoke handle
+ * 
+ * @author Service Platform Architecture Team (spat@58.com)
+ * 
+ *         <a href="http://blog.58.com/spat/">blog</a> <a href="http://www.58.com">website</a>
+ * 
+ */
+public class AsyncInvokerHandler extends AbstractInvokerHandler {
+  private static Logger logger = LoggerFactory.getLogger(AsyncInvokerHandler.class);
+  /**
+   * 异步执行器
+   */
+  private AsyncInvoker asyncInvoker;
+  private HttpThreadLocal httpThreadLocal;
+  private int taskTimeOut = 1000;
 
-  private static Logger logger = LoggerFactory.getLogger(AsyncBack.class);
-  private static AsyncBack asyn = null;
-  private static int taskTimeOut = 1000;
-  private static HttpThreadLocal httpThreadLocal;
-  public static Map<String, Integer> asynMap = new ConcurrentHashMap<String, Integer>();
-  public static final int THREAD_COUNT = Runtime.getRuntime().availableProcessors();
-  private static AsyncInvoker asyncInvoker = AsyncInvoker.getInstance(THREAD_COUNT, false, "Back Async Worker");
-  public static Map<Integer, SCFContext> contextMap = new ConcurrentHashMap<Integer, SCFContext>();
-  public static final CallBackUtil callBackUtil = new CallBackUtil();
-
-  static {
+  public AsyncInvokerHandler() {
     try {
       httpThreadLocal = HttpThreadLocal.getInstance();
-      String sTaskTimeOut = Global.getSingleton().getServiceConfig().getString("back.task.timeout");
+      int workerCount = Global.getSingleton().getServiceConfig().getInt("scf.async.worker.count");
+      if (workerCount > 0) {
+        asyncInvoker = AsyncInvoker.getInstance(workerCount, false, "Scf Async worker");
+      } else {
+        asyncInvoker = AsyncInvoker.getInstance();
+      }
+      String sTaskTimeOut = Global.getSingleton().getServiceConfig().getString("scf.server.tcp.task.timeout");
       if (sTaskTimeOut != null && !"".equals(sTaskTimeOut)) {
         taskTimeOut = Integer.parseInt(sTaskTimeOut);
       }
-      logger.info("back async worker count:" + THREAD_COUNT);
+      logger.info("async worker count:" + workerCount);
     } catch (Exception e) {
       logger.error("init AsyncInvokerHandle error", e);
     }
   }
 
-  private AsyncBack() {
-
-  }
-
-  public static AsyncBack getAsynBack() {
-    return asyn != null ? asyn : new AsyncBack();
-  }
-
-  public static void send(final int key, final Object obj) {
-
-    final SCFContext context = contextMap.get(key);
-    if (null == context) {
-      return;
-    }
-    synchronized (context) {
-      if (null == context || context.isDel()) {
-        return;
-      }
-      context.setDel(true);
-    }
+  @Override
+  public void invoke(final SCFContext context) throws Exception {
+    logger.debug("-------------------begin async invoke-------------------");
 
     asyncInvoker.run(taskTimeOut, new IAsyncHandler() {
       @Override
       public Object run() throws Throwable {
-        if (obj instanceof Exception) {
-          exceptionCaught((Throwable) obj);
-          return null;
+        logger.debug("begin request filter");
+        // request filter
+
+        for (IFilter f : Global.getSingleton().getGlobalRequestFilterList()) {
+          if (context.getExecFilter() == ExecFilterType.All || context.getExecFilter() == ExecFilterType.RequestOnly) {
+            f.filter(context);
+          }
         }
-        Protocol protocol = context.getScfRequest().getProtocol();
-        SCFResponse response = new SCFResponse(obj, null);
 
-        protocol.setSdpEntity(new ResponseProtocol(response.getReturnValue(), null));
-
+        if (context.isDoInvoke()) {
+          if (context.getServerType() == ServerType.HTTP) {
+            httpThreadLocal.set(context.getHttpContext());
+          }
+          doInvoke(context);
+        }
+        if (context.isAsyn()) {
+          return context;
+        }
+        logger.debug("begin response filter");
+        // response filter
         for (IFilter f : Global.getSingleton().getGlobalResponseFilterList()) {
           if (context.getExecFilter() == ExecFilterType.All || context.getExecFilter() == ExecFilterType.ResponseOnly) {
             f.filter(context);
@@ -90,14 +92,20 @@ public class AsyncBack {
 
       @Override
       public void messageReceived(Object obj) {
-        if (obj != null) {
-          SCFContext ctx = (SCFContext) obj;
-          if (ctx.isAsyn()) {
-            ctx.getServerHandler().writeResponse(ctx);
-            // contextMap.remove(key);//使用完删除context
-          } else {
-            logger.error("The Method is Synchronized!");
+        try {
+          if (context.getServerType() == ServerType.HTTP) {
+            httpThreadLocal.remove();
           }
+          if (obj != null) {
+            SCFContext ctx = (SCFContext) obj;
+            if (!ctx.isAsyn()) {
+              ctx.getServerHandler().writeResponse(ctx);
+            }
+          } else {
+            logger.error("context is null!");
+          }
+        } finally {
+          SCFContext.removeThreadLocal();
         }
       }
 
@@ -153,11 +161,15 @@ public class AsyncBack {
           context.getScfResponse().setResponseBuffer(new byte[] { 0 });
           logger.error("AsyncInvokerHandle invoke-exceptionCaught error", ex);
         } finally {
-          context.getServerHandler().writeResponse(context);
-          logger.error("AsyncInvokerHandle invoke error", e);
+          SCFContext.removeThreadLocal();
+          logger.error("AsynBack.contextMap.remove " + context.getSessionID());
+          AsyncBack.contextMap.remove(context.getSessionID());
         }
+
+        context.getServerHandler().writeResponse(context);
+
+        logger.error("AsyncInvokerHandle invoke error", e);
       }
     });
   }
-
 }

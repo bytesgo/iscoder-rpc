@@ -4,12 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.chaboshi.scf.protocol.sfp.v1.Protocol;
+import com.chaboshi.scf.server.IFilter;
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.context.SCFContext;
 import com.chaboshi.scf.server.contract.context.SCFResponse;
 import com.chaboshi.scf.server.contract.context.SecureContext;
 import com.chaboshi.scf.server.contract.context.ServerType;
-import com.chaboshi.scf.server.contract.filter.IFilter;
 
 /**
  * A filter for create protocol from byte[]

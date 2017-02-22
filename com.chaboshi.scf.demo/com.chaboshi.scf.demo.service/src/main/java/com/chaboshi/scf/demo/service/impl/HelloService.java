@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.chaboshi.scf.demo.contract.IHelloService;
-import com.chaboshi.scf.server.contract.annotation.ServiceBehavior;
+import com.chaboshi.scf.server.annotation.ServiceBehavior;
 
 /**
  * @author lee_y

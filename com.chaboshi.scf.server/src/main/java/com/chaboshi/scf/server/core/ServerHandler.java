@@ -1,4 +1,4 @@
-package com.chaboshi.scf.server.contract.server;
+package com.chaboshi.scf.server.core;
 
 import com.chaboshi.scf.server.contract.context.SCFContext;
 

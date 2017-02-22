@@ -2,7 +2,7 @@
  * Copyright 2010 58.com, Inc.
  */
 
-package com.chaboshi.scf.server.core.proxy;
+package com.chaboshi.scf.server.core.handler;
 
 import com.chaboshi.scf.server.contract.context.SCFContext;
 

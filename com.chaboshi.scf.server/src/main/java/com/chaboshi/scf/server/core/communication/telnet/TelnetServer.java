@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.chaboshi.scf.server.contract.context.Global;
-import com.chaboshi.scf.server.contract.server.Server;
+import com.chaboshi.scf.server.core.Server;
 
 /**
  * start netty server

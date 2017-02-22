@@ -5,7 +5,7 @@
 package com.chaboshi.scf.demo.service.impl;
 
 import com.chaboshi.scf.demo.contract.IUserService;
-import com.chaboshi.scf.server.contract.annotation.ServiceBehavior;
+import com.chaboshi.scf.server.annotation.ServiceBehavior;
 
 /**
  * @author lee

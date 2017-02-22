@@ -2,7 +2,7 @@
  * Copyright 2010 58.com, Inc.
  */
 
-package com.chaboshi.scf.server.contract.annotation;
+package com.chaboshi.scf.server.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

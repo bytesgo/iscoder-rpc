@@ -13,12 +13,12 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.server.contract.annotation.AnnotationUtil;
-import com.chaboshi.scf.server.contract.annotation.HttpPathParameter;
-import com.chaboshi.scf.server.contract.annotation.HttpRequestMapping;
-import com.chaboshi.scf.server.contract.annotation.OperationContract;
-import com.chaboshi.scf.server.contract.annotation.ServiceBehavior;
-import com.chaboshi.scf.server.contract.annotation.ServiceContract;
+import com.chaboshi.scf.server.annotation.AnnotationUtil;
+import com.chaboshi.scf.server.annotation.HttpPathParameter;
+import com.chaboshi.scf.server.annotation.HttpRequestMapping;
+import com.chaboshi.scf.server.annotation.OperationContract;
+import com.chaboshi.scf.server.annotation.ServiceBehavior;
+import com.chaboshi.scf.server.annotation.ServiceContract;
 import com.chaboshi.scf.server.deploy.bytecode.ContractInfo.SessionBean;
 import com.chaboshi.scf.server.deploy.hotdeploy.DynamicClassLoader;
 import com.chaboshi.scf.server.deploy.scanner.DefaultClassScanner;

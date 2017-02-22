@@ -12,13 +12,13 @@ import com.chaboshi.scf.protocol.sdp.RequestProtocol;
 import com.chaboshi.scf.protocol.sfp.enumeration.PlatformType;
 import com.chaboshi.scf.protocol.sfp.v1.Protocol;
 import com.chaboshi.scf.protocol.utility.KeyValuePair;
+import com.chaboshi.scf.server.IFilter;
 import com.chaboshi.scf.server.contract.context.ExecFilterType;
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.context.SCFContext;
 import com.chaboshi.scf.server.contract.context.SCFResponse;
 import com.chaboshi.scf.server.contract.context.SecureContext;
 import com.chaboshi.scf.server.contract.context.ServerType;
-import com.chaboshi.scf.server.contract.filter.IFilter;
 import com.chaboshi.scf.server.util.ExceptionHelper;
 
 public class ExecuteMethodFilter implements IFilter {

@@ -4,7 +4,7 @@
 
 package com.chaboshi.scf.server.deploy.hotdeploy;
 
-import com.chaboshi.scf.server.core.proxy.InvokerHandler;
+import com.chaboshi.scf.server.core.handler.InvokerHandler;
 
 /**
  * a interface for description hot deploy class

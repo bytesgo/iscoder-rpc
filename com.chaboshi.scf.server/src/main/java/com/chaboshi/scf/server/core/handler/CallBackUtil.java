@@ -1,4 +1,4 @@
-package com.chaboshi.scf.server.core.proxy;
+package com.chaboshi.scf.server.core.handler;
 
 import java.util.concurrent.TimeUnit;
 

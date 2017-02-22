@@ -5,7 +5,7 @@ package com.chaboshi.scf.server.contract.context;
 
 import com.chaboshi.scf.protocol.sdp.RequestProtocol;
 import com.chaboshi.scf.server.contract.http.HttpContext;
-import com.chaboshi.scf.server.contract.server.ServerHandler;
+import com.chaboshi.scf.server.core.ServerHandler;
 
 /**
  * SCF request/response context

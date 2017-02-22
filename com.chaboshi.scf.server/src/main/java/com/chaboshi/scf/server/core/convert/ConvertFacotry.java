@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.chaboshi.scf.protocol.sfp.enumeration.SerializeType;
 import com.chaboshi.scf.protocol.sfp.v1.Protocol;
+import com.chaboshi.scf.server.core.IConvert;
 
 /**
  * A convert facotry for create converter

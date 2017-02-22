@@ -3,6 +3,7 @@ package com.chaboshi.scf.server.filter;
 import com.chaboshi.scf.protocol.sdp.ResetProtocol;
 import com.chaboshi.scf.protocol.sfp.enumeration.PlatformType;
 import com.chaboshi.scf.protocol.sfp.v1.Protocol;
+import com.chaboshi.scf.server.IFilter;
 import com.chaboshi.scf.server.contract.context.ExecFilterType;
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.context.SCFContext;
@@ -10,7 +11,6 @@ import com.chaboshi.scf.server.contract.context.SCFResponse;
 import com.chaboshi.scf.server.contract.context.SecureContext;
 import com.chaboshi.scf.server.contract.context.ServerStateType;
 import com.chaboshi.scf.server.contract.context.ServerType;
-import com.chaboshi.scf.server.contract.filter.IFilter;
 
 /**
  * A filter for parse protocol from byte[]

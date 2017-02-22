@@ -1,7 +1,7 @@
 package com.chaboshi.scf.server.contract.http;
 
-import com.chaboshi.scf.server.contract.annotation.OperationContract;
-import com.chaboshi.scf.server.contract.annotation.ServiceContract;
+import com.chaboshi.scf.server.annotation.OperationContract;
+import com.chaboshi.scf.server.annotation.ServiceContract;
 
 @ServiceContract
 public interface IHttpHandler {

@@ -2,7 +2,7 @@
  * Copyright 2010 58.com, Inc.
  */
 
-package com.chaboshi.scf.server.contract.server;
+package com.chaboshi.scf.server.core;
 
 /**
  * a interface for description start/stop socket server
