@@ -3,7 +3,7 @@
  * explained at http://creativecommons.org/licenses/publicdomain
  */
 
-package com.chaboshi.common.utils.spat.jsr166;
+package com.chaboshi.common.utils.spat.jsr;
 
 import java.util.AbstractQueue;
 import java.util.Collection;

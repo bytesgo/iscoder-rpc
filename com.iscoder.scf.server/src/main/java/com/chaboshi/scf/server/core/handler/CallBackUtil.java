@@ -3,8 +3,8 @@ package com.chaboshi.scf.server.core.handler;
 import java.util.concurrent.TimeUnit;
 
 import com.chaboshi.common.utils.SystemUtil;
-import com.chaboshi.common.utils.spat.jsr166.LinkedTransferQueue;
-import com.chaboshi.common.utils.spat.jsr166.TransferQueue;
+import com.chaboshi.common.utils.spat.jsr.LinkedTransferQueue;
+import com.chaboshi.common.utils.spat.jsr.TransferQueue;
 import com.chaboshi.scf.server.contract.context.Global;
 
 public class CallBackUtil {

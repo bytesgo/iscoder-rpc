@@ -1,13 +1,8 @@
-/*
- * Copyright 2010 58.com, Inc. SPAT team blog: http://blog.58.com/spat/ website: http://www.58.com
- */
 package com.chaboshi.common.exception;
 
 import com.chaboshi.common.annotation.SCFMember;
 import com.chaboshi.common.annotation.SCFSerializable;
 
-/**
- */
 @SCFSerializable(name = "ExceptionProtocol")
 public class ExceptionProtocol {
 

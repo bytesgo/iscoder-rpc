@@ -10,10 +10,6 @@ import java.util.List;
  * <p>
  * 类扫描接口
  * </p>
- * 
- * @author Alex.j 2014-5-23
- * @see
- * @since 1.0
  */
 public interface MethodScanner {
   /**

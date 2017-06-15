@@ -16,7 +16,6 @@ import javax.crypto.spec.IvParameterSpec;
  * 在java、c#进行DES加、解密进行互通时请使用方法中带Net的方法，注意方法中key length must be 8 bytes long java方法实现DES使用工作模式默认为ECB
  * java与c#互通实现DES使用工作模式为CBC
  * 
- * @author HaoXB date:2011-08-08
  */
 public class DESCoderUtil {
 

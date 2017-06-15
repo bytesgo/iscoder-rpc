@@ -1,7 +1,3 @@
-/*
- * Copyright 2010 www.58.com, Inc.
- * @author Service Platform Architecture Team mail: spat@58.com web: http://www.58.com
- */
 package com.chaboshi.scf.client.channel;
 
 import java.io.IOException;
@@ -15,7 +11,7 @@ import java.util.concurrent.Executors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.common.utils.sfft.tools.ThreadRenameFactory;
+import com.chaboshi.common.utils.ThreadNamedFactory;
 
 /**
  * DataReceiver
@@ -58,7 +54,7 @@ public class DataReceiver {
 class Worker implements Runnable {
 
   private final static int T_COUNT = Runtime.getRuntime().availableProcessors();// CPU核数
-  private ExecutorService pool = Executors.newFixedThreadPool(T_COUNT, new ThreadRenameFactory("Async DataReceiver Thread"));
+  private ExecutorService pool = Executors.newFixedThreadPool(T_COUNT, new ThreadNamedFactory("Async DataReceiver Thread"));
   private static final Logger logger = LoggerFactory.getLogger(Worker.class);
   List<SCFChannel> sockets = null;
 

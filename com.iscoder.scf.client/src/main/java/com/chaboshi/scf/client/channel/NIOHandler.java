@@ -7,8 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.chaboshi.common.exception.TimeoutException;
-import com.chaboshi.common.utils.spat.jsr166.LinkedTransferQueue;
-import com.chaboshi.common.utils.spat.jsr166.TransferQueue;
+import com.chaboshi.common.utils.spat.jsr.LinkedTransferQueue;
+import com.chaboshi.common.utils.spat.jsr.TransferQueue;
 
 public class NIOHandler {
   private static final Logger logger = LoggerFactory.getLogger(NIOHandler.class);

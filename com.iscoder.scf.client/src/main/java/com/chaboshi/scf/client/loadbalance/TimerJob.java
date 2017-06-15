@@ -1,16 +1,7 @@
-/*
- * Copyright 2010 www.58.com, Inc.
- * @author Service Platform Architecture Team mail: spat@58.com web: http://www.58.com
- */
 package com.chaboshi.scf.client.loadbalance;
 
 import com.chaboshi.scf.client.channel.ChannelFactory;
 
-/**
- * TimerJob
- *
- * @author Service Platform Architecture Team (spat@58.com)
- */
 public class TimerJob implements Runnable {
 
   private Server server = null;

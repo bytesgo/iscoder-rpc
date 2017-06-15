@@ -2,8 +2,6 @@ package com.chaboshi.common.entity;
 
 /**
  * ByteConverter
- *
- * @author Service Platform Architecture Team (spat@58.com)
  */
 public class ByteConverter {
 

@@ -13,8 +13,6 @@ import com.chaboshi.scf.protocol.sfp.Protocol;
 
 /**
  * a abstract class for description callback funcation
- * 
- * @author Service Platform Architecture Team (spat@58.com)
  */
 
 public abstract class ReceiveHandler {

@@ -1,7 +1,3 @@
-/*
- * Copyright 2010 www.58.com, Inc.
- * @author Service Platform Architecture Team mail: spat@58.com web: http://www.58.com
- */
 package com.chaboshi.common.utils;
 
 import java.io.File;
@@ -19,11 +15,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-/**
- * XMLHelper
- *
- * @author Service Platform Architecture Team (spat@58.com)
- */
 public class XMLUtil {
 
   public static Element GetXmlDoc(String filePath) {

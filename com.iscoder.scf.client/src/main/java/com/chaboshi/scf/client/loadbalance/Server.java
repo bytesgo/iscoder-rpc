@@ -1,7 +1,3 @@
-/*
- * Copyright 2010 www.58.com, Inc.
- * @author Service Platform Architecture Team mail: spat@58.com web: http://www.58.com
- */
 package com.chaboshi.scf.client.loadbalance;
 
 import java.io.IOException;
@@ -14,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.common.utils.sfft.tools.ThreadRenameFactory;
+import com.chaboshi.common.utils.ThreadNamedFactory;
 import com.chaboshi.scf.client.channel.ChannelFactory;
 import com.chaboshi.scf.client.channel.SCFChannel;
 import com.chaboshi.scf.client.channel.WindowData;
@@ -25,8 +21,6 @@ import com.chaboshi.scf.protocol.sfp.Protocol;
 
 /**
  * Server
- *
- * @author Service Platform Architecture Team (spat@58.com)
  */
 public class Server {
 
@@ -55,7 +49,7 @@ public class Server {
     } else {
       this.state = ServerState.Disable;
     }
-    scheduler = Executors.newScheduledThreadPool(2, new ThreadRenameFactory("Async " + this.getName() + "-Server Thread"));
+    scheduler = Executors.newScheduledThreadPool(2, new ThreadNamedFactory("Async " + this.getName() + "-Server Thread"));
   }
 
   public long getDeadTime() {

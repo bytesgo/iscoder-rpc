@@ -3,7 +3,6 @@ package com.chaboshi.common.exception;
 /**
  * 服务重启异常
  * 
- * @author HAOXB
  */
 public class RebootException extends RemoteException {
   private static final long serialVersionUID = 1L;

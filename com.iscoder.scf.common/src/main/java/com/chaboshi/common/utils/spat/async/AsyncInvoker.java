@@ -3,7 +3,7 @@ package com.chaboshi.common.utils.spat.async;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.chaboshi.common.utils.sfft.tools.ThreadRenameFactory;
+import com.chaboshi.common.utils.ThreadNamedFactory;
 
 public class AsyncInvoker {
 
@@ -66,7 +66,7 @@ public class AsyncInvoker {
     // ExecutorService executor = Executors.newCachedThreadPool(new
     // ThreadRenameFactory("async task thread"));
     ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors(),
-        new ThreadRenameFactory(threadFactoryName + "async task thread"));
+        new ThreadNamedFactory(threadFactoryName + "async task thread"));
 
     for (int i = 0; i < workers.length; i++) {
       workers[i] = new AsyncWorker(executor, timeoutEffect, threadFactoryName);

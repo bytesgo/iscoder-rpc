@@ -1,4 +1,4 @@
-package com.chaboshi.common.utils.sfft.config;
+package com.chaboshi.common.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,15 +10,15 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-public class PropertiesHelper {
+public class PropertiesUtil {
 
   private Properties pro = null;
 
-  public PropertiesHelper(String path) throws Exception {
+  public PropertiesUtil(String path) throws Exception {
     pro = loadProperty(path);
   }
 
-  public PropertiesHelper(InputStream inputStream) {
+  public PropertiesUtil(InputStream inputStream) {
     pro = new Properties();
     try {
       pro.load(inputStream);

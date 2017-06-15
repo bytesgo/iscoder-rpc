@@ -1,7 +1,3 @@
-/*
- * Copyright 2010 www.58.com, Inc.
- * @author Service Platform Architecture Team mail: spat@58.com web: http://www.58.com
- */
 package com.chaboshi.scf.client.proxy.builder;
 
 import java.io.Serializable;
@@ -13,8 +9,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * ProxyStandard
- *
- * @author Service Platform Architecture Team (spat@58.com)
  */
 public class ProxyStandard implements InvocationHandler, Serializable, IProxyStandard {
 
