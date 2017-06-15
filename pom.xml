@@ -1,18 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.chaboshi.scf</groupId>
-    <artifactId>com.chaboshi.scf</artifactId>
+    <groupId>com.iscoder.scf</groupId>
+    <artifactId>com.iscoder.scf</artifactId>
     <version>2.0.1-SNAPSHOT</version>
 
     <packaging>pom</packaging>
     <modules>
-        <module>com.chaboshi.scf.client</module>
-        <module>com.chaboshi.scf.server</module>
-        <module>com.chaboshi.scf.protocol</module>
-        <module>com.chaboshi.scf.common</module>
-        <module>com.chaboshi.scf.demo</module>
-        <module>com.chaboshi.scf.scf</module>
+        <module>com.iscoder.scf.client</module>
+        <module>com.iscoder.scf.server</module>
+        <module>com.iscoder.scf.protocol</module>
+        <module>com.iscoder.scf.common</module>
+        <module>com.iscoder.scf.demo</module>
+        <module>com.iscoder.scf.scf</module>
     </modules>
 
     <properties>
