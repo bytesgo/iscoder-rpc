@@ -106,7 +106,7 @@ done
 
 
 # main class
-MAIN_CLASS=com.bj58.spat.scf.server.bootstrap.Main
+MAIN_CLASS=com.iscoder.scf.server.bootstrap.Main
 
 
 java $JAVA_OPTS -classpath $CLASS_PATH -Duser.dir=$DIR $SYSTEM_PROPERTY $MAIN_CLASS $OTHER_SCF_CONFIG -Dscf.service.name=$SERVICE_NAME &
