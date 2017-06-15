@@ -4,7 +4,7 @@
 
 package com.chaboshi.scf.server.contract.context;
 
-import com.chaboshi.scf.protocol.sfp.v1.Protocol;
+import com.chaboshi.scf.protocol.sfp.Protocol;
 
 /**
  * SCF request entity

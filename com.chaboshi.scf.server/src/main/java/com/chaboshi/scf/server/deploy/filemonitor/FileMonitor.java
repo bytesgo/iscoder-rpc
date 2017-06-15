@@ -8,7 +8,7 @@ import java.util.Timer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.server.util.FileHelper;
+import com.chaboshi.common.utils.FileUtil;
 
 /**
  * A class for check file is change
@@ -93,7 +93,7 @@ public class FileMonitor {
    * @throws Exception
    */
   public void addMonitorFile(String dir) throws Exception {
-    List<File> fList = FileHelper.getFiles(dir, "jar", "ear", "war", "xml");
+    List<File> fList = FileUtil.getFiles(dir, "jar", "ear", "war", "xml");
     for (File file : fList) {
       logger.info("add monitor file:" + file.getAbsolutePath());
       fileList.add(new FileInfo(file));

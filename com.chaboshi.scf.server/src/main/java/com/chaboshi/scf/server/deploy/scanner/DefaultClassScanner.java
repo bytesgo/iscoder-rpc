@@ -21,6 +21,9 @@ public class DefaultClassScanner implements ClassScanner {
       public boolean filterCondition(Class<?> cls) {
         String className = cls.getName();
         String patternStr = (null == pattern || pattern.isEmpty()) ? ".*" : pattern;
+        if (packageName == null || packageName == "") {
+          return className.matches(patternStr);
+        }
         return className.startsWith(packageName) && className.matches(patternStr);
 
       }

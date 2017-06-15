@@ -3,7 +3,7 @@ package com.chaboshi.scf.server.performance.monitorweb;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import com.chaboshi.scf.protocol.utility.ByteConverter;
+import com.chaboshi.common.entity.ByteConverter;
 import com.chaboshi.scf.server.performance.exception.SerializeException;
 
 public class MonitorProtocol {

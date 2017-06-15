@@ -6,7 +6,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.List;
 
-import com.chaboshi.scf.server.util.FileHelper;
+import com.chaboshi.common.utils.FileUtil;
 
 /**
  * A URLClassLoader for dynamic load class from jar
@@ -51,7 +51,7 @@ public class DynamicURLClassLoader {
    * @throws Exception
    */
   public void addFolder(String... dirs) throws Exception {
-    List<String> jarList = FileHelper.getUniqueLibPath(dirs);
+    List<String> jarList = FileUtil.getUniqueLibPath(dirs);
     for (String jar : jarList) {
       addURL(jar);
     }

@@ -18,7 +18,7 @@ import java.util.jar.JarFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.server.util.FileHelper;
+import com.chaboshi.common.utils.FileUtil;
 
 /**
  * A ClassLoader for dynamic load class from jar
@@ -189,7 +189,7 @@ public class DynamicClassLoader extends SecureClassLoader {
    * @throws IOException
    */
   public void addFolder(String... dirs) throws IOException {
-    List<String> jarList = FileHelper.getUniqueLibPath(dirs);
+    List<String> jarList = FileUtil.getUniqueLibPath(dirs);
     for (String jar : jarList) {
       addURL(jar);
     }

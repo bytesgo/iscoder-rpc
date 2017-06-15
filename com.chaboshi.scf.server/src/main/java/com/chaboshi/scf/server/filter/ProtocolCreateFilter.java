@@ -3,7 +3,7 @@ package com.chaboshi.scf.server.filter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.protocol.sfp.v1.Protocol;
+import com.chaboshi.scf.protocol.sfp.Protocol;
 import com.chaboshi.scf.server.IFilter;
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.context.SCFContext;

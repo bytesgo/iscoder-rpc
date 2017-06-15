@@ -11,11 +11,11 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.server.annotation.OperationAsyn;
+import com.chaboshi.common.annotation.OperationAsyn;
 import com.chaboshi.scf.server.core.handler.AsyncBack;
 import com.chaboshi.scf.server.deploy.bytecode.ClassInfo.MethodInfo;
 import com.chaboshi.scf.server.deploy.hotdeploy.DynamicClassLoader;
-import com.chaboshi.scf.server.util.Util;
+import com.chaboshi.scf.server.util.ParamUtil;
 
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -23,10 +23,6 @@ import javassist.CtField;
 import javassist.CtMethod;
 
 /**
- * 
- * @author Service Platform Architecture Team (spat@58.com)
- * 
- *         <a href="http://blog.58.com/spat/">blog</a> <a href="http://www.58.com">website</a>
  * 
  */
 public class ProxyClassCreater {
@@ -185,7 +181,7 @@ public class ProxyClassCreater {
             paraName = mType[i].getCanonicalName();
           }
 
-          paraName = Util.getSimpleParaName(paraName);
+          paraName = ParamUtil.getSimpleParaName(paraName);
 
           sb.append(" && (");
           sb.append("((" + Constant.KEYVALUEPAIR_PROTOCOL_CLASS_NAME + ")listKV.get(");

@@ -15,8 +15,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.client.SCFConst;
-import com.chaboshi.scf.client.configuration.ServiceConfig;
+import com.chaboshi.common.SCFConst;
+import com.chaboshi.common.entity.KeyValuePair;
+import com.chaboshi.common.exception.ExceptionProtocol;
+import com.chaboshi.common.exception.RebootException;
+import com.chaboshi.common.exception.ThrowErrorHelper;
+import com.chaboshi.common.exception.TimeoutException;
+import com.chaboshi.scf.client.entity.ServiceConfig;
 import com.chaboshi.scf.client.loadbalance.Dispatcher;
 import com.chaboshi.scf.client.loadbalance.Server;
 import com.chaboshi.scf.client.loadbalance.component.ServerChoose;
@@ -24,18 +29,13 @@ import com.chaboshi.scf.client.loadbalance.component.ServerState;
 import com.chaboshi.scf.client.proxy.builder.InvokeResult;
 import com.chaboshi.scf.client.proxy.builder.Parameter;
 import com.chaboshi.scf.client.proxy.builder.ReceiveHandler;
-import com.chaboshi.scf.protocol.exception.RebootException;
-import com.chaboshi.scf.protocol.exception.ThrowErrorHelper;
-import com.chaboshi.scf.protocol.exception.TimeoutException;
-import com.chaboshi.scf.protocol.sdp.ExceptionProtocol;
+import com.chaboshi.scf.protocol.entity.CompressType;
+import com.chaboshi.scf.protocol.entity.PlatformType;
+import com.chaboshi.scf.protocol.entity.SDPType;
 import com.chaboshi.scf.protocol.sdp.HandclaspProtocol;
 import com.chaboshi.scf.protocol.sdp.RequestProtocol;
 import com.chaboshi.scf.protocol.sdp.ResponseProtocol;
-import com.chaboshi.scf.protocol.sfp.enumeration.CompressType;
-import com.chaboshi.scf.protocol.sfp.enumeration.PlatformType;
-import com.chaboshi.scf.protocol.sfp.enumeration.SDPType;
-import com.chaboshi.scf.protocol.sfp.v1.Protocol;
-import com.chaboshi.scf.protocol.utility.KeyValuePair;
+import com.chaboshi.scf.protocol.sfp.Protocol;
 
 /**
  * ServiceProxy

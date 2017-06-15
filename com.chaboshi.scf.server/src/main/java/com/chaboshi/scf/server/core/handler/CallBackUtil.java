@@ -2,14 +2,14 @@ package com.chaboshi.scf.server.core.handler;
 
 import java.util.concurrent.TimeUnit;
 
+import com.chaboshi.common.utils.SystemUtil;
+import com.chaboshi.common.utils.spat.jsr166.LinkedTransferQueue;
+import com.chaboshi.common.utils.spat.jsr166.TransferQueue;
 import com.chaboshi.scf.server.contract.context.Global;
-import com.chaboshi.scf.server.util.SystemUtils;
-import com.chaboshi.spat.utility.jsr166.LinkedTransferQueue;
-import com.chaboshi.spat.utility.jsr166.TransferQueue;
 
 public class CallBackUtil {
 
-  private static final int COUNT = SystemUtils.getHalfCpuProcessorCount();
+  private static final int COUNT = SystemUtil.getHalfCpuProcessorCount();
   private final TransferQueue<WData> checkQueue = new LinkedTransferQueue<WData>();
   int taskTimeOut = 1000;
   private Thread[] workers;

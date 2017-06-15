@@ -6,7 +6,7 @@ package com.chaboshi.scf.server.contract.context;
 
 import java.util.List;
 
-import com.chaboshi.scf.server.contract.entity.Out;
+import com.chaboshi.common.entity.Out;
 
 /**
  * SCF response entity

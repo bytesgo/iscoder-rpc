@@ -5,28 +5,26 @@ package com.chaboshi.scf.protocol.serializer;
 
 import java.nio.charset.Charset;
 
-import com.chaboshi.scf.protocol.sfp.enumeration.SerializeType;
+import com.chaboshi.scf.protocol.entity.SerializeType;
 
 /**
  * SerializeBase
  *
- * @author Service Platform Architecture Team (spat@58.com)
  */
 public abstract class AbstractSerializer {
 
-  private static SCFSerializer scfSerialize = new SCFSerializer();
-
+  private static ProtobufSerializer scfSerialize = new ProtobufSerializer();
   private static JSONSerializer jsonSerialize = new JSONSerializer();
   private static KryoSerializer kryoSerializer = new KryoSerializer();
 
-  private Charset encoder;
+  private Charset charset;
 
-  public Charset getEncoder() {
-    return encoder;
+  public Charset getCharset() {
+    return charset;
   }
 
-  public void setEncoder(Charset encoder) {
-    this.encoder = encoder;
+  public void setCharset(Charset encoder) {
+    this.charset = encoder;
   }
 
   public static AbstractSerializer getInstance(SerializeType serializeType) throws Exception {
@@ -37,7 +35,6 @@ public abstract class AbstractSerializer {
     } else if (serializeType == SerializeType.KRYO) {
       return kryoSerializer;
     }
-
     throw new Exception("末知的序列化算法");
   }
 

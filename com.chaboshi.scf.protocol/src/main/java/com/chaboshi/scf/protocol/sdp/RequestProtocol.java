@@ -5,14 +5,11 @@ package com.chaboshi.scf.protocol.sdp;
 
 import java.util.List;
 
-import com.chaboshi.scf.protocol.utility.KeyValuePair;
-import com.chaboshi.scf.serializer.component.annotation.SCFMember;
-import com.chaboshi.scf.serializer.component.annotation.SCFSerializable;
+import com.chaboshi.common.annotation.SCFMember;
+import com.chaboshi.common.annotation.SCFSerializable;
+import com.chaboshi.common.entity.KeyValuePair;
 
 /**
- * RequestProtocol
- *
- * @author Service Platform Architecture Team (spat@58.com)
  */
 @SCFSerializable(name = "RequestProtocol")
 public class RequestProtocol {

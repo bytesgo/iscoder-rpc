@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.tree.TreePath;
 
-import com.chaboshi.scf.server.secure.MDCodeHelper;
+import com.chaboshi.scf.server.util.MDCodeUtil;
 
 public class ButtonFrame extends JPanel {
 
@@ -49,7 +49,7 @@ public class ButtonFrame extends JPanel {
       StringBuffer tempSpot = new StringBuffer("<?xml version=\"1.0\"?>\r\n<secure>\r\n<key>");
 
       try {
-        tempSpot.append(MDCodeHelper.encodeSHA256(String.valueOf(System.nanoTime()) + String.valueOf(new Random().nextLong())));
+        tempSpot.append(MDCodeUtil.encodeSHA256(String.valueOf(System.nanoTime()) + String.valueOf(new Random().nextLong())));
       } catch (Exception e1) {
         e1.printStackTrace();
       }

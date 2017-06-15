@@ -3,8 +3,8 @@ package com.chaboshi.scf.server.core.convert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.protocol.sfp.enumeration.SerializeType;
-import com.chaboshi.scf.protocol.sfp.v1.Protocol;
+import com.chaboshi.scf.protocol.entity.SerializeType;
+import com.chaboshi.scf.protocol.sfp.Protocol;
 import com.chaboshi.scf.server.core.IConvert;
 
 /**

@@ -1,30 +1,44 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.chaboshi.scf</groupId>
-		<artifactId>com.chaboshi.scf</artifactId>
-		<version>2.0.1-SNAPSHOT</version>
-	</parent>
-	<groupId>com.chaboshi.scf.demo</groupId>
-	<artifactId>com.chaboshi.scf.demo</artifactId>
-	<packaging>pom</packaging>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.chaboshi.scf</groupId>
+        <artifactId>com.chaboshi.scf</artifactId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+    <groupId>com.chaboshi.scf.demo</groupId>
+    <artifactId>com.chaboshi.scf.demo</artifactId>
+    <packaging>pom</packaging>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
-	<modules>
-		<module>com.chaboshi.scf.demo.api</module>
-		<module>com.chaboshi.scf.demo.service</module>
-		<module>com.chaboshi.scf.demo.client</module>
-	</modules>
+    <modules>
+        <module>com.chaboshi.scf.demo.api</module>
+        <module>com.chaboshi.scf.demo.service</module>
+        <module>com.chaboshi.scf.demo.client</module>
+    </modules>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.chaboshi.scf</groupId>
-			<artifactId>com.chaboshi.scf.protocol</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>com.chaboshi.scf</groupId>
+            <artifactId>com.chaboshi.scf.protocol</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

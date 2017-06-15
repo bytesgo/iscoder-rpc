@@ -1,7 +1,7 @@
 package com.chaboshi.scf.protocol.sdp;
 
-import com.chaboshi.scf.serializer.component.annotation.SCFMember;
-import com.chaboshi.scf.serializer.component.annotation.SCFSerializable;
+import com.chaboshi.common.annotation.SCFMember;
+import com.chaboshi.common.annotation.SCFSerializable;
 
 @SCFSerializable(name = "ResetProtocol")
 public class ResetProtocol {

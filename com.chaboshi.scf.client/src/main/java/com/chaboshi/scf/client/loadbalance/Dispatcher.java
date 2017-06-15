@@ -12,9 +12,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.client.communication.socket.SocketPool;
-import com.chaboshi.scf.client.configuration.ServiceConfig;
-import com.chaboshi.scf.client.configuration.loadbalance.ServerProfile;
+import com.chaboshi.scf.client.channel.ChannelFactory;
+import com.chaboshi.scf.client.entity.ServerProfile;
+import com.chaboshi.scf.client.entity.ServiceConfig;
 import com.chaboshi.scf.client.loadbalance.component.ServerChoose;
 import com.chaboshi.scf.client.loadbalance.component.ServerState;
 
@@ -42,7 +42,7 @@ public class Dispatcher {
         Server s = new Server(ser);
         if (s.getState() != ServerState.Disable) {
           // ScoketPool sp = new ScoketPool(s, config.getSocketPool());
-          SocketPool sp = new SocketPool(s, config);
+          ChannelFactory sp = new ChannelFactory(s, config);
           s.setScoketpool(sp);
           ServerPool.add(s);
         }

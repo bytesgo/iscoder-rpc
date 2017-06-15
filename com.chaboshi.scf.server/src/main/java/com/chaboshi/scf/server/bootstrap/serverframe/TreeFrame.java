@@ -16,11 +16,11 @@ import javax.swing.tree.TreeSelectionModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.server.annotation.OperationContract;
-import com.chaboshi.scf.server.annotation.ServiceBehavior;
-import com.chaboshi.scf.server.annotation.ServiceContract;
+import com.chaboshi.common.annotation.OperationContract;
+import com.chaboshi.common.annotation.ServiceBehavior;
+import com.chaboshi.common.annotation.ServiceContract;
+import com.chaboshi.common.utils.ClassUtil;
 import com.chaboshi.scf.server.deploy.hotdeploy.DynamicClassLoader;
-import com.chaboshi.scf.server.util.ClassHelper;
 
 public class TreeFrame {
   private static Logger logger = LoggerFactory.getLogger(TreeFrame.class);
@@ -86,7 +86,7 @@ public class TreeFrame {
   @SuppressWarnings("unused")
   private static void loadClassTreeServiceContract(String jarUrl, CheckNode node, DynamicClassLoader classLoader) {
     try {
-      Set<Class<?>> clsSet = ClassHelper.getClassFromJar(jarUrl, classLoader);
+      Set<Class<?>> clsSet = ClassUtil.getClassFromJar(jarUrl, classLoader);
       for (Class<?> cls : clsSet) {
 
         // ServiceContract contract = cls.getAnnotation(ServiceContract.class);
@@ -139,7 +139,7 @@ public class TreeFrame {
    */
   private static void loadClassTreeServiceBehavior(String jarUrl, CheckNode node, DynamicClassLoader classLoader) {
     try {
-      Set<Class<?>> clsSet = ClassHelper.getClassFromJar(jarUrl, classLoader);
+      Set<Class<?>> clsSet = ClassUtil.getClassFromJar(jarUrl, classLoader);
       for (Class<?> cls : clsSet) {
         // 如果存在ServiceContract的注解则添加
         if (cls.getAnnotation(ServiceBehavior.class) != null) {// 定义接口实现类

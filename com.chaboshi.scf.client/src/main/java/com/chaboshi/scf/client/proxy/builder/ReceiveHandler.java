@@ -2,14 +2,14 @@ package com.chaboshi.scf.client.proxy.builder;
 
 import java.util.concurrent.ExecutorService;
 
+import com.chaboshi.common.exception.ExceptionProtocol;
+import com.chaboshi.common.exception.ThrowErrorHelper;
+import com.chaboshi.common.exception.TimeoutException;
 import com.chaboshi.scf.client.loadbalance.Server;
 import com.chaboshi.scf.client.loadbalance.component.ServerState;
-import com.chaboshi.scf.protocol.exception.ThrowErrorHelper;
-import com.chaboshi.scf.protocol.exception.TimeoutException;
-import com.chaboshi.scf.protocol.sdp.ExceptionProtocol;
+import com.chaboshi.scf.protocol.entity.SDPType;
 import com.chaboshi.scf.protocol.sdp.ResponseProtocol;
-import com.chaboshi.scf.protocol.sfp.enumeration.SDPType;
-import com.chaboshi.scf.protocol.sfp.v1.Protocol;
+import com.chaboshi.scf.protocol.sfp.Protocol;
 
 /**
  * a abstract class for description callback funcation

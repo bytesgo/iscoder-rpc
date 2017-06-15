@@ -14,14 +14,14 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.client.communication.socket.SCFSocket;
-import com.chaboshi.scf.client.communication.socket.SocketPool;
-import com.chaboshi.scf.client.communication.socket.ThreadRenameFactory;
-import com.chaboshi.scf.client.communication.socket.WindowData;
-import com.chaboshi.scf.client.configuration.loadbalance.ServerProfile;
+import com.chaboshi.common.utils.sfft.tools.ThreadRenameFactory;
+import com.chaboshi.scf.client.channel.ChannelFactory;
+import com.chaboshi.scf.client.channel.SCFChannel;
+import com.chaboshi.scf.client.channel.WindowData;
+import com.chaboshi.scf.client.entity.ServerProfile;
 import com.chaboshi.scf.client.loadbalance.component.ServerState;
 import com.chaboshi.scf.client.proxy.builder.ReceiveHandler;
-import com.chaboshi.scf.protocol.sfp.v1.Protocol;
+import com.chaboshi.scf.protocol.sfp.Protocol;
 
 /**
  * Server
@@ -40,7 +40,7 @@ public class Server {
   private float weightRage;
   private int currUserCount;
   private ServerState state;
-  private SocketPool scoketpool;
+  private ChannelFactory scoketpool;
   private boolean testing = false;
   private final ScheduledExecutorService scheduler;
 
@@ -82,11 +82,11 @@ public class Server {
     return port;
   }
 
-  public SocketPool getScoketpool() {
+  public ChannelFactory getScoketpool() {
     return scoketpool;
   }
 
-  protected void setScoketpool(SocketPool scoketpool) {
+  protected void setScoketpool(ChannelFactory scoketpool) {
     this.scoketpool = scoketpool;
   }
 
@@ -128,7 +128,7 @@ public class Server {
       throw new Exception("This proxy server is unavailable.state:" + state + "+host:" + address);
     }
     increaseCU();
-    SCFSocket socket = null;
+    SCFChannel socket = null;
     try {
       try {
         socket = this.scoketpool.getSocket();
@@ -185,7 +185,7 @@ public class Server {
       throw new Exception("This proxy server is unavailable.state:" + state + "+host:" + address);
     }
     increaseCU();
-    SCFSocket socket = null;
+    SCFChannel socket = null;
     try {
       try {
         socket = this.scoketpool.getSocket();

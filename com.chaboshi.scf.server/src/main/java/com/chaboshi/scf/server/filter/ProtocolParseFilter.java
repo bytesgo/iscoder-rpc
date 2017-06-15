@@ -1,8 +1,8 @@
 package com.chaboshi.scf.server.filter;
 
+import com.chaboshi.scf.protocol.entity.PlatformType;
 import com.chaboshi.scf.protocol.sdp.ResetProtocol;
-import com.chaboshi.scf.protocol.sfp.enumeration.PlatformType;
-import com.chaboshi.scf.protocol.sfp.v1.Protocol;
+import com.chaboshi.scf.protocol.sfp.Protocol;
 import com.chaboshi.scf.server.IFilter;
 import com.chaboshi.scf.server.contract.context.ExecFilterType;
 import com.chaboshi.scf.server.contract.context.Global;

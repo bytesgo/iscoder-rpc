@@ -1,24 +1,21 @@
 package com.chaboshi.scf.server.deploy.bytecode;
 
+import com.chaboshi.common.annotation.OperationContract;
+import com.chaboshi.common.annotation.ServiceBehavior;
+import com.chaboshi.common.entity.ErrorState;
+import com.chaboshi.common.entity.KeyValuePair;
+import com.chaboshi.common.entity.Out;
 import com.chaboshi.scf.protocol.sdp.RequestProtocol;
-import com.chaboshi.scf.protocol.utility.KeyValuePair;
-import com.chaboshi.scf.server.annotation.OperationContract;
-import com.chaboshi.scf.server.annotation.ServiceBehavior;
 import com.chaboshi.scf.server.contract.context.IProxyFactory;
 import com.chaboshi.scf.server.contract.context.IProxyStub;
 import com.chaboshi.scf.server.contract.context.SCFContext;
 import com.chaboshi.scf.server.contract.context.SCFResponse;
-import com.chaboshi.scf.server.contract.entity.Out;
 import com.chaboshi.scf.server.core.IConvert;
 import com.chaboshi.scf.server.core.convert.ConvertFacotry;
-import com.chaboshi.scf.server.util.ErrorState;
-import com.chaboshi.scf.server.util.ServiceFrameException;
+import com.chaboshi.scf.server.exception.ServiceFrameException;
 
 /**
  * 
- * @author Service Platform Architecture Team (spat@58.com)
- * 
- *         <a href="http://blog.58.com/spat/">blog</a> <a href="http://www.58.com">website</a>
  * 
  */
 public class Constant {

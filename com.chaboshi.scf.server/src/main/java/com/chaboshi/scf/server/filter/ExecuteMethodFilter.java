@@ -7,11 +7,11 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.protocol.sdp.ExceptionProtocol;
+import com.chaboshi.common.entity.KeyValuePair;
+import com.chaboshi.common.exception.ExceptionProtocol;
+import com.chaboshi.scf.protocol.entity.PlatformType;
 import com.chaboshi.scf.protocol.sdp.RequestProtocol;
-import com.chaboshi.scf.protocol.sfp.enumeration.PlatformType;
-import com.chaboshi.scf.protocol.sfp.v1.Protocol;
-import com.chaboshi.scf.protocol.utility.KeyValuePair;
+import com.chaboshi.scf.protocol.sfp.Protocol;
 import com.chaboshi.scf.server.IFilter;
 import com.chaboshi.scf.server.contract.context.ExecFilterType;
 import com.chaboshi.scf.server.contract.context.Global;
@@ -19,7 +19,7 @@ import com.chaboshi.scf.server.contract.context.SCFContext;
 import com.chaboshi.scf.server.contract.context.SCFResponse;
 import com.chaboshi.scf.server.contract.context.SecureContext;
 import com.chaboshi.scf.server.contract.context.ServerType;
-import com.chaboshi.scf.server.util.ExceptionHelper;
+import com.chaboshi.scf.server.util.ExceptionUtil;
 
 public class ExecuteMethodFilter implements IFilter {
 
@@ -94,7 +94,7 @@ public class ExecuteMethodFilter implements IFilter {
 
   public void ContextException(SCFContext context, Protocol protocol, SCFResponse response, String message, boolean bool, byte[] key)
       throws Exception {
-    ExceptionProtocol ep = ExceptionHelper.createError(new Exception());
+    ExceptionProtocol ep = ExceptionUtil.createError(new Exception());
     ep.setErrorMsg(message);
     protocol.setSdpEntity(ep);
     response.setResponseBuffer(protocol.toBytes(bool, key));
@@ -103,7 +103,7 @@ public class ExecuteMethodFilter implements IFilter {
   }
 
   public void ContextException(SCFContext context, Protocol protocol, SCFResponse response, String message) throws Exception {
-    ExceptionProtocol ep = ExceptionHelper.createError(new Exception());
+    ExceptionProtocol ep = ExceptionUtil.createError(new Exception());
     ep.setErrorMsg(message);
     protocol.setSdpEntity(ep);
     response.setResponseBuffer(protocol.toBytes());

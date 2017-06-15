@@ -27,12 +27,12 @@ public class CreateManager {
     ContractInfo serviceContract = ScanClass.getContractInfo(serviceRootPath + "/", classLoader);
 
     long time = System.currentTimeMillis();
-    List<ClassFile> localProxyList = new ProxyClassCreater().createProxy(classLoader, serviceContract, time);
     logger.info("proxy class buffer creater finish!!!");
     ClassFile cfProxyFactory = new ProxyFactoryCreater().createProxy(classLoader, serviceContract, time);
     logger.info("proxy factory buffer creater finish!!!");
-
-    List<IProxyStub> localProxyAry = new ArrayList<IProxyStub>();
+    List<ClassFile> localProxyList = new ProxyClassCreater().createProxy(classLoader, serviceContract, time);
+    logger.info("localProxyList : " + localProxyList);
+    List<IProxyStub> localProxyAry = new ArrayList<IProxyStub>(localProxyList.size());
     for (ClassFile cf : localProxyList) {
       Class<?> cls = classLoader.findClass(cf.getClsName(), cf.getClsByte(), null);
       logger.info("dynamic load class:" + cls.getName());

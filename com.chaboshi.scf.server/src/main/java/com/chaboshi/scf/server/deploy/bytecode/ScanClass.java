@@ -13,17 +13,16 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.server.annotation.AnnotationUtil;
-import com.chaboshi.scf.server.annotation.HttpPathParameter;
-import com.chaboshi.scf.server.annotation.HttpRequestMapping;
-import com.chaboshi.scf.server.annotation.OperationContract;
-import com.chaboshi.scf.server.annotation.ServiceBehavior;
-import com.chaboshi.scf.server.annotation.ServiceContract;
+import com.chaboshi.common.annotation.AnnotationUtil;
+import com.chaboshi.common.annotation.HttpPathParameter;
+import com.chaboshi.common.annotation.HttpRequestMapping;
+import com.chaboshi.common.annotation.OperationContract;
+import com.chaboshi.common.annotation.ServiceBehavior;
+import com.chaboshi.common.annotation.ServiceContract;
+import com.chaboshi.common.utils.ClassUtil;
 import com.chaboshi.scf.server.deploy.bytecode.ContractInfo.SessionBean;
 import com.chaboshi.scf.server.deploy.hotdeploy.DynamicClassLoader;
 import com.chaboshi.scf.server.deploy.scanner.DefaultClassScanner;
-import com.chaboshi.scf.server.util.ClassHelper;
-import com.chaboshi.scf.server.util.FileHelper;
 
 public class ScanClass {
 
@@ -37,12 +36,12 @@ public class ScanClass {
   /**
    * contract ClassInfo
    */
-  private static List<ClassInfo> contractClassInfos = null;
+  private static List<ClassInfo> contractClassInfos = new ArrayList<ClassInfo>();
 
   /**
    * behavior ClassInfo
    */
-  private static List<ClassInfo> behaviorClassInfos = null;
+  private static List<ClassInfo> behaviorClassInfos = new ArrayList<ClassInfo>();
 
   private static Object lockHelper = new Object();
 
@@ -114,30 +113,16 @@ public class ScanClass {
   private static void scan(String path, DynamicClassLoader classLoader) throws Exception {
     logger.info("begin scan jar from path : " + path);
 
-    List<String> jarPathList = FileHelper.getUniqueLibPath(path);
-
     Set<Class<?>> clsSet = new LinkedHashSet<Class<?>>();
-    if (jarPathList == null || jarPathList.isEmpty()) {
-      clsSet.addAll(scanFromClassPath("", classLoader));
-    }
-
-    contractClassInfos = new ArrayList<ClassInfo>();
-    behaviorClassInfos = new ArrayList<ClassInfo>();
-
-    for (String jpath : jarPathList) {
-      try {
-        clsSet.addAll(ClassHelper.getClassFromJar(jpath, classLoader));
-      } catch (Exception ex) {
-        throw ex;
-      }
-    }
+    clsSet.addAll(DefaultClassScanner.getInstance().getClassListByAnnotation("", ServiceBehavior.class));
+    clsSet.addAll(DefaultClassScanner.getInstance().getClassListByAnnotation("", ServiceContract.class));
 
     for (Class<?> cls : clsSet) {
       try {
         ServiceBehavior behavior = cls.getAnnotation(ServiceBehavior.class);
         ServiceContract contract = cls.getAnnotation(ServiceContract.class);
         if (behavior == null && contract == null) {
-          continue;
+          continue; 
         }
 
         if (contract != null) {
@@ -159,14 +144,6 @@ public class ScanClass {
     contractInfo = createContractInfo(contractClassInfos, behaviorClassInfos);
 
     logger.info("finish scan jar");
-  }
-
-  /**
-   * @param classLoader
-   * @return
-   */
-  private static Set<Class<?>> scanFromClassPath(String packageName, DynamicClassLoader classLoader) {
-    return DefaultClassScanner.getInstance().getClassList(packageName, null);
   }
 
   /**
@@ -277,13 +254,13 @@ public class ScanClass {
         Class<?>[] paramAry = m.getParameterTypes();
         Type[] types = m.getGenericParameterTypes();
 
-        String[] paramNames = ClassHelper.getParamNames(cls, m);
+        String[] paramNames = ClassUtil.getParamNames(cls, m);
         String[] mapping = new String[paramAry.length];
         HttpPathParameter[] paramAnnAry = new HttpPathParameter[paramAry.length];
 
         // load RequestMapping
         if (requestMappingAnn != null) {
-          Object[][] annotations = ClassHelper.getParamAnnotations(cls, m);
+          Object[][] annotations = ClassUtil.getParamAnnotations(cls, m);
           for (int i = 0; i < annotations.length; i++) {
             for (int j = 0; j < annotations[i].length; j++) {
               HttpPathParameter paramAnn = null;

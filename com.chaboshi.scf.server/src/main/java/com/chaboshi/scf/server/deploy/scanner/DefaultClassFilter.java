@@ -13,7 +13,7 @@ import java.util.jar.JarFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.secure.StringUtils;
+import com.chaboshi.common.utils.StringUtil;
 
 public abstract class DefaultClassFilter {
   private static final Logger logger = LoggerFactory.getLogger(DefaultClassFilter.class);
@@ -91,7 +91,7 @@ public abstract class DefaultClassFilter {
         if (file.isFile()) {
           // 获取类名
           String className = fileName.substring(0, fileName.lastIndexOf("."));
-          if (StringUtils.isNotEmpty(packageName)) {
+          if (StringUtil.isNotEmpty(packageName)) {
             className = packageName + "." + className;
           }
           // 执行添加类操作
@@ -99,12 +99,12 @@ public abstract class DefaultClassFilter {
         } else {
           // 获取子包
           String subPackagePath = fileName;
-          if (StringUtils.isNotEmpty(packagePath)) {
+          if (StringUtil.isNotEmpty(packagePath)) {
             subPackagePath = packagePath + "/" + subPackagePath;
           }
           // 子包名
           String subPackageName = fileName;
-          if (StringUtils.isNotEmpty(packageName)) {
+          if (StringUtil.isNotEmpty(packageName)) {
             subPackageName = packageName + "." + subPackageName;
           }
           // 递归调用

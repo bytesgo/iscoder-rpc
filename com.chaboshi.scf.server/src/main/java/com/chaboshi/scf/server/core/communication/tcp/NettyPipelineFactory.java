@@ -9,14 +9,11 @@ import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
 import org.jboss.netty.handler.codec.frame.DelimiterBasedFrameDecoder;
 
-import com.chaboshi.scf.protocol.utility.ProtocolConst;
+import com.chaboshi.scf.protocol.ProtocolConst;
 
 /**
  * netty Pipeline Factory
  * 
- * @author Service Platform Architecture Team (spat@58.com)
- * 
- *         <a href="http://blog.58.com/spat/">blog</a> <a href="http://www.58.com">website</a>
  * 
  */
 public class NettyPipelineFactory implements ChannelPipelineFactory {
@@ -37,13 +34,7 @@ public class NettyPipelineFactory implements ChannelPipelineFactory {
     ChannelBuffer buf = directBuffer(ProtocolConst.P_END_TAG.length);
     buf.writeBytes(ProtocolConst.P_END_TAG);
     pipeline.addLast("framer", new DelimiterBasedFrameDecoder(this.frameMaxLength, true, buf));
-
-    // pipeline.addLast("decoder", new StringDecoder(Charset.forName("UTF-8")));
-    // pipeline.addLast("encoder", new StringEncoder(Charset.forName("UTF-8")));
-
-    // and then business logic.
     pipeline.addLast("handler", handler);
-
     return pipeline;
   }
 }

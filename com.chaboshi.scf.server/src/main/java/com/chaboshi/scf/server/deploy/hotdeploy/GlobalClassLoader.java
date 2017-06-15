@@ -9,7 +9,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.server.util.FileHelper;
+import com.chaboshi.common.utils.FileUtil;
 
 import sun.misc.Launcher;
 
@@ -85,14 +85,14 @@ public class GlobalClassLoader {
   }
 
   public static void addSystemClassPathFolder(String... dirs) throws Exception {
-    List<String> jarList = FileHelper.getUniqueLibPath(dirs);
+    List<String> jarList = FileUtil.getUniqueLibPath(dirs);
     for (String jar : jarList) {
       addSystemClassPath(jar);
     }
   }
 
   public static void addURL2ExtClassLoaderFolder(String... dirs) throws Exception {
-    List<String> jarList = FileHelper.getUniqueLibPath(dirs);
+    List<String> jarList = FileUtil.getUniqueLibPath(dirs);
     for (String jar : jarList) {
       addExtClassPath(jar);
     }

@@ -1,6 +1,6 @@
 package com.chaboshi.scf.protocol.compress;
 
-import com.chaboshi.scf.protocol.sfp.enumeration.CompressType;
+import com.chaboshi.scf.protocol.entity.CompressType;
 
 public abstract class CompressBase {
 

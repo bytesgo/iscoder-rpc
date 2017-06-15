@@ -6,7 +6,7 @@ package com.chaboshi.scf.client.proxy.builder;
 
 import java.lang.reflect.Type;
 
-import com.chaboshi.scf.server.contract.entity.Out;
+import com.chaboshi.common.entity.Out;
 
 /**
  * Parameter

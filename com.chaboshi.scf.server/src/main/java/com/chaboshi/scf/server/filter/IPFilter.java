@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.chaboshi.scf.server.IFilter;
 import com.chaboshi.scf.server.contract.context.SCFContext;
-import com.chaboshi.scf.server.util.IPTable;
+import com.chaboshi.scf.server.util.IPTableUtil;
 
 public class IPFilter implements IFilter {
 
@@ -13,7 +13,7 @@ public class IPFilter implements IFilter {
 
   @Override
   public void filter(SCFContext context) throws Exception {
-    if (IPTable.isAllow(context.getChannel().getRemoteIP())) {
+    if (IPTableUtil.isAllow(context.getChannel().getRemoteIP())) {
       logger.info("new channel conected:" + context.getChannel().getRemoteIP());
     } else {
       logger.error("forbid ip not allow connect:" + context.getChannel().getRemoteIP());

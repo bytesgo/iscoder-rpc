@@ -1,6 +1,6 @@
 package com.chaboshi.scf.server.contract.context;
 
-import com.chaboshi.scf.server.contract.init.IInit;
+import com.chaboshi.scf.server.IInit;
 
 /**
  * @author HAOXB 序列化注解类初始化

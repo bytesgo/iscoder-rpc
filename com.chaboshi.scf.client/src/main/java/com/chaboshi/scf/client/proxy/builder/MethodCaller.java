@@ -12,10 +12,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.chaboshi.common.annotation.AnnotationUtil;
+import com.chaboshi.common.annotation.OperationContract;
+import com.chaboshi.common.entity.Out;
 import com.chaboshi.scf.client.proxy.ServiceProxy;
-import com.chaboshi.scf.server.contract.annotation.AnnotationUtil;
-import com.chaboshi.scf.server.contract.annotation.OperationContract;
-import com.chaboshi.scf.server.contract.entity.Out;
 
 /**
  * MethodCaller

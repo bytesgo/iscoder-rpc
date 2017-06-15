@@ -12,10 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.chaboshi.scf.server.IFilter;
+import com.chaboshi.scf.server.IInit;
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.context.IProxyFactory;
 import com.chaboshi.scf.server.contract.context.ServiceConfig;
-import com.chaboshi.scf.server.contract.init.IInit;
 import com.chaboshi.scf.server.core.Server;
 import com.chaboshi.scf.server.deploy.filemonitor.FileMonitor;
 import com.chaboshi.scf.server.deploy.filemonitor.HotDeployListener;
@@ -116,11 +116,11 @@ public class Main {
       IProxyFactory proxyFactory = ProxyFactoryLoader.loadProxyFactory(classLoader);
       Global.getSingleton().setProxyFactory(proxyFactory);
       logger.info("-------------------------end-------------------------\n");
-
-      // load init beans
-      loadInitBeans(classLoader, serviceConfig);
     }
 
+    
+    // load init beans
+    loadInitBeans(classLoader, serviceConfig);
     addFilter(classLoader);
     loadServers(classLoader);
     addFileMonitor(rootPath);

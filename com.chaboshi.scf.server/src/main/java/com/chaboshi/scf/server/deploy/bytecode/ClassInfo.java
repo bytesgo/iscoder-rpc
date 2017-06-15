@@ -4,8 +4,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import com.chaboshi.scf.server.annotation.HttpPathParameter;
-import com.chaboshi.scf.server.annotation.HttpRequestMapping;
+import com.chaboshi.common.annotation.HttpPathParameter;
+import com.chaboshi.common.annotation.HttpRequestMapping;
 
 public class ClassInfo {
 

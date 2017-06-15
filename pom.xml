@@ -10,13 +10,14 @@
         <module>com.chaboshi.scf.client</module>
         <module>com.chaboshi.scf.server</module>
         <module>com.chaboshi.scf.protocol</module>
-        <module>com.chaboshi.scf.util</module>
+        <module>com.chaboshi.scf.common</module>
         <module>com.chaboshi.scf.demo</module>
         <module>com.chaboshi.scf.scf</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jdk.version>1.6</jdk.version>
         <protostuff.version>1.4.4</protostuff.version>
         <kryo.version>4.0.0</kryo.version>
         <javassist.version>3.20.0-GA</javassist.version>
@@ -36,9 +37,9 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <encoding>UTF-8</encoding>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
 

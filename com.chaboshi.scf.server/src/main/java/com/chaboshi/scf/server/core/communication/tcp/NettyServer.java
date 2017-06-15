@@ -19,22 +19,18 @@ import com.chaboshi.scf.server.core.handler.InvokerHandler;
 /**
  * start netty server
  * 
- * @author Service Platform Architecture Team (spat@58.com)
- * 
- *         <a href="http://blog.58.com/spat/">blog</a> <a href="http://www.58.com">website</a>
- * 
  */
 public class NettyServer implements Server {
+  private static final Logger logger = LoggerFactory.getLogger(NettyServer.class);
 
   public NettyServer() {
 
   }
 
-  private static Logger logger = LoggerFactory.getLogger(NettyServer.class);
   /**
    * netty ServerBootstrap
    */
-  static final ServerBootstrap bootstrap = new ServerBootstrap();
+  private static final ServerBootstrap bootstrap = new ServerBootstrap();
 
   /**
    * record all channel
@@ -109,8 +105,7 @@ public class NettyServer implements Server {
     bootstrap.setOption("child.sendBufferSize", Global.getSingleton().getServiceConfig().getInt("scf.server.tcp.sendBufferSize"));
 
     try {
-      InetSocketAddress socketAddress = null;
-      socketAddress = new InetSocketAddress(Global.getSingleton().getServiceConfig().getString("scf.server.tcp.listenIP"),
+      InetSocketAddress socketAddress = new InetSocketAddress(Global.getSingleton().getServiceConfig().getString("scf.server.tcp.listenIP"),
           Global.getSingleton().getServiceConfig().getInt("scf.server.tcp.listenPort"));
       Channel channel = bootstrap.bind(socketAddress);
       allChannels.add(channel);

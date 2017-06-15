@@ -3,10 +3,11 @@ package com.chaboshi.scf.server.filter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chaboshi.scf.protocol.sdp.ExceptionProtocol;
+import com.chaboshi.common.exception.ExceptionProtocol;
+import com.chaboshi.common.utils.StringUtil;
+import com.chaboshi.scf.protocol.entity.PlatformType;
 import com.chaboshi.scf.protocol.sdp.HandclaspProtocol;
-import com.chaboshi.scf.protocol.sfp.enumeration.PlatformType;
-import com.chaboshi.scf.protocol.sfp.v1.Protocol;
+import com.chaboshi.scf.protocol.sfp.Protocol;
 import com.chaboshi.scf.server.IFilter;
 import com.chaboshi.scf.server.contract.context.ExecFilterType;
 import com.chaboshi.scf.server.contract.context.Global;
@@ -14,9 +15,8 @@ import com.chaboshi.scf.server.contract.context.SCFContext;
 import com.chaboshi.scf.server.contract.context.SCFResponse;
 import com.chaboshi.scf.server.contract.context.SecureContext;
 import com.chaboshi.scf.server.contract.context.ServerType;
-import com.chaboshi.scf.server.secure.SecureKey;
-import com.chaboshi.scf.server.secure.StringUtils;
-import com.chaboshi.scf.server.util.ExceptionHelper;
+import com.chaboshi.scf.server.util.ExceptionUtil;
+import com.chaboshi.scf.server.util.SecureKeyUtil;
 
 public class HandclaspFilter implements IFilter {
 
@@ -46,7 +46,7 @@ public class HandclaspFilter implements IFilter {
         if (!sc.isRights()) {
           // 没有通过认证
           if (protocol != null && protocol.getSdpEntity() instanceof HandclaspProtocol) {
-            SecureKey sk = new SecureKey();
+            SecureKeyUtil sk = new SecureKeyUtil();
             HandclaspProtocol handclaspProtocol = (HandclaspProtocol) protocol.getSdpEntity();
             /**
              * 接收 客户端公钥
@@ -97,7 +97,7 @@ public class HandclaspFilter implements IFilter {
               // 判断是否合法,如果合法服务器端生成DES密钥，通过客户端提供的公钥进行加密传送给客户端
               if (global.containsSecureMap(sourceInfo)) {
                 logger.info("secureKey is ok!");
-                String desKey = StringUtils.getRandomNumAndStr(8);
+                String desKey = StringUtil.getRandomNumAndStr(8);
                 // 设置当前channel属性
                 sc.setDesKey(desKey);
                 sc.setRights(true);
@@ -135,7 +135,7 @@ public class HandclaspFilter implements IFilter {
   }
 
   public void ContextException(SCFContext context, Protocol protocol, SCFResponse response, String message) throws Exception {
-    ExceptionProtocol ep = ExceptionHelper.createError(new Exception());
+    ExceptionProtocol ep = ExceptionUtil.createError(new Exception());
     ep.setErrorMsg(message);
     protocol.setSdpEntity(ep);
     response.setResponseBuffer(protocol.toBytes());

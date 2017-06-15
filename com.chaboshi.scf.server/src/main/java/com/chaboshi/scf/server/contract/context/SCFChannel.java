@@ -6,8 +6,8 @@ import java.net.SocketAddress;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.Channel;
 
-import com.chaboshi.scf.protocol.utility.ProtocolConst;
-import com.chaboshi.scf.server.util.ExceptionHelper;
+import com.chaboshi.scf.protocol.ProtocolConst;
+import com.chaboshi.scf.server.util.ExceptionUtil;
 
 public class SCFChannel {
 
@@ -38,7 +38,7 @@ public class SCFChannel {
 
   public void write(byte[] buffer) {
     if (buffer == null) {
-      buffer = ExceptionHelper.createErrorProtocol();
+      buffer = ExceptionUtil.createErrorProtocol();
     }
     this.nettyChannel.write(ChannelBuffers.copiedBuffer(ProtocolConst.P_START_TAG, buffer, ProtocolConst.P_END_TAG));
   }

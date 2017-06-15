@@ -14,9 +14,7 @@ import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// import com.bj58.spat.scf.server.performance.monitorweb.MonitorErrorLog;
-import com.chaboshi.scf.protocol.utility.ProtocolConst;
-import com.chaboshi.scf.protocol.utility.ProtocolHelper;
+import com.chaboshi.scf.protocol.ProtocolConst;
 import com.chaboshi.scf.server.IFilter;
 import com.chaboshi.scf.server.contract.context.Global;
 import com.chaboshi.scf.server.contract.context.SCFChannel;
@@ -24,7 +22,7 @@ import com.chaboshi.scf.server.contract.context.SCFContext;
 import com.chaboshi.scf.server.contract.context.SecureContext;
 import com.chaboshi.scf.server.contract.context.ServerType;
 import com.chaboshi.scf.server.core.ServerHandler;
-import com.chaboshi.scf.server.util.ExceptionHelper;
+import com.chaboshi.scf.server.util.ExceptionUtil;
 
 /**
  * netty event handler
@@ -50,7 +48,7 @@ public class NettyHandler extends SimpleChannelUpstreamHandler implements Server
       byte[] headDelimiter = new byte[ProtocolConst.P_START_TAG.length];
       System.arraycopy(reciveByte, 0, headDelimiter, 0, ProtocolConst.P_START_TAG.length);
 
-      if (ProtocolHelper.checkHeadDelimiter(headDelimiter)) {
+      if (ProtocolConst.checkHeadDelimiter(headDelimiter)) {
         byte[] requestBuffer = new byte[reciveByte.length - ProtocolConst.P_START_TAG.length];
         System.arraycopy(reciveByte, ProtocolConst.P_START_TAG.length, requestBuffer, 0,
             (reciveByte.length - ProtocolConst.P_START_TAG.length));
@@ -59,12 +57,12 @@ public class NettyHandler extends SimpleChannelUpstreamHandler implements Server
 
         NettyServer.invokerHandler.invoke(scfContext);
       } else {
-        byte[] response = ExceptionHelper.createErrorProtocol();
+        byte[] response = ExceptionUtil.createErrorProtocol();
         e.getChannel().write(ChannelBuffers.copiedBuffer(response));
         logger.error("protocol error: protocol head not match");
       }
     } catch (Throwable ex) {
-      byte[] response = ExceptionHelper.createErrorProtocol();
+      byte[] response = ExceptionUtil.createErrorProtocol();
       e.getChannel().write(response);
       logger.error("SocketHandler invoke error", ex);
 

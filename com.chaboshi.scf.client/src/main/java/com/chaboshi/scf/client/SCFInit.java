@@ -9,6 +9,7 @@ import java.net.URLDecoder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.chaboshi.common.SCFConst;
 import com.chaboshi.scf.client.proxy.ServiceProxy;
 
 /**
@@ -21,7 +22,7 @@ public class SCFInit {
   /**
    * 有的老系统没有调用SCFInit的init方法, 因此在SCFConst中增加对SCFInit类的引用,从而保证静态构造函数会被执行
    */
-  protected static String DEFAULT_CONFIG_PATH = null;
+  public static String DEFAULT_CONFIG_PATH = null;
 
   static {
     DEFAULT_CONFIG_PATH = System.getProperty("scf.client.config.path");
@@ -37,12 +38,12 @@ public class SCFInit {
 
   @Deprecated
   public static void init(String configPath, String[] jarPaths) {
-    SCFConst.CONFIG_PATH = DEFAULT_CONFIG_PATH = configPath;
+    DEFAULT_CONFIG_PATH = configPath;
     // Serializer.SetJarPath(jarPaths);
   }
 
   public static void init(String configPath) {
-    SCFConst.CONFIG_PATH = DEFAULT_CONFIG_PATH = configPath;
+    DEFAULT_CONFIG_PATH = configPath;
   }
 
   private static String getJarPath(Class<?> type) {

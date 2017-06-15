@@ -4,7 +4,7 @@
 
 package com.chaboshi.scf.server.contract.context;
 
-import com.chaboshi.scf.server.util.ServiceFrameException;
+import com.chaboshi.scf.server.exception.ServiceFrameException;
 
 /**
  * a interface for description ProxyStub
