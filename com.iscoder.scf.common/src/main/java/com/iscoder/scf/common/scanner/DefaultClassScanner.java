@@ -91,7 +91,7 @@ public class DefaultClassScanner implements ClassScanner {
   // test
   public static void main(String[] args) throws Exception {
     ClassScanner cs = DefaultClassScanner.getInstance();
-    Set<Class<?>> set = cs.getClassList("com.chaboshi", ".*\\.scanner\\..*Filter");
+    Set<Class<?>> set = cs.getClassList("com.iscoder", ".*\\.scanner\\..*Filter");
     for (Class<?> c : set) {
       System.out.println(c.getName());
     }

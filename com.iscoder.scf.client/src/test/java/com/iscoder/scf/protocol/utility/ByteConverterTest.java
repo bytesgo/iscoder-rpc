@@ -1,8 +1,10 @@
-package com.chaboshi.scf.protocol.utility;
+package com.iscoder.scf.protocol.utility;
 
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
+
+import com.iscoder.scf.common.entity.ByteConverter;
 
 public class ByteConverterTest {
 

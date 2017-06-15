@@ -1,12 +1,11 @@
-package com.chaboshi.scf.protocol.sfp;
+package com.iscoder.scf.protocol.sfp;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.chaboshi.scf.protocol.sdp.RequestProtocol;
-import com.chaboshi.scf.protocol.sfp.enumeration.SDPType;
-import com.chaboshi.scf.protocol.sfp.v1.Protocol;
-import com.chaboshi.scf.protocol.utility.ProtocolHelper;
+import com.iscoder.scf.protocol.ProtocolConst;
+import com.iscoder.scf.protocol.entity.SDPType;
+import com.iscoder.scf.protocol.sdp.RequestProtocol;
 
 public class ProtocolHelperTest {
 
@@ -17,7 +16,7 @@ public class ProtocolHelperTest {
 
     byte[] buffer = p.toBytes();
 
-    Protocol p2 = (Protocol) ProtocolHelper.fromBytes(buffer);
+    Protocol p2 = (Protocol) ProtocolConst.fromBytes(buffer);
     Assert.assertEquals(rp.getLookup(), ((RequestProtocol) p2.getSdpEntity()).getLookup());
     Assert.assertEquals(rp.getMethodName(), ((RequestProtocol) p2.getSdpEntity()).getMethodName());
   }
@@ -30,7 +29,7 @@ public class ProtocolHelperTest {
         29, 18, 0, 0, 0, 0, -17, 3, 0, 0, 19, 0, 0, 0, 49, 107, 99, 54, 54, 52, 53, 56, 56, 64, 107, 117, 99, 104, 101, 46, 99, 111, 109,
         11, 0, 0, 0, 116, 72, -59, 0, 0, 0, 0, 0, 18, 0, 0, 0, 1, -20, 3, 0, 0, 18, 0, 0, 0, 0, -16, 3, 0, 0, 6, 0, 0, 0, 117, 112, 100, 97,
         116, 101 };
-    Protocol p = (Protocol) ProtocolHelper.fromBytes(buffer);
+    Protocol p = (Protocol) ProtocolConst.fromBytes(buffer);
     System.out.println(((RequestProtocol) p.getSdpEntity()).getLookup());
     System.out.println(((RequestProtocol) p.getSdpEntity()).getMethodName());
 

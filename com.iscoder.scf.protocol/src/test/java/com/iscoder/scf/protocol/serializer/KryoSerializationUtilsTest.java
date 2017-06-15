@@ -2,7 +2,7 @@
  * 
  */
 
-package com.chaboshi.scf.protocol.serializer;
+package com.iscoder.scf.protocol.serializer;
 
 import org.junit.Test;
 

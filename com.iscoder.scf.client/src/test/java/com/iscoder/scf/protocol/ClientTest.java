@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.chaboshi.scf.protocol;
+package com.iscoder.scf.protocol;
 
 import org.junit.Test;
 

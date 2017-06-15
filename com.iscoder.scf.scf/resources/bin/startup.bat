@@ -69,7 +69,7 @@ for /f %%i in ('dir /b /s "*.jar"') do (
 )
 
 rem main class
-set MAIN_CLASS=com.chaboshi.scf.server.bootstrap.Main
+set MAIN_CLASS=com.iscoder.scf.server.bootstrap.Main
 
 :java %JAVA_OPTS% -classpath %CLASS_PATH% -Duser.dir=%DIR% %SYSTEM_PROPERTY% %MAIN_CLASS% %OTHER_SCF_CONFIG% -Dscf.service.name=%SERVICE_NAME%
 java %JAVA_OPTS% -classpath %CLASS_PATH% -Duser.dir=%DIR% %SYSTEM_PROPERTY% %MAIN_CLASS% %OTHER_GAEA_CONFIG% -Dscf.service.name=%SERVICE_NAME%
