@@ -79,7 +79,7 @@
     <!-- proxy invoker -->
     <property>
         <name>scf.proxy.invoker.implement</name>
-        <value>com.iscoder.scf.server.core.handler.AsyncInvokerHandler</value>
+        <value>com.iscoder.scf.server.core.handler.async.AsyncHandler</value>
     </property>
 
     <!-- async worker count -->
@@ -141,7 +141,7 @@
     <!-- socket server implement class -->
     <property>
         <name>scf.server.tcp.implement</name>
-        <value>com.iscoder.scf.server.core.communication.tcp.NettyServer</value>
+        <value>com.iscoder.scf.server.core.communication.tcp.TcpServer</value>
     </property>
 
     <!-- +++++++++++++++ http server config ++++++++++++++++ -->

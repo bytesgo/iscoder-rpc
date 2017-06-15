@@ -66,9 +66,11 @@ public abstract class AbstractHandler implements Handler {
         }
       }
 
-      logger.debug(sbInvokerMsg.toString());
-      logger.debug(sbIsAsynMsg.toString());
-      logger.debug("begin get proxy factory");
+      if (logger.isDebugEnabled()) {
+        logger.debug(sbInvokerMsg.toString());
+        logger.debug(sbIsAsynMsg.toString());
+        logger.debug("begin get proxy factory");
+      }
 
       // get local proxy
       IProxyStub localProxy = Global.getSingleton().getProxyFactory().getProxy(request.getLookup());
