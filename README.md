@@ -1,2 +1,2 @@
-# com.chaboshi.rpc
-com.chaboshi.rpc
+# iscoder.rpc
+https://github.com/liyzhou/iscoder.rpc.git
