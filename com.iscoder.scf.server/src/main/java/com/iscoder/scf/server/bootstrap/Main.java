@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.xml.DOMConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,11 +64,6 @@ public class Main {
     String serviceFolderPath = rootPath + "service/deploy/" + serviceName;
     String scfConfigDefaultPath = rootPath + "conf/scf_config.xml";
     String scfConfigPath = serviceFolderPath + "/scf_config.xml";
-    String log4jConfigDefaultPath = rootPath + "conf/log4j.xml";
-    String log4jConfigPath = serviceFolderPath + "/log4j.xml";
-
-    // load log4j
-    loadLog4jConfig(log4jConfigPath, log4jConfigDefaultPath, serviceName);
 
     logger.info("+++++++++++++++++++++ staring +++++++++++++++++++++\n");
 
@@ -77,8 +71,6 @@ public class Main {
     logger.info("rootPath: " + rootPath);
     logger.info("service scf_config.xml: " + scfConfigPath);
     logger.info("default scf_config.xml: " + scfConfigDefaultPath);
-    logger.info("service log4j.xml: " + log4jConfigPath);
-    logger.info("default log4j.xml: " + log4jConfigDefaultPath);
 
     serviceConfig = ServiceConfig.getServiceConfig(scfConfigDefaultPath, scfConfigPath);
 
@@ -129,21 +121,6 @@ public class Main {
     logger.info("+++++++++++++++++++++ server start success!!! +++++++++++++++++++++\n");
     while (true) {
       Thread.sleep(1 * 60 * 60 * 1000);
-    }
-  }
-
-  /**
-   * 
-   * @param configPath
-   * @param logFilePath
-   * @throws Exception
-   */
-  private static void loadLog4jConfig(String configPath, String defaultPath, String serviceName) throws Exception {
-    File fLog4jConfig = new File(configPath);
-    if (fLog4jConfig.exists()) {
-      DOMConfigurator.configure(configPath);
-    } else {
-      DOMConfigurator.configure(defaultPath);
     }
   }
 
