@@ -24,7 +24,7 @@
 	</appender>
 
 	<root>
-		<priority value="info" />
+		<priority value="error" />
 		<appender-ref ref="myConsole" />
 		<appender-ref ref="activexAppender" />
 	</root>

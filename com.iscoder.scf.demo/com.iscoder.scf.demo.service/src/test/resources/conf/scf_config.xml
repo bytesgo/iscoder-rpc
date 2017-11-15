@@ -85,7 +85,7 @@
     <!-- async worker count -->
     <property>
         <name>scf.async.worker.count</name>
-        <value>8</value>
+        <value>100</value>
     </property>
 
     <!-- server list -->
