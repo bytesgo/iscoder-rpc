@@ -24,19 +24,19 @@
 <!-- global reqeust filter -->
 <property>
 <name>scf.filter.global.request</name>
-<value>com.iscoder.scf.server.filter.ProtocolParseFilter</value>
+<value>com.github.leeyazhou.server.filter.ProtocolParseFilter</value>
 </property>
 
 <!-- global response filter -->
 <property>
 <name>scf.filter.global.response</name>
-<value>com.iscoder.scf.server.filter.ProtocolCreateFilter,com.iscoder.scf.server.filter.ExecuteTimeFilter</value>
+<value>com.github.leeyazhou.server.filter.ProtocolCreateFilter,com.github.leeyazhou.server.filter.ExecuteTimeFilter</value>
 </property>
 
 <!-- connection filter-->
 <property>
 <name>scf.filter.connection</name>
-<value>com.iscoder.scf.server.filter.IPFilter</value>
+<value>com.github.leeyazhou.server.filter.IPFilter</value>
 </property>
 
 <!-- init beans -->
@@ -78,7 +78,7 @@
 <!-- proxy invoker-->
 <property>
 <name>scf.proxy.invoker.implement</name>
-<value>com.iscoder.scf.server.core.proxy.AsyncInvokerHandle</value>
+<value>com.github.leeyazhou.server.core.proxy.AsyncInvokerHandle</value>
 </property>
 
 <!-- async worker count-->
@@ -140,7 +140,7 @@
 <!-- socket server implement class -->
 <property>
 <name>scf.server.tcp.implement</name>
-<value>com.iscoder.scf.server.core.communication.tcp.SocketServer</value>
+<value>com.github.leeyazhou.server.core.communication.tcp.SocketServer</value>
 </property>
 
 <!-- +++++++++++++++ http server config ++++++++++++++++ -->
@@ -190,7 +190,7 @@
 <!-- http server implement class -->
 <property>
 <name>scf.server.http.implement</name>
-<value>com.iscoder.scf.server.core.communication.http.HttpServer</value>
+<value>com.github.leeyazhou.server.core.communication.http.HttpServer</value>
 </property>
 
 
@@ -241,7 +241,7 @@
 <!-- telnet server implement class -->
 <property>
 <name>scf.server.telnet.implement</name>
-<value>com.iscoder.scf.server.core.communication.telnet.TelnetServer</value>
+<value>com.github.leeyazhou.server.core.communication.telnet.TelnetServer</value>
 </property>
 
 <!-- +++++++++++++++ monitor server config ++++++++++++++++ -->
@@ -273,7 +273,7 @@
 <!-- monitor server implement class -->
 <property>
 <name>scf.server.monitor.implement</name>
-<value>com.iscoder.scf.server.performance.monitorweb.MonitorWebCenter</value>
+<value>com.github.leeyazhou.server.performance.monitorweb.MonitorWebCenter</value>
 </property>
 
 </configuration>
