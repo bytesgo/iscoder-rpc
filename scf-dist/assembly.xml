@@ -29,7 +29,7 @@
 
     <fileSets>
         <fileSet>
-            <directory>resources</directory>
+            <directory>src</directory>
             <includes>
                 <include>**/*</include>
             </includes>

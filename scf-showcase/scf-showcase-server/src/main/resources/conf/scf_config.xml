@@ -30,8 +30,7 @@
     <!-- global response filter -->
     <property>
         <name>scf.filter.global.response</name>
-        <value>com.github.leeyazhou.server.filter.ProtocolCreateFilter,com.github.leeyazhou.server.filter.ExecuteTimeFilter
-        </value>
+        <value>com.github.leeyazhou.server.filter.ProtocolCreateFilter,com.github.leeyazhou.server.filter.ExecuteTimeFilter</value>
     </property>
 
     <!-- connection filter -->

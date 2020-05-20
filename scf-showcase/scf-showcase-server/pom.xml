@@ -8,12 +8,12 @@
     </parent>
     <artifactId>scf-showcase-server</artifactId>
 
-    <properties>
-        <jdk.version>1.8</jdk.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <dependencies>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
         <dependency>
             <groupId>com.github.leeyazhou</groupId>
             <artifactId>scf-server</artifactId>
@@ -23,11 +23,6 @@
             <groupId>com.github.leeyazhou</groupId>
             <artifactId>scf-showcase-api</artifactId>
             <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -39,7 +34,7 @@
                 <configuration>
                     <excludes>
                         <exclude>*.xml</exclude>
-                        <exclude>config/**</exclude>
+                        <exclude>conf/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -47,24 +42,18 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <outputDirectory>${project.build.directory}/build</outputDirectory>
-                    <descriptor>assembly.xml</descriptor>
+                    <descriptors>
+                        <descriptor>assembly.xml</descriptor>
+                    </descriptors>
                 </configuration>
                 <!-- <executions>
                     <execution>
-                    <phase>package</phase>
-                    <goals>
-                    <goal>single</goal>
-                    </goals>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <phase>install</phase>
                     </execution>
-                    </executions> -->
-            </plugin>
-            <!-- 让maven插件跳过单元测试 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
+                </executions> -->
             </plugin>
         </plugins>
     </build>

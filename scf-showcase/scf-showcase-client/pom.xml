@@ -8,11 +8,6 @@
     </parent>
     <artifactId>scf-showcase-client</artifactId>
 
-    <properties>
-        <jdk.version>1.8</jdk.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.github.leeyazhou</groupId>
@@ -22,11 +17,6 @@
         <dependency>
             <groupId>com.github.leeyazhou</groupId>
             <artifactId>scf-showcase-api</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.leeyazhou</groupId>
-            <artifactId>scf-showcase-server</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>

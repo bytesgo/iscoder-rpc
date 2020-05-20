@@ -29,7 +29,7 @@
             <outputDirectory></outputDirectory>
             <includes>
                 <include>*.xml</include>
-                <include>config/**</include>
+                <include>conf/**</include>
             </includes>
         </fileSet>
     </fileSets>
