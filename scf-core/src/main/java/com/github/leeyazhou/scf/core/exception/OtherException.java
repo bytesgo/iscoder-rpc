@@ -1,10 +1,6 @@
 package com.github.leeyazhou.scf.core.exception;
 
-public class OtherException extends RemoteException {
-
-  /**
-   * 
-   */
+public class OtherException extends SCFException {
   private static final long serialVersionUID = 1L;
 
   public OtherException() {

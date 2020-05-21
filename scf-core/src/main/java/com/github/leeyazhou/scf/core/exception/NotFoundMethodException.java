@@ -1,10 +1,6 @@
 package com.github.leeyazhou.scf.core.exception;
 
-public class NotFoundMethodException extends RemoteException {
-
-  /**
-   * 
-   */
+public class NotFoundMethodException extends SCFException {
   private static final long serialVersionUID = 1L;
 
   public NotFoundMethodException() {

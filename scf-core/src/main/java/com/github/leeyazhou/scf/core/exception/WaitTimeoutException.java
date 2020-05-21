@@ -1,28 +1,14 @@
 package com.github.leeyazhou.scf.core.exception;
 
-public class WaitTimeoutException extends Exception {
+public class WaitTimeoutException extends SCFException {
+	private static final long serialVersionUID = 1L;
 
-  /**
-   * 
-   */
-  private static final long serialVersionUID = 1L;
+	public WaitTimeoutException() {
+		super("客户端等待可用连接超时了");
+	}
 
-  public WaitTimeoutException() {
-
-  }
-
-  public WaitTimeoutException(String message) {
-    this.message = message;
-  }
-
-  private String message = "客户端等待可用连接超时了";
-
-  public String getMessage() {
-    return message;
-  }
-
-  public void setMessage(String message) {
-    this.message = message;
-  }
+	public WaitTimeoutException(String message) {
+		super(message);
+	}
 
 }

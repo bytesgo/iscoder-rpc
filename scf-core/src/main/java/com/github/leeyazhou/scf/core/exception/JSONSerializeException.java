@@ -1,10 +1,6 @@
 package com.github.leeyazhou.scf.core.exception;
 
-public class JSONSerializeException extends RemoteException {
-
-  /**
-   * 
-   */
+public class JSONSerializeException extends SCFException {
   private static final long serialVersionUID = 1L;
 
   public JSONSerializeException() {

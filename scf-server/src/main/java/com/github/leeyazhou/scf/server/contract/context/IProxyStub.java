@@ -1,6 +1,6 @@
 package com.github.leeyazhou.scf.server.contract.context;
 
-import com.github.leeyazhou.scf.server.exception.ServiceFrameException;
+import com.github.leeyazhou.scf.server.exception.RPCException;
 
 /**
  * a interface for description ProxyStub
@@ -9,5 +9,5 @@ import com.github.leeyazhou.scf.server.exception.ServiceFrameException;
  */
 public interface IProxyStub {
 
-  public SCFResponse invoke(SCFContext context) throws ServiceFrameException;
+  public SCFResponse invoke(SCFContext context) throws RPCException;
 }

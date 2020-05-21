@@ -10,9 +10,9 @@ import org.jboss.netty.channel.MessageEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.leeyazhou.scf.server.IFilter;
 import com.github.leeyazhou.scf.server.contract.context.Global;
 import com.github.leeyazhou.scf.server.contract.context.SCFContext;
+import com.github.leeyazhou.scf.server.filter.IFilter;
 import com.github.leeyazhou.scf.server.filter.MonitorRequestFilter;
 import com.github.leeyazhou.scf.server.filter.MonitorResponseFilter;
 

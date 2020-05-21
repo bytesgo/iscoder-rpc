@@ -14,7 +14,7 @@ import com.github.leeyazhou.scf.server.contract.context.IProxyStub;
 import com.github.leeyazhou.scf.server.contract.context.SCFContext;
 import com.github.leeyazhou.scf.server.contract.context.SCFResponse;
 import com.github.leeyazhou.scf.server.contract.context.StopWatch;
-import com.github.leeyazhou.scf.server.exception.ServiceFrameException;
+import com.github.leeyazhou.scf.server.exception.RPCException;
 import com.github.leeyazhou.scf.server.performance.monitorweb.FrameExCount;
 import com.github.leeyazhou.scf.server.util.ExceptionUtil;
 
@@ -76,7 +76,7 @@ public abstract class AbstractHandler implements Handler {
       IProxyStub localProxy = Global.getSingleton().getProxyFactory().getProxy(request.getLookup());
       logger.debug("proxyFactory.getProxy finish");
       if (localProxy == null) {
-        ServiceFrameException sfe = new ServiceFrameException(
+        RPCException sfe = new RPCException(
             "method:ProxyHandler.invoke--msg:" + request.getLookup() + "." + request.getMethodName() + " not fond",
             context.getChannel().getRemoteIP(), context.getChannel().getLocalIP(), request, ErrorState.NotFoundServiceException, null);
         response = ExceptionUtil.createError(sfe);
@@ -112,7 +112,7 @@ public abstract class AbstractHandler implements Handler {
         response = createResponse(scfResponse);
         logger.debug("localProxy.invoke finish");
       }
-    } catch (ServiceFrameException sfe) {
+    } catch (RPCException sfe) {
       logger.error("ServiceFrameException when invoke service fromIP:" + context.getChannel().getRemoteIP() + "  toIP:"
           + context.getChannel().getLocalIP(), sfe);
       response = ExceptionUtil.createError(sfe);

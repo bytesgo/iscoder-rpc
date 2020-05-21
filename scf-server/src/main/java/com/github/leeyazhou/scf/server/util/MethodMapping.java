@@ -3,7 +3,7 @@ package com.github.leeyazhou.scf.server.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.leeyazhou.scf.server.IInit;
+import com.github.leeyazhou.scf.core.IInit;
 import com.github.leeyazhou.scf.server.contract.context.SCFChannel;
 
 public class MethodMapping implements IInit {

@@ -4,8 +4,6 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import com.github.leeyazhou.scf.server.util.ExceptionUtil;
-
 public class ErrorProtocolTest {
 
   // static {

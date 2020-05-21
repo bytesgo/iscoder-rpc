@@ -5,7 +5,6 @@ package com.github.leeyazhou.scf.core;
  */
 public final class Version {
 
-  private Version() {
-    super();
-  }
+	private Version() {
+	}
 }

@@ -1,10 +1,6 @@
 package com.github.leeyazhou.scf.core.exception;
 
-public class ProtocolException extends RemoteException {
-
-  /**
-   * 
-   */
+public class ProtocolException extends SCFException {
   private static final long serialVersionUID = 1L;
 
   public ProtocolException() {

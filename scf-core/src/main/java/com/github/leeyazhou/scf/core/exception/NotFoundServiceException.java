@@ -1,10 +1,6 @@
 package com.github.leeyazhou.scf.core.exception;
 
-public class NotFoundServiceException extends RemoteException {
-
-  /**
-   * 
-   */
+public class NotFoundServiceException extends SCFException {
   private static final long serialVersionUID = 1L;
 
   public NotFoundServiceException() {

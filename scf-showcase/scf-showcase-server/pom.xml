@@ -41,19 +41,18 @@
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
-                    <outputDirectory>${project.build.directory}/build</outputDirectory>
                     <descriptors>
                         <descriptor>assembly.xml</descriptor>
                     </descriptors>
                 </configuration>
-                <!-- <executions>
+                <executions>
                     <execution>
                         <goals>
                             <goal>single</goal>
                         </goals>
-                        <phase>install</phase>
+                        <phase>package</phase>
                     </execution>
-                </executions> -->
+                </executions>
             </plugin>
         </plugins>
     </build>

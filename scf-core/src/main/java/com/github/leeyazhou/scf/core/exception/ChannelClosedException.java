@@ -1,9 +1,6 @@
 package com.github.leeyazhou.scf.core.exception;
 
-public class ChannelClosedException extends Exception {
-  /**
-   * 
-   */
+public class ChannelClosedException extends SCFException {
   private static final long serialVersionUID = 1L;
 
   public ChannelClosedException() {

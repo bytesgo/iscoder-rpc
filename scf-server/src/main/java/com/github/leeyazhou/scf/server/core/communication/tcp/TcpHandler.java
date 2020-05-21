@@ -15,13 +15,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.leeyazhou.scf.protocol.ProtocolConst;
-import com.github.leeyazhou.scf.server.IFilter;
 import com.github.leeyazhou.scf.server.contract.context.Global;
 import com.github.leeyazhou.scf.server.contract.context.SCFChannel;
 import com.github.leeyazhou.scf.server.contract.context.SCFContext;
 import com.github.leeyazhou.scf.server.contract.context.SecureContext;
 import com.github.leeyazhou.scf.server.contract.context.ServerType;
 import com.github.leeyazhou.scf.server.core.communication.ServerHandler;
+import com.github.leeyazhou.scf.server.filter.IFilter;
 import com.github.leeyazhou.scf.server.util.ExceptionUtil;
 
 /**

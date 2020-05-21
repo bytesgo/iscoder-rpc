@@ -1,10 +1,6 @@
 package com.github.leeyazhou.scf.core.exception;
 
-public class ParaException extends RemoteException {
-
-  /**
-   * 
-   */
+public class ParaException extends SCFException {
   private static final long serialVersionUID = 1L;
 
   public ParaException() {

@@ -12,7 +12,7 @@ import com.github.leeyazhou.scf.server.contract.context.SCFContext;
 import com.github.leeyazhou.scf.server.contract.context.SCFResponse;
 import com.github.leeyazhou.scf.server.core.convert.Convert;
 import com.github.leeyazhou.scf.server.core.convert.ConvertFacotry;
-import com.github.leeyazhou.scf.server.exception.ServiceFrameException;
+import com.github.leeyazhou.scf.server.exception.RPCException;
 
 /**
  * 
@@ -48,7 +48,7 @@ public class Constant {
   /**
    * ServiceFrameException class name
    */
-  public static final String SERVICEFRAMEEXCEPTION_CLASS_NAME = ServiceFrameException.class.getName();
+  public static final String SERVICEFRAMEEXCEPTION_CLASS_NAME = RPCException.class.getName();
 
   /**
    * Request protocol class name

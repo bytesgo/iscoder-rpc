@@ -7,13 +7,10 @@ import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.RSAPublicKeySpec;
-
 import javax.crypto.Cipher;
-
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
-@SuppressWarnings("restriction")
 public class RSAUtil {
 
   private PublicKey pubKey;

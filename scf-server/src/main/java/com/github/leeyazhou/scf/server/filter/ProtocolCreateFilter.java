@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.leeyazhou.scf.protocol.sfp.Protocol;
-import com.github.leeyazhou.scf.server.IFilter;
 import com.github.leeyazhou.scf.server.contract.context.Global;
 import com.github.leeyazhou.scf.server.contract.context.SCFContext;
 import com.github.leeyazhou.scf.server.contract.context.SCFResponse;

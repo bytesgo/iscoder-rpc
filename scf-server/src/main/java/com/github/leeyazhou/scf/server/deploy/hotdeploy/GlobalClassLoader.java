@@ -5,19 +5,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.github.leeyazhou.scf.core.utils.FileUtil;
-
 import sun.misc.Launcher;
 
 /**
  * A class for load jar
  * 
  */
-@SuppressWarnings("restriction")
 public class GlobalClassLoader {
 
   private static Logger logger = LoggerFactory.getLogger(GlobalClassLoader.class);
@@ -25,9 +21,9 @@ public class GlobalClassLoader {
 
   static {
     try {
-      addURL = URLClassLoader.class.getDeclaredMethod("addURL", new Class[] { URL.class });
+      addURL = URLClassLoader.class.getDeclaredMethod("addURL", new Class[] {URL.class});
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error("", e);
     }
     addURL.setAccessible(true);
   }
@@ -47,7 +43,7 @@ public class GlobalClassLoader {
   public static void addURL2SystemClassLoader(URL url) throws Exception {
     try {
       logger.info("append jar to classpath:" + url.toString());
-      addURL.invoke(system, new Object[] { url });
+      addURL.invoke(system, new Object[] {url});
     } catch (Exception e) {
       throw e;
     }
@@ -56,7 +52,7 @@ public class GlobalClassLoader {
   public static void addURL2ExtClassLoader(URL url) throws Exception {
     try {
       logger.info("append jar to classpath:" + url.toString());
-      addURL.invoke(ext, new Object[] { url });
+      addURL.invoke(ext, new Object[] {url});
     } catch (Exception e) {
       throw e;
     }

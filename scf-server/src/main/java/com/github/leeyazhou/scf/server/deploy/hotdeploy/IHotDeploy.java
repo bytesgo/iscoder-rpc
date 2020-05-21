@@ -8,8 +8,8 @@ import com.github.leeyazhou.scf.server.core.handler.Handler;
  */
 public interface IHotDeploy {
 
-  public void setSyncInvokerHandle(Handler handle);
+  void setSyncInvokerHandle(Handler handle);
 
-  public void setAsyncInvokerHandle(Handler handle);
+  void setAsyncInvokerHandle(Handler handle);
 
 }

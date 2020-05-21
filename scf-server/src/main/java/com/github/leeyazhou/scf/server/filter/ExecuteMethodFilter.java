@@ -12,7 +12,6 @@ import com.github.leeyazhou.scf.core.exception.ExceptionProtocol;
 import com.github.leeyazhou.scf.protocol.entity.PlatformType;
 import com.github.leeyazhou.scf.protocol.sdp.RequestProtocol;
 import com.github.leeyazhou.scf.protocol.sfp.Protocol;
-import com.github.leeyazhou.scf.server.IFilter;
 import com.github.leeyazhou.scf.server.contract.context.ExecFilterType;
 import com.github.leeyazhou.scf.server.contract.context.Global;
 import com.github.leeyazhou.scf.server.contract.context.SCFContext;

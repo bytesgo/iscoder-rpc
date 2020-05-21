@@ -9,9 +9,9 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.jboss.netty.channel.Channel;
 
-import com.github.leeyazhou.scf.server.IFilter;
-import com.github.leeyazhou.scf.server.IInit;
+import com.github.leeyazhou.scf.core.IInit;
 import com.github.leeyazhou.scf.server.core.communication.Server;
+import com.github.leeyazhou.scf.server.filter.IFilter;
 
 /**
  * A class contains global variable

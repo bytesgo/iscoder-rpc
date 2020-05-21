@@ -18,7 +18,7 @@
             <useAllReactorProjects>true</useAllReactorProjects>
             <binaries>
                 <outputDirectory>lib</outputDirectory>
-                <outputFileNameMapping>${module.artifactId}-${module.baseVersion}.${module.extension}</outputFileNameMapping>
+                <!-- <outputFileNameMapping>${module.artifactId}-${module.baseVersion}.${module.extension}</outputFileNameMapping> -->
             </binaries>
         </moduleSet>
     </moduleSets>

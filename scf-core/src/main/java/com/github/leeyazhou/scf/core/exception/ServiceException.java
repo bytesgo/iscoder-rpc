@@ -1,10 +1,6 @@
 package com.github.leeyazhou.scf.core.exception;
 
-public class ServiceException extends RemoteException {
-
-  /**
-   * 
-   */
+public class ServiceException extends SCFException {
   private static final long serialVersionUID = 1L;
 
   public ServiceException() {

@@ -19,7 +19,7 @@ public class ProxyFactoryLoader {
    * @throws Exception
    */
   public static IProxyFactory loadProxyFactory(DynamicClassLoader classLoader) throws Exception {
-    return cm.careteProxy(
-        Global.getSingleton().getRootPath() + "service/deploy/" + Global.getSingleton().getServiceConfig().getServiceName(), classLoader);
+    return cm.careteProxy(Global.getSingleton().getRootPath() + "service/deploy/"
+        + Global.getSingleton().getServiceConfig().getServiceName(), classLoader);
   }
 }

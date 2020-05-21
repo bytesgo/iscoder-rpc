@@ -1,10 +1,6 @@
 package com.github.leeyazhou.scf.core.exception;
 
-public class TimeoutException extends RemoteException {
-
-  /**
-   * 
-   */
+public class TimeoutException extends SCFException {
   private static final long serialVersionUID = 1L;
 
   public TimeoutException() {

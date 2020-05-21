@@ -1,10 +1,6 @@
 package com.github.leeyazhou.scf.core.exception;
 
-public class DBException extends RemoteException {
-
-  /**
-   * 
-   */
+public class DBException extends SCFException {
   private static final long serialVersionUID = 1L;
 
   public DBException() {

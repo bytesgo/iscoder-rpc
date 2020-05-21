@@ -6,7 +6,7 @@ import java.io.Writer;
 
 import com.github.leeyazhou.scf.core.entity.ErrorState;
 import com.github.leeyazhou.scf.core.exception.ExceptionProtocol;
-import com.github.leeyazhou.scf.server.exception.ServiceFrameException;
+import com.github.leeyazhou.scf.server.exception.RPCException;
 
 /**
  * create error protocol
@@ -20,7 +20,7 @@ public class ExceptionUtil {
    * @param sfe
    * @return
    */
-  public static ExceptionProtocol createError(ServiceFrameException sfe) {
+  public static ExceptionProtocol createError(RPCException sfe) {
     ExceptionProtocol error = new ExceptionProtocol();
     if (sfe != null) {
       if (sfe.getState() == null) {

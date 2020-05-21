@@ -1,4 +1,4 @@
-package com.github.leeyazhou.scf.server;
+package com.github.leeyazhou.scf.server.filter;
 
 import com.github.leeyazhou.scf.server.contract.context.SCFContext;
 

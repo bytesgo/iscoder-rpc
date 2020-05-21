@@ -27,7 +27,8 @@ public class ClassUtil {
    * @throws IOException
    * @throws ClassNotFoundException
    */
-  public static Set<Class<?>> getClassFromJar(String jarPath, ClassLoader classLoader) throws IOException, ClassNotFoundException {
+  public static Set<Class<?>> getClassFromJar(String jarPath, ClassLoader classLoader)
+      throws IOException, ClassNotFoundException {
     JarFile jarFile = new JarFile(jarPath);
     Enumeration<JarEntry> entries = jarFile.entries();
     Set<Class<?>> classes = new LinkedHashSet<Class<?>>();
@@ -48,6 +49,7 @@ public class ClassUtil {
         }
       }
     }
+    jarFile.close();
     return classes;
   }
 
@@ -98,7 +100,8 @@ public class ClassUtil {
     }
     LocalVariableAttribute attr = (LocalVariableAttribute) codeAttribute.getAttribute(LocalVariableAttribute.tag);
     if (attr == null) {
-      throw new Exception("class:" + cls.getName() + ", have no LocalVariableTable, please use javac -g:{vars} to compile the source file");
+      throw new Exception("class:" + cls.getName()
+          + ", have no LocalVariableTable, please use javac -g:{vars} to compile the source file");
     }
     String[] paramNames = new String[cm.getParameterTypes().length];
     int pos = Modifier.isStatic(cm.getModifiers()) ? 0 : 1;

@@ -1,10 +1,6 @@
 package com.github.leeyazhou.scf.core.exception;
 
-public class DataOverFlowException extends RemoteException {
-
-  /**
-   * 
-   */
+public class DataOverFlowException extends SCFException {
   private static final long serialVersionUID = 1L;
 
   public DataOverFlowException() {

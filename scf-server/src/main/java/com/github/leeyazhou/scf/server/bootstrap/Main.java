@@ -10,8 +10,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.leeyazhou.scf.server.IFilter;
-import com.github.leeyazhou.scf.server.IInit;
+import com.github.leeyazhou.scf.core.IInit;
 import com.github.leeyazhou.scf.server.contract.context.Global;
 import com.github.leeyazhou.scf.server.contract.context.IProxyFactory;
 import com.github.leeyazhou.scf.server.contract.context.ServiceConfig;
@@ -22,6 +21,7 @@ import com.github.leeyazhou.scf.server.deploy.filemonitor.NotifyCount;
 import com.github.leeyazhou.scf.server.deploy.hotdeploy.DynamicClassLoader;
 import com.github.leeyazhou.scf.server.deploy.hotdeploy.GlobalClassLoader;
 import com.github.leeyazhou.scf.server.deploy.hotdeploy.ProxyFactoryLoader;
+import com.github.leeyazhou.scf.server.filter.IFilter;
 
 /**
  * serive frame entry main para: serviceName
@@ -183,7 +183,7 @@ public class Main {
       for (String filterName : filterList) {
         try {
           logger.debug("load: " + filterName);
-          IFilter filter = (IFilter) classLoader.loadClass(filterName).newInstance();
+          IFilter filter = (IFilter) classLoader.loadClass(filterName.trim()).newInstance();
           instanceList.add(filter);
         } catch (Exception e) {
           logger.error("load " + filterName + " error!!!", e);
