@@ -36,21 +36,21 @@ public class Main {
       throw new IllegalArgumentException("usage: -Dscf.service.name=<service-name> [<other-scf-config>]");
     }
 
-    String userDir = System.getProperty("user.dir", null);
-    String rootPath = userDir + "/";
+    final String scfHome = System.getProperty("scf.home", null);
+    final String rootPath = scfHome + "/";
     String serviceName = "no service name please set it";
     Map<String, String> argsMap = argsToMap(args);
     if (argsMap.containsKey(serviceNameKey)) {
       serviceName = argsMap.get(serviceNameKey);
     }
     Global.getSingleton().setRootPath(rootPath);
-    String serviceFolderPath = rootPath + "service/" + serviceName;
-    String scfConfigDefaultPath = rootPath + "conf/scf_config.xml";
-    String scfConfigPath = serviceFolderPath + "/scf_config.xml";
+    String serviceFolderPath = scfHome + "/services/" + serviceName;
+    String scfConfigDefaultPath = scfHome + "/conf/scf_config.xml";
+    String scfConfigPath = serviceFolderPath + "/conf/scf_config.xml";
 
     logger.info("+++++++++++++++++++++ staring +++++++++++++++++++++\n");
 
-    logger.info("user.dir: " + userDir);
+    logger.info("scf.home: " + scfHome);
     logger.info("rootPath: " + rootPath);
     logger.info("service scf_config.xml: " + scfConfigPath);
     logger.info("default scf_config.xml: " + scfConfigDefaultPath);
@@ -72,9 +72,9 @@ public class Main {
     final SCFLoader loader = new SCFLoader();
     final DynamicClassLoader classLoader = new DynamicClassLoader(loader);
 
-    loader.addURLFolder(rootPath + "libs");
+    loader.addURLFolder(scfHome + "/libs");
 
-    classLoader.addFolder(rootPath + "service/" + serviceConfig.getServiceName() + "/libs");
+    classLoader.addFolder(rootPath + "/services/" + serviceConfig.getServiceName() + "/libs");
 
     Class<?> bootstrapClazz = loader.loadClass("com.github.leeyazhou.scf.server.bootstrap.Bootstrap");
     Method startupMethod = bootstrapClazz.getDeclaredMethod("startup");
@@ -82,9 +82,9 @@ public class Main {
     startupMethod.invoke(constructor.newInstance(serviceConfig, classLoader));
 
     addFileMonitor(rootPath);
-//    while (true) {
-//      Thread.sleep(1 * 60 * 60 * 1000);
-//    }
+    // while (true) {
+    // Thread.sleep(1 * 60 * 60 * 1000);
+    // }
   }
 
   /**

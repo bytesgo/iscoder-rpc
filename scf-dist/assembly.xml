@@ -9,19 +9,16 @@
     <dependencySets>
         <dependencySet>
             <scope>runtime</scope>
-            <outputDirectory>lib</outputDirectory>
+            <outputDirectory>libs</outputDirectory>
         </dependencySet>
     </dependencySets>
 
     <moduleSets>
         <moduleSet>
             <useAllReactorProjects>true</useAllReactorProjects>
-            <includeSubModules>false</includeSubModules>
-            <!-- <includes> <include>com.github.leeyazhou:com.github.leeyazhou.protocol</include> <include>com.github.leeyazhou:com.github.leeyazhou.client</include> 
-                <include>com.github.leeyazhou:com.github.leeyazhou.server</include> <include>com.github.leeyazhou:com.github.leeyazhou.util</include> </includes> -->
             <binaries>
                 <outputFileNameMapping>${module.artifactId}-${module.baseVersion}.${module.extension}</outputFileNameMapping>
-                <outputDirectory>lib</outputDirectory>
+                <outputDirectory>libs</outputDirectory>
                 <unpack>false</unpack>
             </binaries>
         </moduleSet>

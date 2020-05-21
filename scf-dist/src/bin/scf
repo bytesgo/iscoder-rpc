@@ -18,6 +18,10 @@ Example:
 	   scf <jstack> <service-name|sesrvice-pid> <count> <path-url>"
 
 SCF_DIR=/opt/scf
+CURRENT_DIR=$(cd $(dirname $0)/../; pwd)
+SCF_DIR="${CURRENT_DIR}"
+SCF_HOME="${SCF_DIR}"
+echo "SCF_HOME=${SCF_DIR}"
 #scf start function
 function scf_start_func()
 {
@@ -37,12 +41,12 @@ function scf_start_func()
 	SERVICE_NAME=$1
 	OTHER_SCF_CONFIG=""
 	for((i=2; i<=$#; i++)); do
-		OTHER_SCF_CONFIG=$OTHER_SCF_CONFIG" "${!i}
+		OTHER_SCF_CONFIG=$OTHER_SCF_CONFIG ${!i}
 	done
 
 #if this service is not shutwodn Please shutdown
 	SERVICE_DIR=$SCF_DIR
-	PID_FILE="$SERVICE_DIR"/tmp/pid/"$SERVICE_NAME"
+	PID_FILE="$SERVICE_DIR/tmp/pid/$SERVICE_NAME"
 
 	if [ -e $PID_FILE ]; then
 		PID_INFO=`cat $PID_FILE`
@@ -78,23 +82,26 @@ function scf_start_func()
 
 
 # get path
-	DIR="$SCF_HOME"bin
-	if [ "$DIR" = "bin" ]; then
+	DIR="$SCF_HOME"
+	if [ "$DIR" = "" ]; then
 		echo "no SCF_HOME path"
 		DIR=`dirname "$0"`
 		DIR=`cd "$bin"; pwd`
 	fi
 	PROGNAME=`basename $0`
 	ROOT_PATH="$SCF_DIR"
-	DEPLOY_PATH="$ROOT_PATH"/service/deploy
-	PID_PATH="$ROOT_PATH"/tmp/pid
-	JVM_PATH="$DEPLOY_PATH"/"$SERVICE_NAME"/scf_config.xml
+	DEPLOY_PATH="$ROOT_PATH/services"
+	PID_PATH="$ROOT_PATH/"
+	JVM_PATH="${DEPLOY_PATH}/${SERVICE_NAME}/conf/scf_config.xml"
 
 
 # java opts
-	VM_XMS=`cat $JVM_PATH | sed 's#\(.*\)>\(.*\)#\1>#g' |awk '/scf.server.vm.xms/{getline;print}' | sed 's#<value>\(.*\)</value>#\1#g'|sed 's///g'`
-	VM_XMX=`cat $JVM_PATH | sed 's#\(.*\)>\(.*\)#\1>#g' |awk '/scf.server.vm.xmx/{getline;print}' | sed 's#<value>\(.*\)</value>#\1#g'|sed 's///g'`
-	VM_XMN=`cat $JVM_PATH | sed 's#\(.*\)>\(.*\)#\1>#g' |awk '/scf.server.vm.xmn/{getline;print}' | sed 's#<value>\(.*\)</value>#\1#g'|sed 's///g'`
+	VM_XMS=`cat $JVM_PATH | sed 's#\(.*\)>\(.*\)#\1>#g' |awk '/scf.server.vm.xms/{getline;print}' | sed 's#<value>\(.*\)</value>#\1#g'|sed 's/
+//g'`
+	VM_XMX=`cat $JVM_PATH | sed 's#\(.*\)>\(.*\)#\1>#g' |awk '/scf.server.vm.xmx/{getline;print}' | sed 's#<value>\(.*\)</value>#\1#g'|sed 's/
+//g'`
+	VM_XMN=`cat $JVM_PATH | sed 's#\(.*\)>\(.*\)#\1>#g' |awk '/scf.server.vm.xmn/{getline;print}' | sed 's#<value>\(.*\)</value>#\1#g'|sed 's/
+//g'`
 
 	if [ "$VM_XMS" = "" ]; then
 		VM_XMS=512m
@@ -113,20 +120,20 @@ function scf_start_func()
 
 # class path
 	if [ ! $JAVA_HOME ];then
-		CLASS_PATH=.:"$ROOT_PATH"/lib/tools.jar
+		CLASS_PATH=.:"$ROOT_PATH"/libs/tools.jar
 	else
 		CLASS_PATH=.:"$JAVA_HOME"/lib/tools.jar
 	fi
 
-	for jar in $ROOT_PATH/lib/*.jar; do
+	for jar in $ROOT_PATH/libs/*.jar; do
 		CLASS_PATH=$CLASS_PATH:$jar
 	done
 
 
 # main class
-	MAIN_CLASS=com.iscoder.scf.server.bootstrap.Main
+	MAIN_CLASS=com.github.leeyazhou.scf.server.bootstrap.Main
 
-	java $JAVA_OPTS -classpath $CLASS_PATH -Duser.dir=$DIR $SYSTEM_PROPERTY $MAIN_CLASS $OTHER_SCF_CONFIG -Dscf.service.name=$SERVICE_NAME &
+	java $JAVA_OPTS -classpath $CLASS_PATH -Dscf.home=$DIR $SYSTEM_PROPERTY $MAIN_CLASS $OTHER_SCF_CONFIG -Dscf.service.name=$SERVICE_NAME &
 
 	echo pid:$!
 
@@ -359,7 +366,7 @@ function scf_jstack_func()
 #scf auto detect function
 function scf_detect_func() 
 {
-	service_dir="$1/../service/deploy";
+	service_dir="$1/../services";
 
 	for service in $service_dir/*; do
 		service_name=`echo $service|awk -F'/' '{print $8}'`
@@ -376,11 +383,11 @@ function scf_detect_func()
 #scf list function
 function scf_list_func ()
 {
-	service_dir="$1/../service/deploy";
+	service_dir="${SCF_DIR}/services";
 	printf "%-15s %-6s %-6s %-6s %-10s %-10s\n" ServiceName VM_XMS VM_XMX VM_XMN ServiceID Status
 	for service in $service_dir/*; do
-		service_name=`echo $service|awk -F'/' '{print $8}'`
-		JVM_PATH=$service_dir/$service_name/scf_config.xml
+		service_name=`echo $service |awk -F'/' '{print $NF}'`
+		JVM_PATH=$service_dir/$service_name/conf/scf_config.xml
 		VM_XMS=`cat $JVM_PATH | sed 's#\(.*\)>\(.*\)#\1>#g' |awk '/scf.server.vm.xms/{getline;print}' | sed 's#<value>\(.*\)</value>#\1#g'|sed 's/^M//g'` 
 		if [[ $VM_XMS == "" ]];then
 			VM_XMS=2g
@@ -414,7 +421,7 @@ function scf_telnet_func()
 		exit 1
 	fi
 
-	scf_conf=$2/../service/deploy/$1/scf_config.xml
+	scf_conf=$2/../services/$1/conf/scf_config.xml
 #get local_ip and service-port
 	local_ip=`cat $scf_conf|sed 's#\(.*\)>\(.*\)#\1>#g'|awk /scf.server.tcp.listenIP/'{getline;print}'|sed 's#<value>\(.*\)</value>#\1#g'|sed 's/^M//g'`
 	port=`cat $scf_conf|sed 's#\(.*\)>\(.*\)#\1>#g'|awk /scf.server.telnet.listenPort/'{getline;print}'|sed 's#<value>\(.*\)</value>#\1#g'|sed 's/^M//g'`
@@ -448,7 +455,7 @@ function scf_log_func()
 	if [ ! -d $2/../log/$1 ];then
 		mkdir -p $2/../log/$1
 	fi
-	scf_conf=$2/../service/deploy/$1/scf_config.xml
+	scf_conf=$2/../services/$1/conf/scf_config.xml
 	pid_info=`cat $2/../tmp/pid/$1`
 
 	if [ "$pid_info" != "" ];then

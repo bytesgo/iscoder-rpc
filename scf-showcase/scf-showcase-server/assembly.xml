@@ -9,7 +9,7 @@
     <dependencySets>
         <dependencySet>
             <scope>runtime</scope>
-            <outputDirectory>lib</outputDirectory>
+            <outputDirectory>libs</outputDirectory>
         </dependencySet>
     </dependencySets>
 
@@ -17,7 +17,7 @@
         <moduleSet>
             <useAllReactorProjects>true</useAllReactorProjects>
             <binaries>
-                <outputDirectory>lib</outputDirectory>
+                <outputDirectory>libs</outputDirectory>
                 <!-- <outputFileNameMapping>${module.artifactId}-${module.baseVersion}.${module.extension}</outputFileNameMapping> -->
             </binaries>
         </moduleSet>

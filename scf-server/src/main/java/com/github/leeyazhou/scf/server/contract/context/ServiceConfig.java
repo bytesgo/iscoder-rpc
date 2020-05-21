@@ -107,13 +107,13 @@ public class ServiceConfig {
           key = nameNode.getTextContent();
           value = property.get(nameNode.getTextContent());
           if (value != null) {
-            value += "," + valueNode.getTextContent().replaceAll("\n", "").trim();
+            value += "," + valueNode.getTextContent().trim().replaceAll("\n", "").trim();
           } else {
-            value = valueNode.getTextContent().replaceAll("\n", "").trim();
+            value = valueNode.getTextContent().trim().replaceAll("\n", "").trim();
           }
         } else {
           key = nameNode.getTextContent().trim();
-          value = valueNode.getTextContent().replaceAll("\n", "").trim();
+          value = valueNode.getTextContent().trim().replaceAll("\n", "").trim();
         }
         property.put(key, value);
       }

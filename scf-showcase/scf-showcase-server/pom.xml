@@ -44,14 +44,14 @@
                         <descriptor>assembly.xml</descriptor>
                     </descriptors>
                 </configuration>
-                <!-- <executions>
+                <executions>
                     <execution>
                         <goals>
                             <goal>single</goal>
                         </goals>
-                        <phase>package</phase>
+                        <phase>install</phase>
                     </execution>
-                </executions> -->
+                </executions>
             </plugin>
         </plugins>
     </build>
