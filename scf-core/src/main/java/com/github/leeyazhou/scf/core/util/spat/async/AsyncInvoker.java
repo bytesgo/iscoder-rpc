@@ -1,7 +1,9 @@
 package com.github.leeyazhou.scf.core.util.spat.async;
 
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import com.github.leeyazhou.scf.core.util.ThreadNamedFactory;
 
 public class AsyncInvoker {
@@ -59,16 +61,15 @@ public class AsyncInvoker {
    */
   private AsyncInvoker(int workerCount, boolean timeoutEffect, String threadFactoryName) {
     if (null == threadFactoryName) {
-      threadFactoryName = "";
+      threadFactoryName = "worker";
     }
-    workers = new AsyncWorker[workerCount];
-    // ExecutorService executor = Executors.newCachedThreadPool(new
-    // ThreadRenameFactory("async task thread"));
-    ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors(),
-        new ThreadNamedFactory(threadFactoryName + "async task thread"));
+    this.workers = new AsyncWorker[workerCount];
+    final int availableProcessors = Runtime.getRuntime().availableProcessors();
+    final ExecutorService executor = new ThreadPoolExecutor(availableProcessors, availableProcessors * 2, 60L,
+        TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), new ThreadNamedFactory(threadFactoryName));
 
-    for (int i = 0; i < workers.length; i++) {
-      workers[i] = new AsyncWorker(executor, timeoutEffect, threadFactoryName);
+    for (int i = 0; i < workerCount; i++) {
+      workers[i] = new AsyncWorker(executor, timeoutEffect);
       workers[i].setDaemon(true);
       workers[i].setName("async task worker[" + i + "]");
       workers[i].start();

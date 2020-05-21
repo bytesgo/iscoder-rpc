@@ -4,16 +4,13 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.github.leeyazhou.scf.core.util.spat.jsr.LinkedTransferQueue;
 import com.github.leeyazhou.scf.core.util.spat.jsr.TransferQueue;
 
-class AsyncWorker extends Thread {
-
+public class AsyncWorker extends Thread {
   private static final Logger logger = LoggerFactory.getLogger(AsyncWorker.class);
-  final String threadFactoryName;
 
   /**
    * 共享的任务队列
@@ -32,11 +29,10 @@ class AsyncWorker extends Thread {
 
   private boolean timeoutEffect = false;
 
-  AsyncWorker(Executor executor, boolean timeoutEffect, String threadFactoryName) {
+  public AsyncWorker(Executor executor, boolean timeoutEffect) {
     this.taskQueue = new LinkedTransferQueue<AsyncTask>();
     this.executor = executor;
     this.timeoutEffect = timeoutEffect;
-    this.threadFactoryName = threadFactoryName;
   }
 
   @Override
@@ -75,7 +71,7 @@ class AsyncWorker extends Thread {
       task = taskQueue.poll(1500, TimeUnit.MILLISECONDS);
       if (null != task) {
         if ((System.currentTimeMillis() - task.getAddTime()) > task.getQtimeout()) {
-          task.getHandler().exceptionCaught(new TimeoutException(threadFactoryName + " async task timeout!"));
+          task.getHandler().exceptionCaught(new TimeoutException(getName() + " async task timeout!"));
           return;
         } else {
           Object obj = task.getHandler().run();
@@ -96,7 +92,7 @@ class AsyncWorker extends Thread {
       final AsyncTask task = taskQueue.poll(1500, TimeUnit.MILLISECONDS);
       if (null != task) {
         if ((System.currentTimeMillis() - task.getAddTime()) > task.getQtimeout()) {
-          task.getHandler().exceptionCaught(new TimeoutException(threadFactoryName + "async task timeout!"));
+          task.getHandler().exceptionCaught(new TimeoutException(getName() + "async task timeout!"));
           return;
         } else {
           final CountDownLatch cdl = new CountDownLatch(1);
@@ -115,7 +111,7 @@ class AsyncWorker extends Thread {
           });
           cdl.await(getTimeout(task.getTimeout(), taskQueue.size()), TimeUnit.MILLISECONDS);
           if (cdl.getCount() > 0) {
-            task.getHandler().exceptionCaught(new TimeoutException(threadFactoryName + "async task timeout!"));
+            task.getHandler().exceptionCaught(new TimeoutException(getName() + "async task timeout!"));
           }
         }
       } else {

@@ -2,10 +2,8 @@ package com.github.leeyazhou.scf.demo.client;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import com.github.leeyazhou.scf.client.SCFInit;
 import com.github.leeyazhou.scf.client.proxy.builder.ProxyFactory;
 import com.github.leeyazhou.scf.demo.IHelloService;
@@ -19,6 +17,12 @@ public class ClientConsumer {
   }
 
   private IHelloService helloService = ProxyFactory.create(IHelloService.class, "tcp://demo/HelloService");
+
+  @Test
+  public void testOne() {
+    String ret = helloService.say("CrPC");
+    System.out.println("ret: " + ret);
+  }
 
   @Test
   public void testSay() throws InterruptedException {
@@ -56,9 +60,9 @@ public class ClientConsumer {
     public void run() {
 
       try {
+        cyclicBarrier.await();
         for (int i = 0; i < size; i++) {
           System.out.println("开始等待:" + getName());
-          cyclicBarrier.await();
           String result = helloService.say("李亚州--" + i);
           System.out.println("执行结果:" + result);
         }

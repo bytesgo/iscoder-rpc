@@ -30,7 +30,7 @@ public class AsyncBack {
   private static HttpThreadLocal httpThreadLocal;
   public static Map<String, Integer> asynMap = new ConcurrentHashMap<String, Integer>();
   public static final int THREAD_COUNT = Runtime.getRuntime().availableProcessors();
-  private static AsyncInvoker asyncInvoker = AsyncInvoker.getInstance(THREAD_COUNT, false, "Back Async Worker");
+  private static AsyncInvoker asyncInvoker = AsyncInvoker.getInstance(THREAD_COUNT, false, "worker");
   public static Map<Integer, SCFContext> contextMap = new ConcurrentHashMap<Integer, SCFContext>();
   public static final CallBackUtil callBackUtil = new CallBackUtil();
 
@@ -144,13 +144,15 @@ public class AsyncBack {
 
           Protocol protocol = context.getScfRequest().getProtocol();
           if (protocol == null) {
-            protocol = Protocol.fromBytes(context.getScfRequest().getRequestBuffer(), global.getGlobalSecureIsRights(), desKeyByte);
+            protocol = Protocol.fromBytes(context.getScfRequest().getRequestBuffer(), global.getGlobalSecureIsRights(),
+                desKeyByte);
             context.getScfRequest().setProtocol(protocol);
           }
           protocol.setSdpEntity(ExceptionUtil.createError(e));
-          context.getScfResponse().setResponseBuffer(protocol.toBytes(Global.getSingleton().getGlobalSecureIsRights(), desKeyByte));
+          context.getScfResponse()
+              .setResponseBuffer(protocol.toBytes(Global.getSingleton().getGlobalSecureIsRights(), desKeyByte));
         } catch (Exception ex) {
-          context.getScfResponse().setResponseBuffer(new byte[] { 0 });
+          context.getScfResponse().setResponseBuffer(new byte[] {0});
           logger.error("AsyncInvokerHandle invoke-exceptionCaught error", ex);
         } finally {
           context.getServerHandler().writeResponse(context);

@@ -12,6 +12,11 @@
     <dependencies>
         <dependency>
             <groupId>com.github.leeyazhou</groupId>
+            <artifactId>scf-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.leeyazhou</groupId>
             <artifactId>scf-core</artifactId>
             <version>${project.version}</version>
         </dependency>

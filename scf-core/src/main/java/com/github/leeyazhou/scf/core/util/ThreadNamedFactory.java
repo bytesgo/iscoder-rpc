@@ -6,14 +6,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ThreadNamedFactory implements ThreadFactory {
 
   static final AtomicInteger poolNumber = new AtomicInteger(1);
-  final ThreadGroup group;
-  final AtomicInteger threadNumber = new AtomicInteger(1);
-  final String namePrefix;
+  private final ThreadGroup group;
+  private final AtomicInteger threadNumber = new AtomicInteger(1);
+  private final String namePrefix;
 
   public ThreadNamedFactory(String threadNamePrefix) {
     SecurityManager s = System.getSecurityManager();
     group = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
-    namePrefix = threadNamePrefix + "-pool-" + poolNumber.getAndIncrement() + "-tid-";
+    namePrefix = "scf-" + threadNamePrefix + "-" + poolNumber.getAndIncrement() + "-";
   }
 
   public Thread newThread(Runnable r) {
