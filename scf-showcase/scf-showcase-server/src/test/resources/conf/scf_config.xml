@@ -24,20 +24,20 @@
     <!-- global reqeust filter -->
     <property>
         <name>scf.filter.global.request</name>
-        <value>com.github.leeyazhou.server.filter.ProtocolParseFilter</value>
+        <value>com.github.leeyazhou.scf.server.filter.ProtocolParseFilter</value>
     </property>
 
     <!-- global response filter -->
     <property>
         <name>scf.filter.global.response</name>
-        <value>com.github.leeyazhou.server.filter.ProtocolCreateFilter,com.github.leeyazhou.server.filter.ExecuteTimeFilter
+        <value>com.github.leeyazhou.scf.server.filter.ProtocolCreateFilter,com.github.leeyazhou.scf.server.filter.ExecuteTimeFilter
         </value>
     </property>
 
     <!-- connection filter -->
     <property>
         <name>scf.filter.connection</name>
-        <value>com.github.leeyazhou.server.filter.IPFilter</value>
+        <value>com.github.leeyazhou.scf.server.filter.IPFilter</value>
     </property>
 
     <!-- init beans -->
@@ -79,7 +79,7 @@
     <!-- proxy invoker -->
     <property>
         <name>scf.proxy.invoker.implement</name>
-        <value>com.github.leeyazhou.server.core.handler.async.AsyncHandler</value>
+        <value>com.github.leeyazhou.scf.server.core.handler.async.AsyncHandler</value>
     </property>
 
     <!-- async worker count -->
@@ -141,7 +141,7 @@
     <!-- socket server implement class -->
     <property>
         <name>scf.server.tcp.implement</name>
-        <value>com.github.leeyazhou.server.core.communication.tcp.TcpServer</value>
+        <value>com.github.leeyazhou.scf.server.core.communication.tcp.TcpServer</value>
     </property>
 
     <!-- +++++++++++++++ http server config ++++++++++++++++ -->
@@ -191,7 +191,7 @@
     <!-- http server implement class -->
     <property>
         <name>scf.server.http.implement</name>
-        <value>com.github.leeyazhou.server.core.communication.http.HttpServer</value>
+        <value>com.github.leeyazhou.scf.server.core.communication.http.HttpServer</value>
     </property>
 
 
@@ -242,7 +242,7 @@
     <!-- telnet server implement class -->
     <property>
         <name>scf.server.telnet.implement</name>
-        <value>com.github.leeyazhou.server.core.communication.telnet.TelnetServer</value>
+        <value>com.github.leeyazhou.scf.server.core.communication.telnet.TelnetServer</value>
     </property>
 
     <!-- +++++++++++++++ monitor server config ++++++++++++++++ -->
@@ -274,7 +274,7 @@
     <!-- monitor server implement class -->
     <property>
         <name>scf.server.monitor.implement</name>
-        <value>com.github.leeyazhou.server.performance.monitorweb.MonitorWebCenter</value>
+        <value>com.github.leeyazhou.scf.server.performance.monitorweb.MonitorWebCenter</value>
     </property>
 
 </configuration>

@@ -16,9 +16,8 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
+import com.github.leeyazhou.scf.core.loader.DynamicClassLoader;
 import com.github.leeyazhou.scf.server.deploy.bytecode.ContractInfo.SessionBean;
-import com.github.leeyazhou.scf.server.deploy.hotdeploy.DynamicClassLoader;
 
 public class ContractConfig {
 

@@ -5,8 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.junit.Test;
-
-import com.github.leeyazhou.scf.core.utils.FileUtil;
+import com.github.leeyazhou.scf.core.util.FileUtil;
 
 public class FileOperatorTest {
 

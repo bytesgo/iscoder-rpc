@@ -2,8 +2,7 @@ package com.github.leeyazhou.scf.server.util;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import com.github.leeyazhou.scf.core.utils.SystemUtil;
+import com.github.leeyazhou.scf.core.util.SystemUtil;
 
 public class SystemUtilsTest {
 

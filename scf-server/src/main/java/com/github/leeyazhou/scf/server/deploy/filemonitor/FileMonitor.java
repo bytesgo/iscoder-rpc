@@ -7,8 +7,7 @@ import java.util.Timer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.github.leeyazhou.scf.core.utils.FileUtil;
+import com.github.leeyazhou.scf.core.util.FileUtil;
 
 /**
  * A class for check file is change

@@ -7,8 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.leeyazhou.scf.core.exception.TimeoutException;
-import com.github.leeyazhou.scf.core.utils.spat.jsr.LinkedTransferQueue;
-import com.github.leeyazhou.scf.core.utils.spat.jsr.TransferQueue;
+import com.github.leeyazhou.scf.core.util.spat.jsr.LinkedTransferQueue;
+import com.github.leeyazhou.scf.core.util.spat.jsr.TransferQueue;
 
 public class NIOHandler {
   private static final Logger logger = LoggerFactory.getLogger(NIOHandler.class);

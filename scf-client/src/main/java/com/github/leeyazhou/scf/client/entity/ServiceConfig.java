@@ -13,7 +13,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.github.leeyazhou.scf.client.SCFInit;
-import com.github.leeyazhou.scf.core.utils.XMLUtil;
+import com.github.leeyazhou.scf.core.util.XMLUtil;
 
 /**
  * ServiceConfig

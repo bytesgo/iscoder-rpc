@@ -4,11 +4,11 @@
 package com.github.leeyazhou.scf.demo.service;
 
 import java.util.Set;
-
 import org.junit.Test;
-
+import com.github.leeyazhou.scanner.ClassScanner;
+import com.github.leeyazhou.scanner.DefaultClassScanner;
+import com.github.leeyazhou.scanner.Scanner;
 import com.github.leeyazhou.scf.core.annotation.ServiceBehavior;
-import com.github.leeyazhou.scf.core.scanner.DefaultClassScanner;
 
 /**
  * @author lee_y
@@ -20,12 +20,14 @@ public class Server {
   public void main() throws Exception {
     String userDir = Server.class.getResource("/").getPath();
     System.setProperty("user.dir", userDir);
-    com.github.leeyazhou.scf.server.bootstrap.Main.main(new String[] { "-dscf.service.name=showcase", "-Dscf.service.name=showcase" });
+    com.github.leeyazhou.scf.server.bootstrap.Main
+        .main(new String[] {"-dscf.service.name=showcase", "-Dscf.service.name=showcase"});
   }
 
   @Test
   public void test() {
-    Set<Class<?>> a = DefaultClassScanner.getInstance().getClassListByAnnotation("", ServiceBehavior.class);
+    ClassScanner classScanner = new DefaultClassScanner(Scanner.builder().setBasePackage(""));
+    Set<Class<?>> a = classScanner.getByAnnotation(ServiceBehavior.class);
     System.out.println(a);
   }
 

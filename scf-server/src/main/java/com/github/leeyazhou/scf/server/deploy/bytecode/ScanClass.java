@@ -9,20 +9,20 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import com.github.leeyazhou.scanner.ClassScanner;
+import com.github.leeyazhou.scanner.DefaultClassScanner;
+import com.github.leeyazhou.scanner.Scanner;
 import com.github.leeyazhou.scf.core.annotation.AnnotationUtil;
 import com.github.leeyazhou.scf.core.annotation.HttpPathParameter;
 import com.github.leeyazhou.scf.core.annotation.HttpRequestMapping;
 import com.github.leeyazhou.scf.core.annotation.OperationContract;
 import com.github.leeyazhou.scf.core.annotation.ServiceBehavior;
 import com.github.leeyazhou.scf.core.annotation.ServiceContract;
-import com.github.leeyazhou.scf.core.scanner.DefaultClassScanner;
-import com.github.leeyazhou.scf.core.utils.ClassUtil;
+import com.github.leeyazhou.scf.core.loader.DynamicClassLoader;
+import com.github.leeyazhou.scf.core.util.ClassUtil;
 import com.github.leeyazhou.scf.server.deploy.bytecode.ContractInfo.SessionBean;
-import com.github.leeyazhou.scf.server.deploy.hotdeploy.DynamicClassLoader;
 
 public class ScanClass {
 
@@ -52,7 +52,7 @@ public class ScanClass {
    * @return
    * @throws Exception
    */
-  public static ContractInfo getContractInfo(String path, DynamicClassLoader classLoader) throws Exception {
+  public static ContractInfo getContractInfo(String path, DynamicClassLoader classLoader) {
     if (contractInfo == null) {
       synchronized (lockHelper) {
         if (contractInfo == null) {
@@ -110,19 +110,20 @@ public class ScanClass {
    * @return
    * @throws Exception
    */
-  private static void scan(String path, DynamicClassLoader classLoader) throws Exception {
+  private static void scan(String path, DynamicClassLoader classLoader) {
     logger.info("begin scan jar from path : " + path);
 
     Set<Class<?>> clsSet = new LinkedHashSet<Class<?>>();
-    clsSet.addAll(DefaultClassScanner.getInstance().getClassListByAnnotation("", ServiceBehavior.class));
-    clsSet.addAll(DefaultClassScanner.getInstance().getClassListByAnnotation("", ServiceContract.class));
+    ClassScanner classScanner = new DefaultClassScanner(Scanner.builder().setBasePackage(""));
+    clsSet.addAll(classScanner.getByAnnotation(ServiceBehavior.class));
+    clsSet.addAll(classScanner.getByAnnotation(ServiceContract.class));
 
     for (Class<?> cls : clsSet) {
       try {
         ServiceBehavior behavior = cls.getAnnotation(ServiceBehavior.class);
         ServiceContract contract = cls.getAnnotation(ServiceContract.class);
         if (behavior == null && contract == null) {
-          continue; 
+          continue;
         }
 
         if (contract != null) {
@@ -137,7 +138,7 @@ public class ScanClass {
           }
         }
       } catch (Exception ex) {
-        throw ex;
+        throw new RuntimeException(ex);
       }
     }
 
@@ -289,7 +290,8 @@ public class ScanClass {
 
         ClassInfo.ParamInfo[] paramInfoAry = new ClassInfo.ParamInfo[paramAry.length];
         for (int i = 0; i < paramAry.length; i++) {
-          paramInfoAry[i] = new ClassInfo.ParamInfo(i, paramAry[i], types[i], paramNames[i], mapping[i], paramAnnAry[i]);
+          paramInfoAry[i] =
+              new ClassInfo.ParamInfo(i, paramAry[i], types[i], paramNames[i], mapping[i], paramAnnAry[i]);
         }
         mi.setParamInfoAry(paramInfoAry);
 

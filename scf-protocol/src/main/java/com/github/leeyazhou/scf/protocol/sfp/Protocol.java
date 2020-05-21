@@ -1,7 +1,7 @@
 package com.github.leeyazhou.scf.protocol.sfp;
 
 import com.github.leeyazhou.scf.core.entity.ByteConverter;
-import com.github.leeyazhou.scf.core.utils.DESCoderUtil;
+import com.github.leeyazhou.scf.core.util.DESCoderUtil;
 import com.github.leeyazhou.scf.protocol.compress.CompressBase;
 import com.github.leeyazhou.scf.protocol.entity.CompressType;
 import com.github.leeyazhou.scf.protocol.entity.PlatformType;

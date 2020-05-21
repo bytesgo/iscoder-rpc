@@ -19,7 +19,7 @@ import com.github.leeyazhou.scf.core.entity.ByteConverter;
 import com.github.leeyazhou.scf.core.exception.DataOverFlowException;
 import com.github.leeyazhou.scf.core.exception.ProtocolException;
 import com.github.leeyazhou.scf.core.exception.TimeoutException;
-import com.github.leeyazhou.scf.core.utils.SystemUtil;
+import com.github.leeyazhou.scf.core.util.SystemUtil;
 import com.github.leeyazhou.scf.protocol.ProtocolConst;
 import com.github.leeyazhou.scf.protocol.sfp.SFPStruct;
 

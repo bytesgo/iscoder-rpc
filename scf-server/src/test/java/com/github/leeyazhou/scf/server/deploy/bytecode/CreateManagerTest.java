@@ -5,11 +5,9 @@ import java.lang.reflect.Method;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-
 import org.junit.Test;
-
+import com.github.leeyazhou.scf.core.loader.DynamicClassLoader;
 import com.github.leeyazhou.scf.server.contract.context.IProxyFactory;
-import com.github.leeyazhou.scf.server.deploy.hotdeploy.DynamicURLClassLoader;
 
 public class CreateManagerTest {
 
@@ -53,7 +51,7 @@ public class CreateManagerTest {
   @Test
   public void hotDeploy() throws Exception {
 
-    DynamicURLClassLoader classLoader = new DynamicURLClassLoader();
+    DynamicClassLoader classLoader = new DynamicClassLoader();
     classLoader.addURL("D:/serviceframe_v2_online/lib/serviceframe/serviceframe-2.0.1.beta.jar");
     classLoader.addFolder("D:/serviceframe_v2_online/service/deploy/imc/");
     Class<?> cmCls = classLoader.loadClass("com.iscoder.sfft.serviceframe.deploy.bytecode.CreateManager");

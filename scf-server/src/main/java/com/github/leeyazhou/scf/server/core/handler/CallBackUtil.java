@@ -1,10 +1,9 @@
 package com.github.leeyazhou.scf.server.core.handler;
 
 import java.util.concurrent.TimeUnit;
-
-import com.github.leeyazhou.scf.core.utils.SystemUtil;
-import com.github.leeyazhou.scf.core.utils.spat.jsr.LinkedTransferQueue;
-import com.github.leeyazhou.scf.core.utils.spat.jsr.TransferQueue;
+import com.github.leeyazhou.scf.core.util.SystemUtil;
+import com.github.leeyazhou.scf.core.util.spat.jsr.LinkedTransferQueue;
+import com.github.leeyazhou.scf.core.util.spat.jsr.TransferQueue;
 import com.github.leeyazhou.scf.server.contract.context.Global;
 
 public class CallBackUtil {

@@ -7,16 +7,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.github.leeyazhou.scf.core.annotation.OperationAsyn;
+import com.github.leeyazhou.scf.core.loader.DynamicClassLoader;
 import com.github.leeyazhou.scf.server.core.handler.AsyncBack;
 import com.github.leeyazhou.scf.server.deploy.bytecode.ClassInfo.MethodInfo;
-import com.github.leeyazhou.scf.server.deploy.hotdeploy.DynamicClassLoader;
 import com.github.leeyazhou.scf.server.util.ParamUtil;
-
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtField;
@@ -36,7 +34,7 @@ public class ProxyClassCreater {
     List<ClassFile> clsList = new ArrayList<ClassFile>();
 
     ClassPool pool = ClassPool.getDefault();
-    List<String> jarList = classLoader.getJarList();
+    Set<String> jarList = classLoader.getJarList();
     for (String jar : jarList) {
       pool.appendClassPath(jar);
     }

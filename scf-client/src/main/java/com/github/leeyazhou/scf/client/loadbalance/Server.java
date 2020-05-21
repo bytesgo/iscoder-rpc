@@ -16,7 +16,7 @@ import com.github.leeyazhou.scf.client.channel.WindowData;
 import com.github.leeyazhou.scf.client.entity.ServerProfile;
 import com.github.leeyazhou.scf.client.loadbalance.component.ServerState;
 import com.github.leeyazhou.scf.client.proxy.builder.ReceiveHandler;
-import com.github.leeyazhou.scf.core.utils.ThreadNamedFactory;
+import com.github.leeyazhou.scf.core.util.ThreadNamedFactory;
 import com.github.leeyazhou.scf.protocol.sfp.Protocol;
 
 /**

@@ -2,10 +2,9 @@ package com.github.leeyazhou.scf.server.deploy.filemonitor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import com.github.leeyazhou.scf.core.loader.DynamicClassLoader;
 import com.github.leeyazhou.scf.server.contract.context.Global;
 import com.github.leeyazhou.scf.server.contract.context.IProxyFactory;
-import com.github.leeyazhou.scf.server.deploy.hotdeploy.DynamicClassLoader;
 import com.github.leeyazhou.scf.server.deploy.hotdeploy.ProxyFactoryLoader;
 
 /**

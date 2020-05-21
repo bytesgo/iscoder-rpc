@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.github.leeyazhou.scf.core.entity.ErrorState;
 import com.github.leeyazhou.scf.core.entity.KeyValuePair;
-import com.github.leeyazhou.scf.core.utils.SystemUtil;
+import com.github.leeyazhou.scf.core.util.SystemUtil;
 import com.github.leeyazhou.scf.protocol.sdp.RequestProtocol;
 import com.github.leeyazhou.scf.protocol.sdp.ResponseProtocol;
 import com.github.leeyazhou.scf.protocol.sfp.Protocol;

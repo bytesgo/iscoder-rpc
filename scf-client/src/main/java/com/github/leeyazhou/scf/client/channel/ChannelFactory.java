@@ -18,7 +18,7 @@ import com.github.leeyazhou.scf.client.proxy.ServiceProxy;
 import com.github.leeyazhou.scf.core.exception.ExceptionProtocol;
 import com.github.leeyazhou.scf.core.exception.RebootException;
 import com.github.leeyazhou.scf.core.exception.ThrowErrorHelper;
-import com.github.leeyazhou.scf.core.utils.SecureKey;
+import com.github.leeyazhou.scf.core.util.SecureKey;
 import com.github.leeyazhou.scf.protocol.entity.SDPType;
 import com.github.leeyazhou.scf.protocol.sdp.HandclaspProtocol;
 import com.github.leeyazhou.scf.protocol.sfp.Protocol;

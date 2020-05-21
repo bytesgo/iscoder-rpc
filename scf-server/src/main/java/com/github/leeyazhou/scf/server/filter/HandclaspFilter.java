@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.leeyazhou.scf.core.exception.ExceptionProtocol;
-import com.github.leeyazhou.scf.core.utils.StringUtil;
+import com.github.leeyazhou.scf.core.util.StringUtil;
 import com.github.leeyazhou.scf.protocol.entity.PlatformType;
 import com.github.leeyazhou.scf.protocol.sdp.HandclaspProtocol;
 import com.github.leeyazhou.scf.protocol.sfp.Protocol;

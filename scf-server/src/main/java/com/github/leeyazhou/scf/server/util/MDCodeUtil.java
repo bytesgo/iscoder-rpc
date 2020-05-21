@@ -1,9 +1,8 @@
 package com.github.leeyazhou.scf.server.util;
 
 import java.security.MessageDigest;
-
-import com.github.leeyazhou.scf.core.utils.Base64Util;
-import com.github.leeyazhou.scf.core.utils.CharEncoding;
+import com.github.leeyazhou.scf.core.util.Base64Util;
+import com.github.leeyazhou.scf.core.util.CharEncoding;
 
 /**
  * Java 消息摘要算法(MD2,MD5,SHA) 128位

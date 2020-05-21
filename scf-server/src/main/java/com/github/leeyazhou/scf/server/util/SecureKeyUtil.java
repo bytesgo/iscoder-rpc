@@ -2,9 +2,8 @@ package com.github.leeyazhou.scf.server.util;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.github.leeyazhou.scf.core.utils.DESCoderUtil;
-import com.github.leeyazhou.scf.core.utils.RSACoderUtil;
+import com.github.leeyazhou.scf.core.util.DESCoderUtil;
+import com.github.leeyazhou.scf.core.util.RSACoderUtil;
 
 public class SecureKeyUtil {
 

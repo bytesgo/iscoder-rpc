@@ -6,14 +6,13 @@ import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
-
+import com.github.leeyazhou.scf.core.loader.DynamicClassLoader;
 import com.github.leeyazhou.scf.server.deploy.bytecode.ClassInfo;
 import com.github.leeyazhou.scf.server.deploy.bytecode.ContractInfo;
 import com.github.leeyazhou.scf.server.deploy.bytecode.ScanClass;
 import com.github.leeyazhou.scf.server.deploy.bytecode.ClassInfo.MethodInfo;
 import com.github.leeyazhou.scf.server.deploy.bytecode.ClassInfo.ParamInfo;
 import com.github.leeyazhou.scf.server.deploy.bytecode.ContractInfo.SessionBean;
-import com.github.leeyazhou.scf.server.deploy.hotdeploy.DynamicClassLoader;
 
 public class ScanClassTest {
 

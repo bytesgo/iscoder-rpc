@@ -1,27 +1,19 @@
 package com.github.leeyazhou.scf.server.bootstrap;
 
-import java.io.File;
-import java.util.ArrayList;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.github.leeyazhou.scf.core.IInit;
+import com.github.leeyazhou.scf.core.loader.DynamicClassLoader;
+import com.github.leeyazhou.scf.core.loader.SCFLoader;
+import com.github.leeyazhou.scf.core.util.StringUtil;
 import com.github.leeyazhou.scf.server.contract.context.Global;
-import com.github.leeyazhou.scf.server.contract.context.IProxyFactory;
 import com.github.leeyazhou.scf.server.contract.context.ServiceConfig;
-import com.github.leeyazhou.scf.server.core.communication.Server;
 import com.github.leeyazhou.scf.server.deploy.filemonitor.FileMonitor;
 import com.github.leeyazhou.scf.server.deploy.filemonitor.HotDeployListener;
 import com.github.leeyazhou.scf.server.deploy.filemonitor.NotifyCount;
-import com.github.leeyazhou.scf.server.deploy.hotdeploy.DynamicClassLoader;
-import com.github.leeyazhou.scf.server.deploy.hotdeploy.GlobalClassLoader;
-import com.github.leeyazhou.scf.server.deploy.hotdeploy.ProxyFactoryLoader;
-import com.github.leeyazhou.scf.server.filter.IFilter;
 
 /**
  * serive frame entry main para: serviceName
@@ -30,6 +22,7 @@ public class Main {
 
   private static final Logger logger = LoggerFactory.getLogger(Main.class);
   private static ServiceConfig serviceConfig;
+  private static final String serviceNameKey = "scf.service.name";
 
   /**
    * start server
@@ -46,22 +39,12 @@ public class Main {
     String userDir = System.getProperty("user.dir", null);
     String rootPath = userDir + "/";
     String serviceName = "no service name please set it";
-    Map<String, String> argsMap = new HashMap<String, String>();
-    Global.getSingleton().setRootPath(rootPath);
-
-    for (int i = 0; i < args.length; i++) {
-      if (args[i].startsWith("-D")) {
-        String[] aryArg = args[i].split("=");
-        if (aryArg.length == 2) {
-          if (aryArg[0].equalsIgnoreCase("-Dscf.service.name")) {
-            serviceName = aryArg[1];
-          }
-          argsMap.put(aryArg[0].replaceFirst("-D", ""), aryArg[1]);
-        }
-      }
+    Map<String, String> argsMap = argsToMap(args);
+    if (argsMap.containsKey(serviceNameKey)) {
+      serviceName = argsMap.get(serviceNameKey);
     }
-
-    String serviceFolderPath = rootPath + "service/deploy/" + serviceName;
+    Global.getSingleton().setRootPath(rootPath);
+    String serviceFolderPath = rootPath + "service/" + serviceName;
     String scfConfigDefaultPath = rootPath + "conf/scf_config.xml";
     String scfConfigPath = serviceFolderPath + "/scf_config.xml";
 
@@ -74,12 +57,11 @@ public class Main {
 
     serviceConfig = ServiceConfig.getServiceConfig(scfConfigDefaultPath, scfConfigPath);
 
-    Set<String> keySet = argsMap.keySet();
-    for (String key : keySet) {
-      logger.debug(key + ": " + argsMap.get(key));
-      serviceConfig.set(key, argsMap.get(key));
+    for (Map.Entry<String, String> entry : argsMap.entrySet()) {
+      logger.debug(entry.getKey() + ": " + entry.getValue());
+      serviceConfig.set(entry.getKey(), entry.getValue());
     }
-    if (serviceConfig.getServiceName() == null || serviceConfig.getServiceName().length() == 0) {
+    if (StringUtil.isEmpty(serviceConfig.getServiceName())) {
       logger.info("scf.service.name:" + serviceName);
       serviceConfig.setServiceName(serviceName);
     }
@@ -87,161 +69,22 @@ public class Main {
 
     // init class loader
     logger.info("-----------------loading global jars------------------");
-    DynamicClassLoader classLoader = new DynamicClassLoader();
-    String[] jarPath = new String[3];
-    jarPath[0] = rootPath + "service/deploy/" + serviceConfig.getServiceName() + "/";
-    jarPath[1] = rootPath + "service/lib/";
-    jarPath[2] = rootPath + "lib";
-    classLoader.addFolder(jarPath);
-    GlobalClassLoader.addSystemClassPathFolder(jarPath);
-    jarPath = null;
-    logger.info("-------------------------end-------------------------\n");
+    final SCFLoader loader = new SCFLoader();
+    final DynamicClassLoader classLoader = new DynamicClassLoader(loader);
 
-    if (new File(serviceFolderPath).isDirectory() || !serviceName.equalsIgnoreCase("error_service_name_is_null")) {
-      // load proxy factory
-      logger.info("--------------------loading proxys-------------------");
-      IProxyFactory proxyFactory = ProxyFactoryLoader.loadProxyFactory(classLoader);
-      Global.getSingleton().setProxyFactory(proxyFactory);
-      logger.info("-------------------------end-------------------------\n");
-    }
+    loader.addURLFolder(rootPath + "libs");
 
-    // load init beans
-    loadInitBeans(classLoader, serviceConfig);
-    addFilter(classLoader);
-    loadServers(classLoader);
+    classLoader.addFolder(rootPath + "service/" + serviceConfig.getServiceName() + "/libs");
+
+    Class<?> bootstrapClazz = loader.loadClass("com.github.leeyazhou.scf.server.bootstrap.Bootstrap");
+    Method startupMethod = bootstrapClazz.getDeclaredMethod("startup");
+    Constructor<?> constructor = bootstrapClazz.getConstructor(ServiceConfig.class, DynamicClassLoader.class);
+    startupMethod.invoke(constructor.newInstance(serviceConfig, classLoader));
+
     addFileMonitor(rootPath);
-
-    try {
-      registerExcetEven();
-    } catch (Exception e) {
-      logger.error("registerExcetEven error", e);
-      System.exit(0);
-    }
-
-    logger.info("+++++++++++++++++++++ server start success!!! +++++++++++++++++++++\n");
-    while (true) {
-      Thread.sleep(1 * 60 * 60 * 1000);
-    }
-  }
-
-  /**
-   * 
-   * @param classLoader
-   * @param sc
-   * @throws Exception
-   */
-  private static void loadInitBeans(DynamicClassLoader classLoader, ServiceConfig sc) throws Exception {
-    logger.info("-----------------loading init beans------------------");
-    List<String> initList = sc.getList("scf.init", ",");
-    if (initList != null) {
-      for (String initBeans : initList) {
-        try {
-          logger.info("load: " + initBeans);
-          IInit initBean = (IInit) classLoader.loadClass(initBeans).newInstance();
-          Global.getSingleton().addInit(initBean);
-          initBean.init();
-        } catch (Exception e) {
-          logger.error("init " + initBeans + " error!!!", e);
-        }
-      }
-    }
-    logger.info("-------------------------end-------------------------\n");
-  }
-
-  /**
-   * 加载授权文件方法
-   * 
-   * @param sc
-   * @param key
-   * @param serverName
-   * @throws Exception
-   */
-  // private static void loadSecureKey(ServiceConfig sc, String path) throws
-  // Exception{
-  // File[] file = new File(path).listFiles();
-  // for(File f : file){
-  // String fName = f.getName();
-  // if(!f.exists() || fName.indexOf("secure") < 0 ||
-  // !"xml".equalsIgnoreCase(fName.substring(fName.lastIndexOf(".")+1))){
-  // continue;
-  // }
-  // sc.getSecureConfig(f.getPath());
-  // }
-  // }
-
-  /**
-   * 
-   * @param classLoader
-   * @param sc
-   * @param key
-   * @throws Exception
-   */
-  private static List<IFilter> loadFilters(DynamicClassLoader classLoader, ServiceConfig sc, String key) throws Exception {
-    List<String> filterList = sc.getList(key, ",");
-    List<IFilter> instanceList = new ArrayList<IFilter>();
-    if (filterList != null) {
-      for (String filterName : filterList) {
-        try {
-          logger.debug("load: " + filterName);
-          IFilter filter = (IFilter) classLoader.loadClass(filterName.trim()).newInstance();
-          instanceList.add(filter);
-        } catch (Exception e) {
-          logger.error("load " + filterName + " error!!!", e);
-        }
-      }
-    }
-    return instanceList;
-  }
-
-  private static void addFilter(DynamicClassLoader classLoader) throws Exception {
-    // load global request-filters
-    logger.info("-----------loading global request filters------------");
-    List<IFilter> requestFilters = loadFilters(classLoader, serviceConfig, "scf.filter.global.request");
-    for (IFilter filter : requestFilters) {
-      Global.getSingleton().addGlobalRequestFilter(filter);
-    }
-    logger.info("-------------------------end-------------------------\n");
-
-    // load global response-filters
-    logger.info("-----------loading global response filters-----------");
-    List<IFilter> responseFilters = loadFilters(classLoader, serviceConfig, "scf.filter.global.response");
-    for (IFilter filter : responseFilters) {
-      Global.getSingleton().addGlobalResponseFilter(filter);
-    }
-    logger.info("-------------------------end-------------------------\n");
-
-    // load connection filters
-    logger.info("-----------loading connection filters-----------");
-    List<IFilter> connFilters = loadFilters(classLoader, serviceConfig, "scf.filter.connection");
-    for (IFilter filter : connFilters) {
-      Global.getSingleton().addConnectionFilter(filter);
-    }
-    logger.info("-------------------------end-------------------------\n");
-  }
-
-  /**
-   * 
-   * @param classLoader
-   * @param sc
-   * @throws Exception
-   */
-  private static void loadServers(DynamicClassLoader classLoader) throws Exception {
-    logger.info("------------------ starting servers -----------------");
-    List<String> servers = serviceConfig.getList("scf.servers", ",");
-    for (String server : servers) {
-      try {
-        if (serviceConfig.getBoolean(server + ".enable")) {
-          logger.info(server + " is starting...");
-          Server serverImpl = (Server) classLoader.loadClass(serviceConfig.getString(server + ".implement")).newInstance();
-          Global.getSingleton().addServer(serverImpl);
-          serverImpl.start();
-          logger.info(server + "started success!!!\n");
-        }
-      } catch (Exception err) {
-        logger.error(server + "error : ", err);
-      }
-    }
-    logger.info("-------------------------end-------------------------\n");
+//    while (true) {
+//      Thread.sleep(1 * 60 * 60 * 1000);
+//    }
   }
 
   /**
@@ -256,7 +99,7 @@ public class Main {
     }
     logger.info("------------------init file monitor-----------------");
 
-    FileMonitor.getInstance().addMonitorFile(rootPath + "service/deploy/" + serviceConfig.getServiceName() + "/");
+    FileMonitor.getInstance().addMonitorFile(rootPath + "service/" + serviceConfig.getServiceName() + "/");
     FileMonitor.getInstance().setInterval(5000);
     FileMonitor.getInstance().setNotifyCount(NotifyCount.Once);
     FileMonitor.getInstance().addListener(new HotDeployListener());
@@ -265,26 +108,19 @@ public class Main {
     logger.info("-------------------------end-------------------------\n");
   }
 
-  /**
-   * when shutdown server destroyed all socket connection
-   */
-  private static void registerExcetEven() {
-    Runtime.getRuntime().addShutdownHook(new Thread() {
-      public void run() {
-        for (Server server : Global.getSingleton().getServerList()) {
-          try {
-            server.stop();
-          } catch (Exception e) {
-            logger.error("stop server error", e);
-          }
-        }
+  private static Map<String, String> argsToMap(String[] args) {
+    Map<String, String> argsMap = new HashMap<String, String>();
 
-        try {
-          super.finalize();
-        } catch (Throwable e) {
-          logger.error("super.finalize() error when stop server", e);
+    for (int i = 0; i < args.length; i++) {
+      if (args[i].startsWith("-D")) {
+        args[i] = args[i].replaceFirst("-D", "");
+
+        String[] aryArg = args[i].split("=");
+        if (aryArg.length == 2) {
+          argsMap.put(aryArg[0], aryArg[1]);
         }
       }
-    });
+    }
+    return argsMap;
   }
 }

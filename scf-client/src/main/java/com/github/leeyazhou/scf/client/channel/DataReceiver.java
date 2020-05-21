@@ -10,8 +10,7 @@ import java.util.concurrent.Executors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.github.leeyazhou.scf.core.utils.ThreadNamedFactory;
+import com.github.leeyazhou.scf.core.util.ThreadNamedFactory;
 
 /**
  * DataReceiver

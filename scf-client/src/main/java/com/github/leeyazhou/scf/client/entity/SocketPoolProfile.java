@@ -3,7 +3,7 @@ package com.github.leeyazhou.scf.client.entity;
 import org.w3c.dom.Node;
 
 import com.github.leeyazhou.scf.core.SCFConst;
-import com.github.leeyazhou.scf.core.utils.TimeSpanUtil;
+import com.github.leeyazhou.scf.core.util.TimeSpanUtil;
 
 /**
  * SocketPoolProfile
