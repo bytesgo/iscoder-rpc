@@ -1,2 +1,2 @@
-# iscoder.rpc
-https://github.com/liyzhou/iscoder.rpc.git
+# iscoder-rpc
+https://github.com/leeyazhou/iscoder-rpc.git
