@@ -25,7 +25,7 @@
         <antlr.version>2.7.4</antlr.version>
         <javassist.version>3.20.0-GA</javassist.version>
         <jdk.version>1.6</jdk.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <kryo.version>4.0.2</kryo.version>
         <log4j.version>1.2.17</log4j.version>
         <netty.version>3.2.10.Final</netty.version>
